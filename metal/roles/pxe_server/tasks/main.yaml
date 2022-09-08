@@ -36,3 +36,16 @@
       files:
         - casper/vmlinuz
         - casper/initrd
+
+    #- name: start docker-compose pxe server
+    #  community.docker.docker_compose:
+    #    project_src: '{{ role_path }}/files/'
+    #    files:
+    #      - docker-compose.yaml
+
+  - name: wake on lan
+    community.general.wakeonlan:
+      mac: "{{ hostvars[item]['mac'] }}"
+      broadcast: '{{ ansible_default_ipv4.broadcast }}'
+    delegate_to: localhost
+    loop: "{{ groups['metal'] }}"

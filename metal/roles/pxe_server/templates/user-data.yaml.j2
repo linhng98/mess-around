@@ -2,4 +2,4 @@
 autoinstall:
   version: 1
   early-commands:
-    - curl -G -o /autoinstall.yaml "http://{{ ansible_default_ipv4.address }}/pxe/autoinstall.d/$(ip a | grep ether | cut -d ' ' -f6).yaml"
+    - curl -G -o /autoinstall.yaml "http://{{ ansible_default_ipv4.address }}/pxe/autoinstall.d/$(ip a | grep ether | cut -d ' ' -f6 | head -n 1).yaml"
