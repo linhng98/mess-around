@@ -1,0 +1,38 @@
+---
+  - name: Render user-data for autoinstall
+    template:
+      src: user-data.yaml.j2
+      dest: '{{ role_path }}/files/data/ubuntu/user-data'
+      mode: 0644
+
+  - name: Render machine specific init config
+    template:
+      src: autoinstall.yaml.j2
+      dest: "{{ role_path }}/files/data/autoinstall.d/{{ hostvars[item]['mac'] }}.yaml"
+      mode: 0644
+    loop: "{{ groups['metal'] }}"
+
+  - name: Render dnsmasq server config
+    template:
+      src: dnsmasq.conf.j2
+      dest: '{{ role_path }}/files/data/configs/dnsmasq.conf'
+      mode: 0644
+
+  - name: Render grubx64 config
+    template:
+      src: grub.cfg.j2
+      dest: '{{ role_path }}/files/data/configs/grub.cfg'
+      mode: 0644
+
+  - name: Download ubuntu iso image
+    ansible.builtin.get_url:
+      url: '{{ ubuntu_release_iso }}'
+      dest: '{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}'
+
+  - name: Extract vmlinuz and initrd from ubuntu iso
+    community.general.iso_extract:
+      image: '{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}'
+      dest: '{{ role_path }}/files/data/ubuntu'
+      files:
+        - casper/vmlinuz
+        - casper/initrd

@@ -1,0 +1,109 @@
+  version: 1
+  identity:
+    hostname: {{ item }}
+    password: "$6$exDY1mhS4KUYCE/2$zmn9ToZwTKLhCw.b4/b.ZRTIZM30JZ4QrOQ2aOXJ8yk96xpcCof0kxKwuX1kqLG/ygbJ1f8wxED22bTL4F46P0"
+    username: ubuntu
+  ssh:
+    install-server: yes
+    authorized-keys:
+      - {{ ssh_public_key }}
+    allow-pw: no
+  network:
+    version: 2
+    ethernets:
+      enp1s0:
+        match:
+          macaddress: {{ hostvars[item]["mac"] }}
+        dhcp4: no
+        addresses:
+          - {{ hostvars[item]["ansible_host"] }}/{{ (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ansible.utils.ipaddr('prefix') }}
+        gateway4: {{ ansible_default_ipv4["gateway"] }}
+        nameservers:
+          addresses:
+            - 8.8.8.8
+            - 1.1.1.1
+      enp0s3:
+        match:
+          macaddress: {{ hostvars[item]["mac"] }}
+        dhcp4: no
+        addresses:
+          - {{ hostvars[item]["ansible_host"] }}/{{ (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ansible.utils.ipaddr('prefix') }}
+        gateway4: {{ ansible_default_ipv4["gateway"] }}
+        nameservers:
+          addresses:
+            - 8.8.8.8
+            - 1.1.1.1
+  storage:
+    config:
+      - grub_device: false
+        id: {{ hostvars[item]["disk"] }}
+        path: /dev/{{ hostvars[item]["disk"] }}
+        ptable: gpt
+        type: disk
+        wipe: superblock-recursive
+        preserve: false
+      - device: {{ hostvars[item]["disk"] }}
+        flag: boot
+        id: efi-partition
+        number: 1
+        size: 1G
+        type: partition
+        grub_device: true
+      - fstype: fat32
+        id: efi-format
+        type: format
+        volume: efi-partition
+        label: ESP
+      - device: efi-format
+        id: mount-efi-partition
+        path: /boot/efi
+        type: mount
+      - device: {{ hostvars[item]["disk"] }}
+        id: boot-partition
+        number: 2
+        size: 2G
+        type: partition
+      - fstype: ext4
+        id: boot-format
+        type: format
+        volume: boot-partition
+        label: BOOT
+      - device: boot-format
+        id: mount-boot-partition
+        path: /boot
+        type: mount
+      - type: partition             # LVM partition (PV)
+        number: 3
+        id: lvm-partition
+        device: {{ hostvars[item]["disk"] }}
+        size: -1
+        grub_device: false
+      - name: system                # LVM VG (system)
+        devices:
+        - lvm-partition
+        preserve: false
+        type: lvm_volgroup
+        id: lvm_volgroup-0
+      - name: root                  # LVM LV (root)
+        volgroup: lvm_volgroup-0
+        size: {{ hostvars[item]["root_disk_size"] }}
+        wipe: superblock
+        preserve: false
+        type: lvm_partition
+        id: lvm_partition-root
+      - fstype: xfs                 # LVM LV root - format rules
+        volume: lvm_partition-root
+        preserve: false
+        type: format
+        id: format-root
+      - path: /                     # LVM LV root - mount rules
+        device: format-root
+        type: mount
+        id: mount-root
+      {% for cd in hostvars[item]["ceph_disks"] -%}
+      - id: {{ cd }}
+        path: /dev/{{ cd }}
+        ptable: gpt
+        type: disk
+        wipe: superblock-recursive
+      {% endfor %}

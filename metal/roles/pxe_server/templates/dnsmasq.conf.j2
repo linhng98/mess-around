@@ -1,0 +1,19 @@
+bind-interfaces
+
+dhcp-range={{ ansible_default_ipv4.network | ansible.utils.ipmath(2) }},{{ ansible_default_ipv4.broadcast | ansible.utils.ipmath(-1) }},{{ ansible_default_ipv4.netmask }},8h
+dhcp-option=option:router,{{ ansible_default_ipv4["gateway"] }}
+dhcp-option=option:dns-server,8.8.8.8
+dhcp-option=option:dns-server,1.1.1.1
+
+enable-tftp
+tftp-root=/srv/tftp/
+dhcp-boot=bootx64.efi
+pxe-prompt="Press F8 for PXE Network boot.", 5
+pxe-service=x86PC, "Install OS via PXE",pxelinux
+
+#log DNS queries
+log-queries
+#log DHCP details
+log-dhcp
+#log file to use
+log-facility=/var/log/dnsmasq.log

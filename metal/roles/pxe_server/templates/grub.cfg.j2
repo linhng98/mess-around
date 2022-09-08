@@ -1,0 +1,8 @@
+default=autoinstall
+timeout=5
+timeout_style=menu
+menuentry "{{ ubuntu_release_iso | basename }} autoinstall" --id=autoinstall {
+    linux /ubuntu/vmlinuz ip=dhcp url=http://{{ ansible_default_ipv4.address }}/pxe/ubuntu/{{ ubuntu_release_iso | basename }} autoinstall ds='nocloud-net;s=http://{{ ansible_default_ipv4.address }}/pxe/ubuntu/' cloud-config-url=/dev/null root=/dev/ram0
+    echo "Loading Ram Disk..."
+    initrd /ubuntu/initrd
+}

@@ -1,0 +1,12 @@
+FROM ubuntu:20.04
+
+RUN apt-get update -y
+RUN apt-get install -y dnsmasq
+RUN touch /var/log/dnsmasq.log
+
+RUN mkdir -p /srv/tftp
+RUN apt-get download shim-signed && dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed -O > /srv/tftp/bootx64.efi
+RUN apt-get download grub-efi-amd64-signed && dpkg-deb --fsys-tarfile grub-efi-amd64-signed*deb | tar x ./usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed -O > /srv/tftp/grubx64.efi
+RUN apt-get download grub-common && dpkg-deb --fsys-tarfile grub-common*deb | tar x ./usr/share/grub/unicode.pf2 -O > /srv/tftp/unicode.pf2
+
+CMD service dnsmasq start && tail -F /var/log/dnsmasq.log
