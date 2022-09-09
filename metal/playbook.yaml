@@ -1,6 +1,5 @@
 ---
   - name: Start PXE server
     hosts: localhost
-    become: true
     roles:
       - pxe_server

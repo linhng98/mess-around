@@ -1,5 +1,5 @@
 ---
-version: "3.8"
+version: '3.8'
 services:
   apache2:
     image: httpd:2.4.54-alpine

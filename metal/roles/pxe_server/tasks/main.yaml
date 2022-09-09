@@ -12,6 +12,12 @@
       mode: 0644
     loop: "{{ groups['metal'] }}"
 
+  #- name: Render docker compose config
+  #  template:
+  #    src: docker-compose.yaml.j2
+  #    dest: "{{ role_path }}/files/docker-compose.yaml"
+  #    mode: 0644
+
   - name: Render dnsmasq server config
     template:
       src: dnsmasq.conf.j2
@@ -28,20 +34,32 @@
     ansible.builtin.get_url:
       url: '{{ ubuntu_release_iso }}'
       dest: '{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}'
+    register: iso
 
-  - name: Extract vmlinuz and initrd from ubuntu iso
-    community.general.iso_extract:
-      image: '{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}'
-      dest: '{{ role_path }}/files/data/ubuntu'
+  - name: Extract the ISO
+    command:
+      cmd: xorriso -osirrox on -indev {{ iso.dest }} -extract / {{ role_path }}/files/data/os
+      creates: '{{ role_path }}/files/data/os/.treeinfo'
+    ignore_errors: true
+
+  - name: Copy initrd
+    ansible.builtin.copy:
+      src: '{{ role_path }}/files/data/os/casper/initrd'
+      dest: '{{ role_path }}/files/data/ubuntu/initrd'
+
+  - name: Copy vmlinuz
+    ansible.builtin.copy:
+      src: '{{ role_path }}/files/data/os/casper/vmlinuz'
+      dest: '{{ role_path }}/files/data/ubuntu/vmlinuz'
+
+  - name: start docker-compose pxe server
+    community.docker.docker_compose:
+      project_src: '{{ role_path }}/files/'
       files:
-        - casper/vmlinuz
-        - casper/initrd
-
-    #- name: start docker-compose pxe server
-    #  community.docker.docker_compose:
-    #    project_src: '{{ role_path }}/files/'
-    #    files:
-    #      - docker-compose.yaml
+        - docker-compose.yaml
+      state: present
+      restarted: true
+      build: true
 
   - name: wake on lan
     community.general.wakeonlan:
