@@ -12,12 +12,6 @@
       mode: 0644
     loop: "{{ groups['metal'] }}"
 
-  #- name: Render docker compose config
-  #  template:
-  #    src: docker-compose.yaml.j2
-  #    dest: "{{ role_path }}/files/docker-compose.yaml"
-  #    mode: 0644
-
   - name: Render dnsmasq server config
     template:
       src: dnsmasq.conf.j2
@@ -40,7 +34,9 @@
     command:
       cmd: xorriso -osirrox on -indev {{ iso.dest }} -extract / {{ role_path }}/files/data/os
       creates: '{{ role_path }}/files/data/os/.treeinfo'
-    ignore_errors: true
+
+  - name: Add write permission to os dir
+    ansible.builtin.command: chmod u+w -R {{ role_path }}/files/data/os
 
   - name: Copy initrd
     ansible.builtin.copy:
