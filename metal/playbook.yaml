@@ -1,5 +1,11 @@
 ---
-  - name: Start PXE server
-    hosts: localhost
+  #- name: Start PXE server
+  #  hosts: localhost
+  #  roles:
+  #    - pxe_server
+
+  - name: Install rke2 cluster
+    remote_user: ubuntu
+    hosts: all
     roles:
-      - pxe_server
+      - rke2

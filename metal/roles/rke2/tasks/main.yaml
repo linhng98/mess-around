@@ -1,0 +1,3 @@
+---
+  - name: Download and install RKE2 {{ rke2_version }}
+    ansible.builtin.include_tasks: rke2.yaml
