@@ -1,4 +1,5 @@
 ---
+version: '3.8'
 services:
   apache2:
     image: httpd:2.4.54-alpine
@@ -9,6 +10,7 @@ services:
   dnsmasq:
     build:
       dockerfile: Dockerfile.dnsmasq
+      context: ./
     network_mode: host
     cap_add:
       - NET_ADMIN

@@ -28,11 +28,38 @@
     ansible.builtin.get_url:
       url: '{{ ubuntu_release_iso }}'
       dest: '{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}'
+    register: iso
 
-  - name: Extract vmlinuz and initrd from ubuntu iso
-    community.general.iso_extract:
-      image: '{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}'
-      dest: '{{ role_path }}/files/data/ubuntu'
+  - name: Extract the ISO
+    command:
+      cmd: xorriso -osirrox on -indev {{ iso.dest }} -extract / {{ role_path }}/files/data/os
+      creates: '{{ role_path }}/files/data/os/.treeinfo'
+
+  - name: Add write permission to os dir
+    ansible.builtin.command: chmod u+w -R {{ role_path }}/files/data/os
+
+  - name: Copy initrd
+    ansible.builtin.copy:
+      src: '{{ role_path }}/files/data/os/casper/initrd'
+      dest: '{{ role_path }}/files/data/ubuntu/initrd'
+
+  - name: Copy vmlinuz
+    ansible.builtin.copy:
+      src: '{{ role_path }}/files/data/os/casper/vmlinuz'
+      dest: '{{ role_path }}/files/data/ubuntu/vmlinuz'
+
+  - name: start docker-compose pxe server
+    community.docker.docker_compose:
+      project_src: '{{ role_path }}/files/'
       files:
-        - casper/vmlinuz
-        - casper/initrd
+        - docker-compose.yaml
+      state: present
+      restarted: true
+      build: true
+
+  - name: wake on lan
+    community.general.wakeonlan:
+      mac: "{{ hostvars[item]['mac'] }}"
+      broadcast: '{{ ansible_default_ipv4.broadcast }}'
+    delegate_to: localhost
+    loop: "{{ groups['metal'] }}"
