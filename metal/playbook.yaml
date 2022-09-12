@@ -6,6 +6,7 @@
 
   - name: Install rke2 cluster
     remote_user: ubuntu
+    become: true
     hosts: all
     roles:
       - rke2

@@ -1,0 +1,99 @@
+---
+
+- name: Create the RKE2 config dir
+  ansible.builtin.file:
+    state: directory
+    path: /etc/rancher/rke2
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Set server taints
+  ansible.builtin.set_fact:
+    combined_node_taints: "{{ node_taints + [ 'CriticalAddonsOnly=true:NoExecute' ] }}"
+  when: rke2_server_taint and rke2_type == 'server'
+
+- name: Set agent taints
+  ansible.builtin.set_fact:
+    combined_node_taints: "{{ node_taints }}"
+  when: rke2_type == 'agent' or not rke2_server_taint
+
+- name: Copy rke2 config
+  ansible.builtin.template:
+    src: "{{ rke2_config }}"
+    dest: /etc/rancher/rke2/config.yaml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy Containerd Registry Configuration file
+  ansible.builtin.template:
+    src: "{{ rke2_custom_registry_path }}"
+    dest: /etc/rancher/rke2/registries.yaml
+    owner: root
+    group: root
+    mode: 0644
+  when: rke2_custom_registry_mirrors.0.endpoint | length > 0
+
+- name: Restore etcd
+  block:
+    - name: Create the RKE2 etcd snapshot dir
+      ansible.builtin.file:
+        state: directory
+        path: "{{ rke2_etcd_snapshot_destination_dir }}"
+        recurse: true
+        mode: 0755
+    - name: Copy etcd snapshot file
+      ansible.builtin.copy:
+        src: "{{ rke2_etcd_snapshot_source_dir }}/{{ rke2_etcd_snapshot_file }}"
+        dest: "{{ rke2_etcd_snapshot_destination_dir }}/{{ rke2_etcd_snapshot_file }}"
+        mode: 0644
+        force: true
+    - name: Restore etcd from a snapshot
+      ansible.builtin.shell: |
+        rke2 server \
+        --cluster-reset \
+        --cluster-reset-restore-path="{{ rke2_etcd_snapshot_destination_dir }}/{{ rke2_etcd_snapshot_file }}" \
+        --token {{ rke2_token }}
+  when: rke2_etcd_snapshot_file and ( "rke2-server.service" is not in ansible_facts.services )
+
+- name: Start RKE2 service on the first server
+  ansible.builtin.systemd:
+    name: "rke2-server.service"
+    state: started
+    enabled: true
+  environment:
+    RKE2_TOKEN: "{{ rke2_token }}"
+
+- name: Mask RKE2 agent service on the first server
+  ansible.builtin.systemd:
+    name: "rke2-agent.service"
+    enabled: false
+    masked: true
+
+- name: Wait for the first server be ready
+  ansible.builtin.shell: |
+    set -o pipefail
+    {{ rke2_data_path }}/bin/kubectl --kubeconfig /etc/rancher/rke2/rke2.yaml get nodes | grep "{{ inventory_hostname }}"
+  args:
+    executable: /bin/bash
+  changed_when: false
+  register: first_server
+  until:
+    '" Ready "  in first_server.stdout'
+  retries: 40
+  delay: 15
+
+- name: Restore etcd - remove old <node>.node-password.rke2 secrets
+  ansible.builtin.shell: |
+    {{ rke2_data_path }}/bin/kubectl --kubeconfig /etc/rancher/rke2/rke2.yaml \
+    delete secret {{ item }}.node-password.rke2 -n kube-system 2>&1 || true
+  args:
+    executable: /bin/bash
+  with_items: "{{ groups[rke2_cluster_group_name] }}"
+  when: rke2_etcd_snapshot_file and inventory_hostname != item and  ( "rke2-server.service" is not in ansible_facts.services )
+
+- name: Set an Active Server variable
+  ansible.builtin.set_fact:
+    active_server: "{{ inventory_hostname }}"
+  run_once: true

@@ -27,8 +27,8 @@ rke2_api_cidr: 24
 # optional option for kubevip
 # rke2_interface: eth0
 
-# optiononal option for kubevip load balancer IP range
-rke2_loadbalancer_ip_range: 192.168.1.50-192.168.1.100
+# optional for kubevip load balancer IP range
+rke2_loadbalancer_ip_range: "{{ ansible_default_ipv4.network | ansible.utils.ipmath(200) }}-{{ ansible_default_ipv4.network | ansible.utils.ipmath(250) }}" 
 
 # Install kubevip cloud provider if rke2_ha_mode_kubevip is true
 rke2_kubevip_cloud_provider_enable: true
@@ -103,7 +103,9 @@ rke2_channel: stable
 
 # Do not deploy packaged components and delete any deployed components
 # Valid items: rke2-canal, rke2-coredns, rke2-ingress-nginx, rke2-kube-proxy, rke2-metrics-server
-rke2_disable:
+rke2_disable: 
+  - rke2-ingress-nginx
+  - rke2-metrics-server
 
 # Path to custom manifests deployed during the RKE2 installation
 rke2_custom_manifests:
@@ -147,7 +149,7 @@ rke2_snapshooter: overlayfs
 rke2_cni: cilium
 
 # Download Kubernetes config file to the Ansible controller
-rke2_download_kubeconf: false
+rke2_download_kubeconf: true
 
 # Name of the Kubernetes config file will be downloaded to the Ansible controller
 rke2_download_kubeconf_file_name: rke2.yaml
@@ -156,7 +158,7 @@ rke2_download_kubeconf_file_name: rke2.yaml
 rke2_download_kubeconf_path: /tmp
 
 # Default Ansible Inventory Group name for RKE2 cluster
-rke2_cluster_group_name: k8s_cluster
+rke2_cluster_group_name: metal
 
 # Default Ansible Inventory Group name for RKE2 Servers
 rke2_servers_group_name: masters

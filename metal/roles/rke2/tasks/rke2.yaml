@@ -34,7 +34,6 @@
       mode: 0700
 
   - name: Run RKE2 script
-    become: true
     ansible.builtin.command:
       cmd: '{{ rke2_install_script_dir }}/rke2.sh'
     environment:
