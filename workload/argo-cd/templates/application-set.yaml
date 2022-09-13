@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: application-set
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/linhng98/mess-around.git
+    targetRevision: master
+    path: bootstrap/application-set
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd

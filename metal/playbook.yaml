@@ -1,6 +1,7 @@
 ---
   - name: Start PXE server
     hosts: localhost
+    tags: pxe
     roles:
       - pxe_server
 
@@ -8,5 +9,6 @@
     remote_user: ubuntu
     become: true
     hosts: all
+    tags: rke2
     roles:
       - rke2
