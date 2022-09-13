@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: workload
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: &repo https://github.com/linhng98/mess-around.git
+        revision: feat/bootstrap-argocd
+        directories:
+          - path: workload/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: *repo
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'

@@ -1,0 +1,47 @@
+---
+argo-cd:
+  controller:
+    name: application-controller
+    replicas: 1
+
+    args:
+      appResyncPeriod: '60'
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  dex:
+    enabled: true
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  redis:
+    enabled: true
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  server:
+    enabled: true
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  repoServer:
+    enabled: true
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  applicationSet:
+    enabled: true
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true

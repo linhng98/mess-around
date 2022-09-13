@@ -1,0 +1,8 @@
+---
+ingress-nginx:
+  controller:
+    kind: DaemonSet
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
