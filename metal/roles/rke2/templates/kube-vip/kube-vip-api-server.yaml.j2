@@ -2,18 +2,20 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   creationTimestamp: null
-  name: kube-vip-ds
+  name: kube-vip-api-server
   namespace: kube-system
 spec:
   selector:
     matchLabels:
-      name: kube-vip-ds
+      name: kube-vip-api-server
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: kube-vip-ds
+        name: kube-vip-api-server
     spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
       containers:
       - args:
         - manager
@@ -35,7 +37,7 @@ spec:
         - name: enableUPNP
           value: "false"
         - name: svc_enable
-          value: "{{ rke2_kubevip_svc_enable }}"
+          value: "false"
         - name: vip_leaderelection
           value: "true"
         - name: vip_leaseduration

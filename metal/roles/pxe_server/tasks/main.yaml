@@ -63,3 +63,8 @@
       broadcast: '{{ ansible_default_ipv4.broadcast }}'
     delegate_to: localhost
     loop: "{{ groups['metal'] }}"
+
+  - name: Wait for server install os
+    ansible.builtin.wait_for:
+      timeout: 9000
+    delegate_to: localhost
