@@ -156,7 +156,7 @@ rke2_download_kubeconf: true
 rke2_download_kubeconf_file_name: kubeconfig.yaml
 
 # Destination directory where the Kubernetes config file will be downloaded to the Ansible controller
-rke2_download_kubeconf_path: '{{ role_path }}'
+rke2_download_kubeconf_path: '{{ role_path }}/files'
 
 # Default Ansible Inventory Group name for RKE2 cluster
 rke2_cluster_group_name: '{{ group_names[0] }}'
