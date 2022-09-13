@@ -2,7 +2,6 @@
   - name: Download and install RKE2 {{ rke2_version }}
     ansible.builtin.include_tasks: rke2.yaml
 
-
   - name: Prepare very first server node in the cluster
     ansible.builtin.include_tasks: first_master_server.yaml
     when:
