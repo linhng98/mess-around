@@ -14,6 +14,8 @@ spec:
       labels:
         name: kube-vip-loadbalancer
     spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: "true"
       containers:
       - args:
         - manager
@@ -44,6 +46,8 @@ spec:
           value: "3"
         - name: vip_retryperiod
           value: "1"
+        - name: address
+          value: "{{ rke2_api_ip }}"
         image: ghcr.io/kube-vip/kube-vip:v0.4.0
         imagePullPolicy: Always
         name: kube-vip
