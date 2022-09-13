@@ -2,13 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: workload
-  namespace: argocd
+  name: appset-workload
+  namespace: argo-cd
 spec:
   generators:
     - git:
         repoURL: &repo https://github.com/linhng98/mess-around.git
-        revision: feat/bootstrap-argocd
+        revision: &rev master
         directories:
           - path: workload/*
   template:
@@ -18,8 +18,20 @@ spec:
       project: default
       source:
         repoURL: *repo
-        targetRevision: HEAD
+        targetRevision: *rev
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 10
+          backoff:
+            duration: 1m
+            factor: 2
+            maxDuration: 16m
+        syncOptions:
+          - CreateNamespace=true

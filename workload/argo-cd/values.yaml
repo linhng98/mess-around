@@ -6,42 +6,27 @@ argo-cd:
 
     args:
       appResyncPeriod: '60'
-    metrics:
+    metrics: &metrics
       enabled: true
       serviceMonitor:
         enabled: true
 
   dex:
     enabled: true
-    metrics:
-      enabled: true
-      serviceMonitor:
-        enabled: true
+    metrics: *metrics
 
   redis:
     enabled: true
-    metrics:
-      enabled: true
-      serviceMonitor:
-        enabled: true
+    metrics: *metrics
 
   server:
     enabled: true
-    metrics:
-      enabled: true
-      serviceMonitor:
-        enabled: true
+    metrics: *metrics
 
   repoServer:
     enabled: true
-    metrics:
-      enabled: true
-      serviceMonitor:
-        enabled: true
+    metrics: *metrics
 
   applicationSet:
     enabled: true
-    metrics:
-      enabled: true
-      serviceMonitor:
-        enabled: true
+    metrics: *metrics
