@@ -79,7 +79,7 @@
       executable: /bin/bash
     changed_when: false
     register: first_server
-    until: '" Ready "  in first_server.stdout'
+    until: '" Ready " in first_server.stdout'
     retries: 40
     delay: 15
 

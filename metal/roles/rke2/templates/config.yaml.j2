@@ -9,6 +9,7 @@ cni: {{ rke2_cni }}
 tls-san:
   - cluster.local
   - {{ rke2_api_ip }}
+  - {{ apiserver_url }}
 {% for san in rke2_additional_sans %}
   - {{ san }}
 {% endfor %}
