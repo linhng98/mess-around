@@ -14,7 +14,7 @@ spec:
         paths:
           - backend:
               service:
-                name: kubeseal-webgui
+                name: kube-system-kubeseal-webgui
                 port:
                   number: 8080
             path: /
