@@ -1,5 +1,4 @@
 ---
-
   - name: Create the RKE2 config dir
     ansible.builtin.file:
       state: directory

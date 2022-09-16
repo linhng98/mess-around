@@ -15,7 +15,7 @@ spec:
         name: kube-vip-loadbalancer
     spec:
       nodeSelector:
-        node-role.kubernetes.io/worker: "true"
+        rke-type.kubernetes.io: agent
       containers:
       - args:
         - manager

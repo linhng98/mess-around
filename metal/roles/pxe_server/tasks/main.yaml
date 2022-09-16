@@ -71,3 +71,4 @@
     retries: 20
     delay: 60
     loop: "{{ groups['metal'] }}"
+    delegate_to: localhost
