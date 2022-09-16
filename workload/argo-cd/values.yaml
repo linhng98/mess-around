@@ -31,7 +31,11 @@ argo-cd:
       paths:
         - /
       hosts:
-        - argocd.homelab.linhng98.com
+        - &host argocd.homelab.linhng98.com
+      tls:
+        - secretName: argocd-tls
+          hosts:
+            - *host
       https: true
 
   repoServer:
