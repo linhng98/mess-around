@@ -4,5 +4,5 @@ version: 1.0.0
 name: deploychart
 dependencies:
   - name: deploychart
-    version: 3.0.1
+    version: 3.0.2
     repository: https://linhng98.github.io/helm-charts
