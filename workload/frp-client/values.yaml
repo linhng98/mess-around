@@ -1,7 +1,8 @@
 ---
 deploychart:
   replicaCount: 1
-  image: snowdreamtech/frpc:0.44.0
+  image:
+    repository: snowdreamtech/frpc:0.44.0
   pullPolicy: IfNotPresent
 
   strategy:
