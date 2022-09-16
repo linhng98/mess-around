@@ -16,9 +16,9 @@ deploychart:
     enabled: true
     encryptedData:
       mapFile:
-        - mountPath: /etc/frp
+        - mountPath: /etc
           name: frpc-client
           files:
             - name: frpc.ini
               value: AgBo8w9esqB3lyWnXatV8ZrDqunuLPZVXWnBYvM3MqVcFw3LGBdXgMUZhaSF6cdvn/Ia8Rlb4dI2eY9BX48EM1aWnrrwH9l23DmApCTJk+yxPaOuqPPseK8xyeCKHhIVe/IjaKjKKcBWAXRxdYqH/zhpeb1FdkWPUDoUdla67I+59ceIBvi0lz5vhzdZAvVG/tQNRdK+W1P43N1WwK5lKErWEk3qj0Q2mnJ15arClKYGQ3uXFIXaEcdcHyJ5Bq1YpS9f2FRPl2Tviz+Xomc5VMaYIu6xlwdivUSAIvgWPwChmF8mpyKWHlqZ5jCpOPT1Z2Y3qAG/O1+DmbYzd3pvXwsHm+XAWa3bQm1fo3DKHfiqYyS8HE3GR8ktEgaj/3woUQOOduRXnI6ZuS/zfCKrLa7XXoW9pnEYLqRYubg8V2utemCSwAxrW7t1ogWqTLIT1PtLacGH9dJgr8z11P7jdsKW5Ub1nPBW7y+ambR0wUwvc/HjDu0cf03tI68WdBMOemOBp0cCXLMHdgPOi00zPwjcntFSh5Nxjo9sSICuUnM9ipRr81G+xoNXA2ZWky9536XijUbvuhiwFBYqLz51GwHgpF3csH07vY3AmhP7mkH/suIR9ZGaSqW1aYdt8S2UPVQ1VSf+9FGsgW2InFYdiXDlKIZJqKWhGHG0xypueOkGo5aJCPwr3HN9dGKjaBivWyXFpb29HJe6ofKTGLdMCgph9sP+3T0HG4kwCUZQz/m2+ka2XUF9jzKZCQZ523bQ9LdslZcCfiRftworUlXXJH5cD1dD2qIQspX9CqAxB13mwadhfuiEelEFd9t3sQx8EvzfUDC1K1KB07/LON5Fbaum0u4q7o6mKCVGHtR0PK15TBJ7ROMgiwJF1lN7oTX91K6vekvEHT4pBQrD1t6OYXBGArucjavghUy1soDufmCClsKUZP5SPDb1j3rozPDBaBPkmd6bluFecNllj9oUJziQlhAqjUqovsqvUJibH1waGcmLPtq48hTfv3iPhCT++rOATp9GbJTEmCEXpa/H3Xm2nSzEoPt1KNzt43qsRIwnBe9uqhBpLmEcbH/JvTm4bewA62JReazWxuHUV3yfiZYogrLCo85TjOju6Pc7R4DKIs2qwrt+t9RpI5lUrn4UXcI94gWkf1DoR9P/Kn+5ro5NRb/C7OoF5rjF55Z9b5/QxDmQvGQOiRf9WzVHU1p0KDs=
-              path: /frpc.ini
+              path: frp
