@@ -22,6 +22,15 @@ argo-cd:
   server:
     enabled: true
     metrics: *metrics
+    ingress:
+      enabled: true
+      annotations: {}
+      labels: {}
+      ingressClassName: nginx
+      paths:
+        - /
+      hosts:
+        - argocd.homelab.linhng98.com
 
   repoServer:
     enabled: true
