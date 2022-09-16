@@ -1,2 +1,5 @@
 Chart.lock
 charts
+.env
+.terragrunt*
+.terraform*
