@@ -1,7 +1,7 @@
 # Mess Around
 
-## Ubuntu PXE boot
-- Got idea and well-structed ansible code from [khuedoan's homelab](https://github.com/khuedoan/homelab.git), he is a talented and ambitious SRE, totally worth taking a look at his project
+## Foreword
+- Got idea and well-structed ansible code from [khuedoan's homelab](https://github.com/khuedoan/homelab.git), he is a talented and enthusiastic SRE, totally worth taking a look at his awesome project
 
 ## Reference
 - https://www.youtube.com/watch?v=E_OlsA1hF4k
