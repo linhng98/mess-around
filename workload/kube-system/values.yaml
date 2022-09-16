@@ -1,0 +1,45 @@
+---
+sealed-secrets:
+  createController: true
+  image:
+    commandArgs:
+      - --key-renew-period=0
+
+kubeseal-webgui:
+  replicaCount: 1
+  api:
+    url: https://kubeseal.homelab.linhng98.com
+
+  sealedSecrets:
+    autoFetchCert: false
+    controllerName: sealed-secrets-controller
+    controllerNamespace: kube-system
+    cert: |
+      -----BEGIN CERTIFICATE-----
+      MIIEzTCCArWgAwIBAgIRAJrqXlBZmGFZiEnTybbt0i0wDQYJKoZIhvcNAQELBQAw
+      ADAeFw0yMjA3MTEwNzQyMzJaFw0zMjA3MDgwNzQyMzJaMAAwggIiMA0GCSqGSIb3
+      DQEBAQUAA4ICDwAwggIKAoICAQDQv2tXSIXNLBQxgFCCp/PYN1sga3vGB4OuJo1X
+      sRRBC/SUY4N1Zoqq8OpfN6kQ68PS63BRNbgr4VpAKgXlXhUV7onRmOQpuXsxC5CS
+      NRp1RQHON2b/a/H3TL4LYPU8ai0LVMZXRlvY9pI1lynTneUDihvzjr6hbA3atrd7
+      VDaqsSkjX36lRsCPp5P4JhnCTvVpygNa6d97FHVbHFu/4eVdPCALbLwJX4A2aKZw
+      69DIGlNs/9LNvXUq/pjhG12WOwx3oSJAAePk748/+jzvMct3pmfCld+RhOVXDzQY
+      0DPWJ6X6K+VJIjQm/roZwuNedw8IiD/4684Sk3lL3qv971tLUFMBmQhBrmoY7WZi
+      uEa6uUmbAPYgx/VemTgF4LLN907iiOqVCaLk7BZhxxxV5xDb3L0IyQf9+2w+R8wR
+      keCSk7BBidG3x/ifQ6PfOujxhgmJqWBbcu76nLYaXe+ldccQEOMOfoRt9DuablUb
+      X3mk8FFOb20V43hGLeHOlRwVIaKKgkJnuKYMfeFoIwxy1RI8QO9GRffX4GVAXhhT
+      NWRMnCvt53SRmQ4NnsD+V1uPBsfIIKdHgtyzM766rdJPnAqnOnxkZzNuy04kJoOA
+      6vpSpEUzJYrLAlqE85eMO5cseMLaghEdN5QKOhtIRJodUP7v1nf9/wfq4nXKXA7m
+      IswIlwIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAAEwDwYDVR0TAQH/BAUwAwEB/zAd
+      BgNVHQ4EFgQUanYtYZQRD9u7VCm/wd23+5tntigwDQYJKoZIhvcNAQELBQADggIB
+      AEH6YqOk1Sjlwg4guPFul3TwO3/EDoYGpPEBzZKCMIIRwX26iDewE3+wksJk2Wm8
+      Gt3dKgADMGeCJAMJlqUssPrGITWjQlscFnEfZXLpqITPmuI6IM66tDeRoxzNdcnr
+      my1CfbP1VjESlYu9QwfVpKKbRrPh/iZ4oT+5VPHYBF6ZOE7DvKSG/QMJF/IILh6d
+      V6xE57cZ0QfRmViXOo9cVSeaIqXlJj9ZSPqEUmZ2XwcULyZNqT06tM6rs8bYslek
+      xdhjHxHLkUMfYIyFnL6J0DgQZqnXbLI1lp4/REnhuHH06+8S3S+erOzVskvVgA1R
+      H6BGLw4qKY2aw/vEB/M6P+mfxPCPb7d1LV6v9XkK7NQLSbopnD2wFL3qGlhrwJu9
+      fswb1z2/Q9jCUHOwAyzepzPeaxbiqDjRM8LLo8+B/GGeMM7Hr1ZoyuMPO7e8rGK+
+      KzKmIjsy6RELiozVRvMV0TNkTC4SaYI9Yo04gIPqKJAHDc18YRuH+Z3DjXS7dQgj
+      Az6A/+ZGynl+CfKPH+WwiTkQpqqUipoRJoNILTDjN9RtKgW7oSZagwPvnwalwAPB
+      rnUu/EzsNdxmFJE3JKao3j70/LCI20l6qYXX/MWC6EFVJsGhMVA+pwV8/WO5E1mw
+      9fhgrwJHMub7xJVz/bGGVbhHz47rJW67ho4Ez3D4udfi
+      -----END CERTIFICATE-----

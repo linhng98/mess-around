@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: &host kubeseal.homelab.linhng98.com
+  namespace: kube-system
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: *host
+      http:
+        paths:
+          - backend:
+              service:
+                name: kubeseal-webgui
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - *host
+      secretName: *host

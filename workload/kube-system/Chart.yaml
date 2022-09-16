@@ -1,0 +1,11 @@
+---
+apiVersion: v2
+name: system-app
+version: 0.0.0
+dependencies:
+  - name: sealed-secrets
+    version: 1.0.9
+    repository: https://bitnami-labs.github.io/sealed-secrets
+  - name: kubeseal-webgui
+    version: 3.1.1
+    repository: https://jaydee94.github.io/kubeseal-webgui/
