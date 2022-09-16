@@ -26,6 +26,7 @@ argo-cd:
       enabled: true
       annotations:
         nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+        cert-manager.io/cluster-issuer: letsencrypt-prod
       ingressClassName: nginx
       paths:
         - /

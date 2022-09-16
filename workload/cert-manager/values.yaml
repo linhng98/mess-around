@@ -1,0 +1,10 @@
+---
+cert-manager:
+  installCRDs: true
+  prometheus:
+    enabled: true
+    servicemonitor:
+      enabled: true
+
+issuer:
+  email: example@gmail.com

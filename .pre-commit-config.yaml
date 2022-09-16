@@ -1,6 +1,9 @@
 ---
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
+
+exclude: templates/*
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
@@ -21,12 +24,12 @@ repos:
     rev: v1.27.1
     hooks:
       - id: yamllint
-        args: [-c=.yamllint]
 
   - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
     rev: 0.2.2
     hooks:
       - id: yamlfmt
+        exclude: ^.+\/templates\/.+\.yaml
         args: [--mapping, '2', --sequence, '4', --offset, '2']
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
