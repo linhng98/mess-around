@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+version: 1.0.0
+name: deploychart
+dependencies:
+  - name: deploychart
+    version: 3.0.1
+    repository: https://linhng98.github.io/helm-charts

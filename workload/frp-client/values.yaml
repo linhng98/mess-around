@@ -1,0 +1,23 @@
+---
+deploychart:
+  replicaCount: 1
+  image: snowdreamtech/frpc:0.44.0
+  pullPolicy: IfNotPresent
+
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  fullnameOverride: frpc-client
+
+  sealedSecrets:
+    enabled: true
+    encryptedData:
+      mapFile:
+        - mountPath: /etc/frp
+          name: frpc-client
+          files:
+            - name: frpc.ini
+              value: AgBkHY/19XxcoLMB8Qoi+O+o/zWyvAlgHgMDeh2KkQKjFfUSGa6UZbM2sVWBR1SXuEGlHmTJPqwCJY562NkXzidIM2EWFkdYBOzKuPNmXMDwX+e73cdIiBCE2ocH5VqC8HXLDCCYqsDfnNTz7eS1zXJFZ8a/D+lkt80NsIsjf/Rsfscdyghbq1+yq6t+/3G5g8o0alSAwU1asKjiAOJcZbWD5GhvUJl/buOO9LdvniBZFpyRjYdXucjC2IG1rYwc6inOw+NIgmoHfukvWYcI6CMNlXvmPBfMo4ooBZ+0FuAlyfvXo5hER8vlBSaANhJZkQoYtDATz8u9qJ3JChFXxeyje6hWRtR+T8oTgAbnoOF5gUNpro0RbS161folzlfPpZm1fz003dEZ+ukft/UmA9N0RIcOk+6EsA5GAhTuk/r/uDdcrQRDcSHeIuR0HuXHNfkDHo4LY1HEmIfVObcddBLNna3wCRqiOY6QCF+OVEJrisqkD8KzJ4KGwlCDREh7cAyw9BB5YmOJRU+DIjli37lKA7nlcxTectE4I2qRwyRV3GTxh1nf8en1XbN3S4vlD1nYsjG9Qn/YUN+mvSbtmzKbQbmYOsk1vsf/VKAMhWocPyUhLf9SZur19rC1OWIi++LIhRTc7J/1rchan/9pwVh8zoZ/lceb/QNaxZ11VVlB37EGDL9W1gu4Y2ZfxQGyAg1i3i/hBKNIJdSGIeaVQ3zGMevLOrvaEKrf0xqGJraLyk3t4Sq2kFNKgxJ4XaGacdbAygBaiaNoMgUMZ0dX6WFsdrqmUSnoRuB6JSqMCchxpdP0a6Q85ktUZeuqoylTiQSfhX0HD9kadiW4Kgphg2pwUQ9f3OwZZvg5YQV2QEkjCgPUT2RRNY6xs/smPE5SO8JpYpZ82Eb/Y337cDlB0pe0N77kp0ETitSb6JIshD9auxlx4hQApX1tT6NIRZ3fWrsaO25rhku8VhKAV36yYJTgJVlNGCbfy5v1JVE8qxR6tAnlibe4bE9ehG/3j40utjQEoCNjA7yYxlSZR20dwlGPWsvLBxxfv1fQrNViqLFD8uKcCuLXAK8WxKpl+Cp4qocNRDJye3sdiNlSpOhaXKmW/ecDNZ5j9uQqVcUZutGlAgb9aweXoL+6FbX6fbajFW1dN1QYgBNi1eV9mqC1D1FW0U73SInqtdcAF+6B5CkZZGkrBa0Wdn88aSSsOOV1pt0=
+              path: /
