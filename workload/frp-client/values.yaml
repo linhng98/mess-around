@@ -16,7 +16,7 @@ deploychart:
     enabled: true
     encryptedData:
       mapFile:
-        - mountPath: /etc
+        - mountPath: /etc/frp
           name: frpc-client
           files:
             - name: frpc.ini
