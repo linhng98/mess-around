@@ -24,7 +24,8 @@ argo-cd:
     metrics: *metrics
     ingress:
       enabled: true
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: false
       labels: {}
       ingressClassName: nginx
       paths:
