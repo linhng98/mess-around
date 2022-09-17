@@ -1,7 +1,4 @@
 ---
-ignore: |
-  templates/
-
 yaml-files:
   - '*.yaml'
   - '*.yml'
