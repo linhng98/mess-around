@@ -9,6 +9,13 @@ loki-stack:
     serviceMonitor:
       enabled: true
 
+metrics-server:
+  metrics:
+    enabled: true
+
+  serviceMonitor:
+    enabled: true
+
 kube-prometheus-stack:
   grafana:
     enabled: false

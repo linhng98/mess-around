@@ -12,3 +12,6 @@ dependencies:
   - name: grafana
     version: 6.23.0
     repository: https://grafana.github.io/helm-charts
+  - name: metrics-server
+    version: 3.8.2
+    repository: https://kubernetes-sigs.github.io/metrics-server
