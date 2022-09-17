@@ -1,0 +1,88 @@
+---
+rook-ceph:
+  crds:
+    enabled: true
+  monitoring:
+    enabled: true
+
+rook-ceph-cluster:
+  operatorNamespace: rook-ceph
+  configOverride: |
+    [global]
+    mon_allow_pool_delete = true
+    osd_max_backfills = 3
+    osd_recovery_max_active = 3
+    mon_osd_down_out_interval = 600
+
+  toolbox:
+    enabled: true
+    image: rook/ceph:v1.10.1
+
+  monitoring:
+    enabled: true
+    createPrometheusRules: true
+
+  cephClusterSpec:
+    dashboard:
+      enabled: true
+      port: 8443
+      ssl: true
+
+    resources:
+      mgr:
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+        requests:
+          cpu: 500m
+          memory: 512Mi
+      mon:
+        limits:
+          cpu: 2000m
+          memory: 2Gi
+        requests:
+          cpu: 1000m
+          memory: 1Gi
+      osd:
+        limits:
+          cpu: 2000m
+          memory: 2Gi
+        requests:
+          cpu: 250m
+          memory: 2Gi
+
+    removeOSDsIfOutAndSafeToRemove: true
+
+    storage:
+      useAllNodes: true
+      useAllDevices: true
+
+  ingress:
+    dashboard:
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      host:
+        name: &host ceph.homelab.linhng98.com
+        path: /
+      tls:
+        - secretName: rook-ceph-tls
+          hosts:
+            - *host
+
+  cephBlockPools:
+    - name: ceph-blockpool
+      spec:
+        failureDomain: host
+        replicated:
+          size: 3
+      storageClass:
+        enabled: true
+        name: ceph-block
+        isDefault: true
+        reclaimPolicy: Delete
+        allowVolumeExpansion: true
+
+  cephFileSystems: []
+
+  cephObjectStores: []
