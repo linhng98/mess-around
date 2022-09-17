@@ -1,11 +1,14 @@
 ---
 loki-stack:
   loki:
+    enabled: true
+    isDefault: true
     serviceMonitor:
       enabled: true
   promtail:
-    loki:
-      serviceName: observability-loki
+    enabled: true
+    clients:
+      - url: http://{{ .Release.Name }}-loki:3100/loki/api/v1/push
     serviceMonitor:
       enabled: true
 
