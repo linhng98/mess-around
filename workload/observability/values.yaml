@@ -1,0 +1,90 @@
+---
+loki-stack:
+  serviceMonitor:
+    enabled: true
+
+kube-prometheus-stack:
+  grafana:
+    enabled: false
+
+  prometheusOperator:
+    prometheusConfigReloader:
+      resources:
+        requests:
+          cpu: 20m
+          memory: 50Mi
+
+  prometheus:
+    prometheusSpec:
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
+
+      externalLabels:
+        cluster: homelab
+      retention: 1d
+      shards: 3
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: [ReadWriteOnce]
+            resources:
+              requests:
+                storage: 5Gi
+
+grafana:
+  serviceMonitor:
+    enabled: true
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - &host grafana.homelab.linhng98.com
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - *host
+  deploymentStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  persistence:
+    enabled: false
+  plugins:
+    - vonage-status-panel
+    - grafana-piechart-panel
+
+  sidecar:
+    enableUniqueFilenames: false
+    dashboards:
+      enabled: true
+      provider:
+        # disableDelete to activate a import-only behaviour
+        disableDelete: true
+        # allow updating provisioned dashboards from the UI
+        allowUiUpdates: false
+        # allow Grafana to replicate dashboard structure from filesystem
+        foldersFromFilesStructure: true
+    datasources:
+      enabled: true
+      defaultDatasourceEnabled: false
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Loki
+          type: loki
+          url: http://loki:3100
+
+  grafana.ini:
+    server:
+      root_url: https://grafana.homelab.linhng98.com
+    auth:
+      disable_login_form: false
