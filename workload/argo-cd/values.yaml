@@ -2,8 +2,10 @@
 argo-cd:
   controller:
     name: application-controller
+    image:
+      repository: ghcr.io/argoproj/argocd
+      tag: 2.5.0-158e92c7
     replicas: 1
-
     args:
       appResyncPeriod: '60'
     metrics: &metrics
@@ -21,6 +23,9 @@ argo-cd:
 
   server:
     enabled: true
+    image:
+      repository: ghcr.io/argoproj/argocd
+      tag: 2.5.0-158e92c7
     metrics: *metrics
     ingress:
       enabled: true
