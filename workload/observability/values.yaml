@@ -7,8 +7,11 @@ loki-stack:
       enabled: true
   promtail:
     enabled: true
-    clients:
-      - url: http://{{ .Release.Name }}-loki:3100/loki/api/v1/push
+    config:
+      logLevel: info
+      serverPort: 3101
+      clients:
+        - url: http://{{ .Release.Name }}-loki:3100/loki/api/v1/push
     serviceMonitor:
       enabled: true
 
