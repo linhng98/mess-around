@@ -1,7 +1,13 @@
 ---
 loki-stack:
-  serviceMonitor:
-    enabled: true
+  loki:
+    serviceMonitor:
+      enabled: true
+  promtail:
+    loki:
+      serviceName: observability-loki
+    serviceMonitor:
+      enabled: true
 
 kube-prometheus-stack:
   grafana:
