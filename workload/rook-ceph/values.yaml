@@ -26,7 +26,7 @@ rook-ceph-cluster:
     dashboard:
       enabled: true
       port: 8443
-      ssl: true
+      ssl: false
 
     resources:
       mgr:
