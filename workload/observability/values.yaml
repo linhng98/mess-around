@@ -73,6 +73,11 @@ grafana:
       maxSurge: 1
       maxUnavailable: 1
 
+  admin:
+    existingSecret: grafana-admin-dashboard
+    userKey: admin-user
+    passwordKey: admin-password
+
   persistence:
     enabled: false
   plugins:
