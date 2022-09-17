@@ -81,7 +81,7 @@ grafana:
       datasources:
         - name: Loki
           type: loki
-          url: http://loki:3100
+          url: http://observability-loki:3100
 
   grafana.ini:
     server:
