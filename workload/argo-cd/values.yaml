@@ -76,14 +76,16 @@ argo-cd:
               - 'sh'
               - '-c'
               - |
-                BASENAME=`basename $PWD`
                 if test -e Chart.yaml; then
-                  helm template --include-crds $BASENAME --namespace $BASENAME . | argocd-vault-plugin generate -
+                  helm template --include-crds $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE . | argocd-vault-plugin generate -
                 elif test -e kustomization.yaml; then
                   kustomize build . | argocd-vault-plugin generate -
                 else
                   argocd-vault-plugin generate ./
                 fi
+    volumes:
+      - name: custom-tools
+        emptyDir: {}
     initContainers:
       - name: download-tools
         image: alpine:3.8
