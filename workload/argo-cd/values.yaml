@@ -46,96 +46,71 @@ argo-cd:
   repoServer:
     enabled: true
     metrics: *metrics
-    volumes:
-      - configMap:
-          name: cmp-plugin
-        name: cmp-plugin
-      - name: custom-tools
-        emptyDir: {}
+    config:
+      resource.customizations.health.argoproj.io_Application: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.health ~= nil then
+            hs.status = obj.status.health.status
+            if obj.status.health.message ~= nil then
+              hs.message = obj.status.health.message
+            end
+          end
+        end
+        return hs
+
+      configManagementPlugins: |
+        - name: argocd-vault-plugin
+          init:
+            command:
+              - 'sh'
+              - '-c'
+              - |
+                if test -e Chart.yaml; then
+                  helm dependency update
+                fi
+          generate:
+            command:
+              - 'sh'
+              - '-c'
+              - |
+                BASENAME=`basename $PWD`
+                if test -e Chart.yaml; then
+                  helm template --include-crds $BASENAME --namespace $BASENAME . | argocd-vault-plugin generate -
+                elif test -e kustomization.yaml; then
+                  kustomize build . | argocd-vault-plugin generate -
+                else
+                  argocd-vault-plugin generate ./
+                fi
     initContainers:
       - name: download-tools
-        image: registry.access.redhat.com/ubi8
+        image: alpine:3.8
+        command: [sh, -c]
+
+      # Don't forget to update this to whatever the stable release version is
+      # Note the lack of the `v` prefix unlike the git tag
         env:
           - name: AVP_VERSION
-            value: 1.11.0
-          - name: HELM_VERSION
-            value: v3.9.4
-          - name: KUSTOMIZE_VERSION
-            value: v4.5.7
-        command: [sh, -c]
+            value: 1.7.0
         args:
           - >-
-            curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v$(AVP_VERSION)/argocd-vault-plugin_$(AVP_VERSION)_linux_amd64
-            -o argocd-vault-plugin &&
+            wget -O argocd-vault-plugin
+            https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 &&
             chmod +x argocd-vault-plugin &&
-            mv argocd-vault-plugin /custom-tools/ && echo "installing helm" &&
-            curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" --output helm.tar.gz &&
-            tar -zxvf helm.tar.gz &&
-            cp linux-amd64/helm /custom-tools/helm && echo "installing kustomize" &&
-            curl -LO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
-            &&
-            tar -zxvf kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz &&
-            mv kustomize /custom-tools
-
+            mv argocd-vault-plugin /custom-tools/
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
+
+    volumeMounts:
+      - name: custom-tools
+        mountPath: /usr/local/bin/argocd-vault-plugin
+        subPath: argocd-vault-plugin
     envFrom:
       - secretRef:
-          name: argocd-vault-plugin-credential
-    extraContainers:
-      - name: avp-helm
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: registry.access.redhat.com/ubi8
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 999
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /tmp
-            name: tmp-dir
-
-          # Register plugins into sidecar
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: avp-helm.yaml
-            name: cmp-plugin
-
-          # Important: Mount tools into $PATH
-          - name: custom-tools
-            subPath: argocd-vault-plugin
-            mountPath: /usr/local/bin/argocd-vault-plugin
-      - name: avp-kustomize
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: registry.access.redhat.com/ubi8
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 999
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /tmp
-            name: tmp-dir
-
-          # Register plugins into sidecar
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: avp-kustomize.yaml
-            name: cmp-plugin
-
-          # Important: Mount tools into $PATH
-          - name: custom-tools
-            subPath: argocd-vault-plugin
-            mountPath: /usr/local/bin/argocd-vault-plugin
-          - name: custom-tools
-            subPath: helm
-            mountPath: /usr/local/bin/helm
-          - name: custom-tools
-            subPath: kustomize
-            mountPath: /usr/local/bin/kustomize
+          name: argocd-vault-plugin-credentials
 
   applicationSet:
     enabled: true
