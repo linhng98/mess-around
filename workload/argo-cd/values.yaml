@@ -112,7 +112,7 @@ argo-cd:
         subPath: argocd-vault-plugin
     envFrom:
       - secretRef:
-          name: argocd-vault-plugin-credentials
+          name: argocd-vault-plugin-credential
 
   applicationSet:
     enabled: true
