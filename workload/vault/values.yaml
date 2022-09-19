@@ -1,0 +1,34 @@
+---
+vault:
+  injector:
+    enabled: false
+  server:
+    dataStorage:
+      size: 1Gi
+    auditStorage:
+      enabled: true
+      size: 1Gi
+
+    ha:
+      enabled: true
+      replicas: 3
+
+      # Enables Vault's integrated Raft storage.  Unlike the typical HA modes where
+      # Vault's persistence is external (such as Consul), enabling Raft mode will create
+      # persistent volumes for Vault to store data according to the configuration under server.dataStorage.
+      # The Vault cluster will coordinate leader elections and failovers internally.
+      raft:
+        # Enables Raft integrated storage
+        enabled: true
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host vault.homelab.linhng98.com
+      tls:
+        - secretName: vault-tls
+          hosts:
+            - *host
