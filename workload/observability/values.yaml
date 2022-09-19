@@ -30,7 +30,7 @@ kube-prometheus-stack:
     prometheusConfigReloader:
       resources:
         requests:
-          cpu: 20m
+          cpu: 10m
           memory: 50Mi
 
   prometheus:

@@ -16,7 +16,13 @@ rook-ceph-cluster:
 
   toolbox:
     enabled: true
-    image: rook/ceph:v1.10.1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 128Mi
 
   monitoring:
     enabled: true
@@ -34,56 +40,56 @@ rook-ceph-cluster:
           cpu: 1000m
           memory: 1Gi
         requests:
-          cpu: 50m
+          cpu: 10m
           memory: 512Mi
       mon:
         limits:
           cpu: 2000m
           memory: 2Gi
         requests:
-          cpu: 50m
+          cpu: 10m
           memory: 1Gi
       osd:
         limits:
           cpu: 2000m
           memory: 2Gi
         requests:
-          cpu: 50m
+          cpu: 10m
           memory: 2Gi
       prepareosd:
         limits:
           cpu: 500m
           memory: 400Mi
         requests:
-          cpu: 500m
+          cpu: 100m
           memory: 50Mi
       mgr-sidecar:
         limits:
           cpu: 500m
           memory: 100Mi
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 50Mi
       crashcollector:
         limits:
           cpu: 500m
           memory: 60Mi
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 60Mi
       logcollector:
         limits:
           cpu: 500m
           memory: 1Gi
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 50Mi
       cleanup:
         limits:
           cpu: 500m
           memory: 1Gi
         requests:
-          cpu: 500m
+          cpu: 50m
           memory: 100Mi
 
     removeOSDsIfOutAndSafeToRemove: true
