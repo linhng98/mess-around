@@ -68,6 +68,9 @@ argo-cd:
         volumeMounts:
           - mountPath: /custom-tools
             name: custom-tools
+    envFrom:
+      - secretRef:
+          name: argocd-vault-plugin-credential
     extraContainers:
       - name: avp
         command: [/var/run/argocd/argocd-cmp-server]
