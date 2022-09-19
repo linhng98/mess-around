@@ -68,10 +68,10 @@ argo-cd:
             curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v$(AVP_VERSION)/argocd-vault-plugin_$(AVP_VERSION)_linux_amd64
             -o argocd-vault-plugin &&
             chmod +x argocd-vault-plugin &&
-            mv argocd-vault-plugin /custom-tools/ &&
+            mv argocd-vault-plugin /custom-tools/ && echo "installing helm" &&
             curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" --output helm.tar.gz &&
             tar -zxvf helm.tar.gz &&
-            cp linux-amd64/helm /custom-tools/helm &&
+            cp linux-amd64/helm /custom-tools/helm && echo "installing kustomize" &&
             curl -LO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
             &&
             tar -zxvf kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz &&
@@ -130,6 +130,12 @@ argo-cd:
           - name: custom-tools
             subPath: argocd-vault-plugin
             mountPath: /usr/local/bin/argocd-vault-plugin
+          - name: custom-tools
+            subPath: helm
+            mountPath: /usr/local/bin/helm
+          - name: custom-tools
+            subPath: kustomize
+            mountPath: /usr/local/bin/kustomize
 
   applicationSet:
     enabled: true
