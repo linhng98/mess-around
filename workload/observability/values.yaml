@@ -22,7 +22,7 @@ metrics-server:
   serviceMonitor:
     enabled: true
 
-kube-prometheus-stack:
+prom:
   grafana:
     enabled: false
 
