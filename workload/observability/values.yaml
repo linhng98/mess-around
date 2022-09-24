@@ -110,6 +110,15 @@ grafana:
         - name: Loki
           type: loki
           url: http://observability-loki:3100
+        - name: Prometheus
+          isDefault: true
+          type: prometheus
+          url: http://mimir-nginx.mimir/prometheus
+          basicAuth: false
+          jsonData:
+            httpHeaderName1: X-Scope-OrgID
+          secureJsonData:
+            httpHeaderValue1: homelab
 
   grafana.ini:
     server:
