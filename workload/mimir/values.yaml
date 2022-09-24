@@ -84,7 +84,10 @@ mimir-distributed:
           max_recv_msg_size: 104857600
           max_send_msg_size: 104857600
 
-      limits: {}
+      limits:
+        compactor_blocks_retention_period: "604800s"
+        max_global_series_per_user: 0
+        max_global_series_per_metric: 0
 
       memberlist:
         abort_if_cluster_join_fails: false
