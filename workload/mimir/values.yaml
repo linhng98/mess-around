@@ -18,7 +18,7 @@ mimir-distributed:
       alertmanager_storage:
         backend: local
         local:
-          directory: /data
+          path: /data
 
       blocks_storage:
         backend: s3
