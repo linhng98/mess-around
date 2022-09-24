@@ -49,8 +49,8 @@ mimir-distributed:
         s3:
           bucket_name: cortex-bucket
           endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph
-          access_key_id: <path:homelab/data/aws_credentials/ceph/mimir-bucket#AWS_ACCESS_KEY_ID>
-          secret_access_key: <path:homelab/data/aws_credentials/ceph/mimir-bucket#AWS_SECRET_ACCESS_KEY>
+          access_key_id: <path:homelab/data/aws-credentials/ceph/mimir-bucket#AWS_ACCESS_KEY_ID>
+          secret_access_key: <path:homelab/data/aws-credentials/ceph/mimir-bucket#AWS_SECRET_ACCESS_KEY>
           insecure: true
         tsdb:
           dir: /data/tsdb
