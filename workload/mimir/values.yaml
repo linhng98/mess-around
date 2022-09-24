@@ -1,5 +1,5 @@
 ---
-mimir:
+mimir-distributed:
   global:
     dnsService: rke2-coredns-rke2-coredns
     dnsNamespace: kube-system
