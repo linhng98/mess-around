@@ -47,7 +47,7 @@ mimir-distributed:
           {{- end }}
           sync_dir: /data/tsdb-sync
         s3:
-          bucket_name: cortex-bucket
+          bucket_name: mimir-bucket
           endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph
           access_key_id: <path:homelab/data/aws-credentials/ceph/mimir-bucket#AWS_ACCESS_KEY_ID>
           secret_access_key: <path:homelab/data/aws-credentials/ceph/mimir-bucket#AWS_SECRET_ACCESS_KEY>
