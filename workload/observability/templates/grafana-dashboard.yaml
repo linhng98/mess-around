@@ -1,0 +1,17 @@
+{{- $ReleaseName := .Release.Name  }}
+{{- $DashboardPath := .Values.grafana.sidecar.dashboards.folder | dir }}
+{{- range $path, $_ :=  .Files.Glob  "dashboards/**.json" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    {{- if $.Values.grafana.sidecar.dashboards.label }}
+    {{ $.Values.grafana.sidecar.dashboards.label }}: "1"
+    {{- end }}
+  name: {{ $path | base }}
+  annotations:
+    k8s-sidecar-target-directory: {{ printf "%s/%s" $DashboardPath ($path | dir) }}
+data:
+{{ ($.Files.Glob $path).AsConfig | indent 2 }}
+---
+{{- end }}
