@@ -1,0 +1,209 @@
+---
+mimir:
+  global:
+    dnsService: rke2-coredns-rke2-coredns
+    dnsNamespace: kube-system
+    clusterDomain: cluster.local
+
+  mimir:
+    config: |
+      activity_tracker:
+        filepath: /data/metrics-activity.log
+
+      alertmanager:
+        data_dir: /data
+        enable_api: true
+        external_url: /alertmanager
+
+      alertmanager_storage:
+        backend: local
+        local:
+          directory: /data
+
+      blocks_storage:
+        backend: s3
+        bucket_store:
+          {{- if index .Values "chunks-cache" "enabled" }}
+          chunks_cache:
+            backend: memcached
+            memcached:
+              addresses: {{ include "mimir.chunksCacheAddress" . }}
+              max_item_size: {{ mul (index .Values "chunks-cache").maxItemMemory 1024 1024 }}
+              timeout: 450ms
+          {{- end }}
+          {{- if index .Values "index-cache" "enabled" }}
+          index_cache:
+            backend: memcached
+            memcached:
+              addresses: {{ include "mimir.indexCacheAddress" . }}
+              max_item_size: {{ mul (index .Values "index-cache").maxItemMemory 1024 1024 }}
+          {{- end }}
+          {{- if index .Values "metadata-cache" "enabled" }}
+          metadata_cache:
+            backend: memcached
+            memcached:
+              addresses: {{ include "mimir.metadataCacheAddress" . }}
+              max_item_size: {{ mul (index .Values "metadata-cache").maxItemMemory 1024 1024 }}
+          {{- end }}
+          sync_dir: /data/tsdb-sync
+        s3:
+          bucket_name: cortex-bucket
+          endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph
+          access_key_id: <path:homelab/data/aws_credentials/ceph/mimir-bucket#AWS_ACCESS_KEY_ID>
+          secret_access_key: <path:homelab/data/aws_credentials/ceph/mimir-bucket#AWS_SECRET_ACCESS_KEY>
+          insecure: true
+        tsdb:
+          dir: /data/tsdb
+
+      compactor:
+        data_dir: "/data"
+
+      frontend:
+        align_queries_with_step: true
+        log_queries_longer_than: 10s
+        {{- if index .Values "results-cache" "enabled" }}
+        results_cache:
+          backend: memcached
+          memcached:
+            addresses: {{ include "mimir.resultsCacheAddress" . }}
+            max_item_size: {{ mul (index .Values "results-cache").maxItemMemory 1024 1024 }}
+        cache_results: true
+        {{- end }}
+
+      frontend_worker:
+        frontend_address: {{ template "mimir.fullname" . }}-query-frontend-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverGrpcListenPort" . }}
+
+      ingester:
+        ring:
+          final_sleep: 0s
+          num_tokens: 512
+          unregister_on_shutdown: false
+
+      ingester_client:
+        grpc_client_config:
+          max_recv_msg_size: 104857600
+          max_send_msg_size: 104857600
+
+      limits: {}
+
+      memberlist:
+        abort_if_cluster_join_fails: false
+        compression_enabled: false
+        join_members:
+        - {{ include "mimir.fullname" . }}-gossip-ring
+
+      ruler:
+        alertmanager_url: dnssrvnoa+http://_http-metrics._tcp.{{ template "mimir.fullname" . }}-alertmanager-headless.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}/alertmanager
+        enable_api: true
+        rule_path: /data
+
+      ruler_storage:
+        backend: local
+        local:
+          directory: /data
+
+      runtime_config:
+        file: /var/{{ include "mimir.name" . }}/runtime.yaml
+
+      server:
+        grpc_server_max_concurrent_streams: 1000
+
+  alertmanager:
+    enabled: true
+    replicas: 1
+    statefulSet:
+      enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+    persistentVolume:
+      size: 1Gi
+
+  distributor:
+    replicas: 3
+    resources:
+      requests:
+        cpu: 10m
+        memory: 512Mi
+
+  ingester:
+    replicas: 3
+    statefulSet:
+      enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 512Mi
+    persistentVolume:
+      size: 5Gi
+
+  overrides_exporter:
+    enabled: true
+    replicas: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+
+  ruler:
+    enabled: true
+    replicas: 2
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+
+  querier:
+    replicas: 2
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+
+  query_frontend:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+
+  store_gateway:
+    replicas: 2
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+    persistentVolume:
+      size: 5Gi
+
+  compactor:
+    replicas: 3
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+    persistentVolume:
+      size: 5Gi
+
+  chunks-cache:
+    enabled: true
+    replicas: 1
+
+  index-cache:
+    enabled: true
+    replicas: 1
+
+  metadata-cache:
+    enabled: true
+
+  results-cache:
+    enabled: true
+    replicas: 1
+
+  minio:
+    enabled: false
+
+  nginx:
+    enabled: true
+    replicas: 3
