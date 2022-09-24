@@ -51,6 +51,10 @@ prom:
             resources:
               requests:
                 storage: 5Gi
+      remoteWrite:
+        - url: http://mimir-nginx.mimir/api/v1/push
+          headers:
+            X-Scope-OrgID: homelab
 
 grafana:
   serviceMonitor:
