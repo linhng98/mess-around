@@ -1,0 +1,27 @@
+---
+# dindrunnerdeployment.yaml
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: homelab
+spec:
+  template:
+    spec:
+      dockerdWithinRunnerContainer: true
+      repository: linhng98/mess-around
+      labels:
+        - homelab
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: homelab
+spec:
+  scaleTargetRef:
+    name: homelab
+  minReplicas: 2
+  maxReplicas: 5
+  scaleUpTriggers:
+  - githubEvent: {}
+    amount: 1
+    duration: "5m"

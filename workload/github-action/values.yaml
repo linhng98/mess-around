@@ -1,0 +1,38 @@
+---
+actions-runner-controller:
+  replicaCount: 1
+  webhookPort: 9443
+  syncPeriod: 5m
+  defaultScaleDownDelay: 10m
+  enableLeaderElection: true
+
+  authSecret:
+    enabled: true
+    github_token: <path:homelab/data/access-token/github/mess-around#token>
+
+  metrics:
+    serviceMonitor: true
+
+  githubWebhookServer:
+    enabled: true
+    replicaCount: 1
+    syncPeriod: 5m
+    secret:
+      create: true
+      name: github-webhook-server
+      github_webhook_secret_token: <path:homelab/data/webhook/github-action/mess-around#secret>
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        kubernetes.io/tls-acme: 'true'
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host github-actions.homelab.linhng98.com
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: github-action-tls
+          hosts:
+            - *host

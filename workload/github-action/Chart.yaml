@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+name: github-action
+version: 0.0.0
+dependencies:
+  - name: actions-runner-controller
+    version: 0.21.0
+    repository: https://actions-runner-controller.github.io/actions-runner-controller
