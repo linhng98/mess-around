@@ -8,6 +8,7 @@ actions-runner-controller:
 
   authSecret:
     create: true
+    enabled: false
     github_token: <path:homelab/data/access-token/github/mess-around#token>
 
   metrics:
