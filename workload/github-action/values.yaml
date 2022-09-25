@@ -7,7 +7,7 @@ actions-runner-controller:
   enableLeaderElection: true
 
   authSecret:
-    enabled: false
+    enabled: true
     create: true
     github_token: <path:homelab/data/access-token/github/mess-around#token>
 
