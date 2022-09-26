@@ -21,6 +21,8 @@ harbor:
         nginx.ingress.kubernetes.io/ssl-redirect: 'true'
         nginx.ingress.kubernetes.io/proxy-body-size: '0'
   externalURL: https://harbor.homelab.linhng98.com
+  caSecretName: harbor-core-tls
+  secretKey: <path:homelab/data/secrets/harbor#secretkey>
 
   persistence:
     enabled: true
