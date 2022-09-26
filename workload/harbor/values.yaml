@@ -10,6 +10,13 @@ harbor:
         core: harbor.homelab.linhng98.com
         notary: notary.homelab.linhng98.com
       controller: default
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        ingress.kubernetes.io/ssl-redirect: 'true'
+        ingress.kubernetes.io/proxy-body-size: '0'
+        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+        nginx.ingress.kubernetes.io/proxy-body-size: '0'
   externalURL: https://harbor.homelab.linhng98.com
 
   persistence:
