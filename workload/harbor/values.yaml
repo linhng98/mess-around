@@ -4,7 +4,10 @@ harbor:
     type: ingress
     tls:
       enabled: true
-      certSource: none
+      certSource: secret
+      secret:
+        secretName: harbor-core-tls
+        notarySecretName: harbor-notary-tls
     ingress:
       hosts:
         core: harbor.homelab.linhng98.com
