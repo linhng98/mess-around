@@ -4,7 +4,7 @@ harbor:
     type: ingress
     tls:
       enabled: true
-      certSource: auto
+      certSource: none
     ingress:
       hosts:
         core: harbor.homelab.linhng98.com
