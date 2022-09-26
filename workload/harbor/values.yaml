@@ -1,0 +1,44 @@
+---
+harbor:
+  expose:
+    type: ingress
+    tls:
+      enabled: true
+      certSource: auto
+    ingress:
+      hosts:
+        core: harbor.homelab.linhng98.com
+        notary: notary.homelab.linhng98.com
+      controller: default
+  externalURL: https://harbor.homelab.linhng98.com
+
+  persistence:
+    enabled: true
+    persistentVolumeClaim:
+      registry:
+        size: 15Gi
+      chartmuseum:
+        size: 2Gi
+    imageChartStorage:
+      type: filesystem
+      filesystem:
+        rootdirectory: /storage
+
+  harborAdminPassword: <path:homelab/data/secrets/harbor#password>
+
+  portal:
+    replicas: 1
+
+  core:
+    replicas: 1
+
+  trivy:
+    enabled: true
+
+  notary:
+    enabled: true
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
