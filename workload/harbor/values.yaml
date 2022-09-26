@@ -23,6 +23,8 @@ harbor:
   externalURL: https://harbor.homelab.linhng98.com
   caSecretName: harbor-core-tls
   secretKey: <path:homelab/data/secrets/harbor#secretkey>
+  updateStrategy:
+    type: Recreate
 
   persistence:
     enabled: true
