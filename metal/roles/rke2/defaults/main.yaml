@@ -107,7 +107,6 @@ rke2_channel: stable
 rke2_disable:
   - rke2-ingress-nginx
   - rke2-metrics-server
-  - rke2-coredns
 
 # Path to custom manifests deployed during the RKE2 installation
 rke2_custom_manifests:
