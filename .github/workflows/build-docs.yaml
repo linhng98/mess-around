@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - documents/**
+
 jobs:
   build-push-document-container:
     runs-on: homelab
