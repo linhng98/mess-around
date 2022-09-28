@@ -16,4 +16,4 @@ jobs:
       - name: build push container
         run: |
           cd documents
-          skaffold build
+          skaffold debug
