@@ -21,9 +21,7 @@ build:
         cpu: '1'
         memory: 4Gi
         ephemeralStorage: 5Gi
-        resourceStorage: 5Gi
       limits:
         cpu: '1'
         memory: 4Gi
         ephemeralStorage: 5Gi
-        resourceStorage: 5Gi
