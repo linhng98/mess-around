@@ -1,5 +1,5 @@
 ---
-apiVersion: skaffold/v2beta29
+apiVersion: skaffold/v2beta10
 kind: Config
 build:
   tagPolicy:
