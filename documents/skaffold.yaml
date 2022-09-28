@@ -8,8 +8,8 @@ build:
   artifacts:
     - image: harbor.homelab.linhng98.com/library/docs
       kaniko:
-        useNewRun: true
-        snapshotMode: redo
+        #useNewRun: true
+        #snapshotMode: redo
         dockerfile: Dockerfile
         cache: {}
   cluster:
