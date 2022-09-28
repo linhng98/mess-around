@@ -1,0 +1,18 @@
+---
+name: build and release new version document
+run-name: ${{ github.actor }} release new document version
+on:
+  push:
+    paths:
+      - documents/**
+jobs:
+  build-push-document-container:
+    runs-on: homelab
+    steps:
+      - uses: actions/checkout@v3
+      - name: install skaffold
+        run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo install skaffold /usr/local/bin/
+      - name: build push container
+        run: |
+          cd documents
+          skaffold dev

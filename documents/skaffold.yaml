@@ -1,0 +1,17 @@
+---
+apiVersion: skaffold/v2beta29
+kind: Config
+build:
+  tagPolicy:
+    gitCommit:
+      variant: AbbrevCommitSha
+  artifacts:
+    - image: harbor.homelab.linhng98.com/library/docs
+      kaniko:
+        useNewRun: true
+        snapshotMode: redo
+        dockerfile: Dockerfile
+        cache: {}
+  cluster:
+    dockerConfig:
+      secretName: homelab-registry-secret
