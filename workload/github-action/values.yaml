@@ -5,6 +5,9 @@ actions-runner-controller:
   syncPeriod: 5m
   defaultScaleDownDelay: 10m
   enableLeaderElection: true
+  serviceAccount:
+    create: true
+    name: github-action-actions-runner-controller
 
   authSecret:
     enabled: true

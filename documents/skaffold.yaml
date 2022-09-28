@@ -13,5 +13,6 @@ build:
         dockerfile: Dockerfile
         cache: {}
   cluster:
+    namespace: github-action
     dockerConfig:
       secretName: homelab-registry-secret
