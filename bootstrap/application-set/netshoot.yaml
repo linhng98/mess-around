@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: netshoot
+  namespace: kube-system
+  labels:
+    app: netshoot
+spec:
+  selector:
+    matchLabels:
+      app: netshoot
+  template:
+    metadata:
+      labels:
+        app: netshoot
+    spec:
+      tolerations:
+        - operator: Exists
+      containers:
+        - name: netshoot
+          image: nicolaka/netshoot
+          command: [/bin/bash]
+          args: [-c, while true; do ping localhost; sleep 60;done]
