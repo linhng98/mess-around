@@ -1,5 +1,5 @@
 ---
-apiVersion: skaffold/v2beta10
+apiVersion: skaffold/v2beta29
 kind: Config
 build:
   tagPolicy:
@@ -16,3 +16,9 @@ build:
     namespace: github-action
     dockerConfig:
       secretName: homelab-registry-secret
+    resources:
+      requests:
+        cpu: '1'
+        memory: 4Gi
+        ephemeralStorage: 5Gi
+        resourceStorage: 5Gi
