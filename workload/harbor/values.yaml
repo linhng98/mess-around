@@ -50,13 +50,29 @@ harbor:
   chartmuseum:
     enabled: false
 
+  registry:
+    secret: <path:homelab/data/secrets/harbor#secretkey>
+    registry:
+      resources:
+        requests:
+          memory: 60Mi
+          cpu: 10m
+    controller:
+      resources:
+        requests:
+          memory: 60Mi
+          cpu: 10m
+
   jobservice:
+    secret: <path:homelab/data/secrets/harbor#secretkey>
     resources:
       requests:
         memory: 60Mi
         cpu: 10m
 
   core:
+    secret: <path:homelab/data/secrets/harbor#secretkey>
+    xsrfKey: <path:homelab/data/secrets/harbor#secretkey>
     replicas: 1
     resources:
       requests:
