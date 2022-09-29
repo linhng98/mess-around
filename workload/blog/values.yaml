@@ -1,5 +1,6 @@
 ---
 deploychart:
+  fullnameOverride: docusaurus
   replicaCount: 2
   image:
     repository: harbor.homelab.linhng98.com/library/docs:b5cbab69
@@ -23,6 +24,7 @@ deploychart:
       - host: &host docs.homelab.linhng98.com
         paths:
           - path: /
+            pathType: Prefix
     tls:
       - secretName: docs-tls
         hosts:
