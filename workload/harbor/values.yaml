@@ -90,7 +90,7 @@ harbor:
 
   notary:
     secretName: notary-cert
-    enabled: true
+    enabled: false
     resources:
       requests:
         memory: 60Mi
