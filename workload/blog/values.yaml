@@ -1,0 +1,29 @@
+---
+deploychart:
+  replicaCount: 2
+  image:
+    repository: harbor.homelab.linhng98.com/library/docs:b5cbab69
+    containerPort: 80
+
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - host: &host docs.homelab.linhng98.com
+        paths:
+          - path: /
+    tls:
+      - secretName: docs-tls
+        hosts:
+          - *host
