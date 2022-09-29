@@ -89,13 +89,15 @@ harbor:
         cpu: 10m
 
   redis:
-    resources:
-      requests:
-        memory: 60Mi
-        cpu: 10m
+    internal:
+      resources:
+        requests:
+          memory: 60Mi
+          cpu: 10m
 
   database:
-    resources:
-      requests:
-        memory: 60Mi
-        cpu: 10m
+    internal:
+      resources:
+        requests:
+          memory: 60Mi
+          cpu: 10m
