@@ -81,6 +81,8 @@ harbor:
     enabled: true
     serviceMonitor:
       enabled: true
+
+  exporter:
     resources:
       requests:
         memory: 60Mi
