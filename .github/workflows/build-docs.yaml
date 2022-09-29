@@ -1,0 +1,55 @@
+---
+name: build and release new version document
+run-name: ${{ github.actor }} release new document version
+on:
+  push:
+    paths:
+      - documents/**
+
+jobs:
+  build-push-document-container:
+    runs-on: homelab
+    env:
+      CONTAINER: document
+      IMAGE: harbor.homelab.linhng98.com/library/docs
+      KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
+    steps:
+      - uses: actions/checkout@v3
+      - name: set env
+        run: |
+          export GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-8)
+          echo "GITHUB_SHA_SHORT=${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
+          echo "IMAGE_TAG=${IMAGE}:${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
+      - name: install aws cli
+        run: |
+          sudo apt update -y
+          sudo apt install -y unzip
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+          cp -r /tmp/.aws ~/.aws
+          aws --version
+      - name: create compress tar
+        run: |
+          tar -C documents -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
+      - name: upload context kaniko
+        run: |
+          export context_tgz=context-${{ env.GITHUB_SHA_SHORT }}.tar.gz
+          aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
+          echo "KANIKO_CONTEXT=s3://mess-around-kaniko/${CONTAINER}/${context_tgz}" >> $GITHUB_ENV
+      - name: install kubectl cli
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/bin/kubectl
+      - name: config kaniko
+        run: |
+          sed -i "s|<DOCKERFILE>|Dockerfile|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<CONTEXT>|${{ env.KANIKO_CONTEXT }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<IMAGE_TAG>|${{ env.IMAGE_TAG }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<TAG>|${{ env.GITHUB_SHA_SHORT }}|g" ${KANIKO_TEMPLATE}
+      - name: build and push kaniko image
+        run: |
+          kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
+          kubectl wait --timeout 60s --for=condition=Ready pod/kaniko-${{ env.GITHUB_SHA_SHORT }} -n github-action
+          kubectl logs --follow kaniko-${{ env.GITHUB_SHA_SHORT }} -n github-action
