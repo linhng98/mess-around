@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kaniko
+  name: kaniko-<TAG>
 spec:
   containers:
     - name: kaniko
@@ -17,7 +17,7 @@ spec:
         - name: aws-secret
           mountPath: /root/.aws/
         - name: homelab-registry-secret
-          mountPath: /root/.docker/
+          mountPath: /kaniko/.docker/
   restartPolicy: Never
   volumes:
     - name: aws-secret
