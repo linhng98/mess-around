@@ -4,6 +4,12 @@ kind: Pod
 metadata:
   name: kaniko-<TAG>
 spec:
+  securityContext:
+    sysctls:
+    - name: fs.inotify.max_user_watches
+      value: "524288"
+    - name: fs.inotify.max_user_instances
+      value: "8192"
   containers:
     - name: kaniko
       image: gcr.io/kaniko-project/executor:latest
@@ -12,7 +18,7 @@ spec:
         - "--context=<CONTEXT>"
         - "--destination=<IMAGE_TAG>"
         - "--use-new-run"
-        - "--snapshotMode=redo"
+        - "--snapshot-mode=redo"
       volumeMounts:
         - name: aws-secret
           mountPath: /root/.aws/
