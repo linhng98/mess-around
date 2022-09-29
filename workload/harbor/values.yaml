@@ -74,7 +74,7 @@ harbor:
 
   core:
     secret: <path:homelab/data/secrets/harbor#secretkey>
-    xsrfKey: <path:homelab/data/secrets/harbor#secretkey>
+    xsrfKey: <path:homelab/data/secrets/harbor#xsrfKey>
     replicas: 1
     resources:
       requests:
