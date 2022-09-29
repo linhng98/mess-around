@@ -21,8 +21,6 @@ jobs:
           echo "GITHUB_SHA_SHORT=${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
           echo "IMAGE_TAG=${IMAGE}:${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
       - name: install aws cli
-        run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo install skaffold /usr/local/bin/
-      - name: install aws cli
         run: |
           sudo apt update -y
           sudo apt install -y unzip
