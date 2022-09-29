@@ -25,12 +25,12 @@ jobs:
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
+          cp -r /tmp/.aws ~/.aws
           aws --version
       - name: create compress tar
         run: |
           tar -C documents -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
-      - name: configure aws cli
+      - name: upload context kaniko
         run: |
           export context_tgz=context-${{ env.GITHUB_SHA_SHORT }}.tar.gz
-          cp /tmp/.aws/credentials ~/.aws/credentials
           aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
