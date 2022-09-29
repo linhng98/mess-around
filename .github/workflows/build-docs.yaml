@@ -53,4 +53,5 @@ jobs:
       - name: build and push kaniko image
         run: |
           kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
+          kubectl wait --timeout 60s --for=condition=Ready pod/kaniko-${{ env.GITHUB_SHA_SHORT }} -n github-action
           kubectl logs --follow kaniko-${{ env.GITHUB_SHA_SHORT }} -n github-action
