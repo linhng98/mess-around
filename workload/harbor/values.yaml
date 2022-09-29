@@ -89,7 +89,7 @@ harbor:
         cpu: 10m
 
   notary:
-    secretName: harbor-notary-server
+    secretName: notary-cert
     enabled: true
     resources:
       requests:
