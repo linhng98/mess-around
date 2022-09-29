@@ -42,17 +42,58 @@ harbor:
 
   portal:
     replicas: 1
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
+
+  chartmuseum:
+    enabled: false
+
+  jobservice:
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
 
   core:
     replicas: 1
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
 
   trivy:
     enabled: true
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
 
   notary:
     enabled: true
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
 
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
+
+  redis:
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
+
+  database:
+    resources:
+      requests:
+        memory: 60Mi
+        cpu: 10m
