@@ -13,15 +13,7 @@ build:
         dockerfile: Dockerfile
         cache: {}
   cluster:
+    pullSecretName: kaniko-secret
     namespace: github-action
     dockerConfig:
       secretName: homelab-registry-secret
-    resources:
-      requests:
-        cpu: '1'
-        memory: 4Gi
-        ephemeralStorage: 5Gi
-      limits:
-        cpu: '1'
-        memory: 4Gi
-        ephemeralStorage: 5Gi
