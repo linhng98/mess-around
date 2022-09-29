@@ -51,4 +51,6 @@ jobs:
           sed -i "s|<IMAGE_TAG>|${{ env.IMAGE_TAG }}|g" ${KANIKO_TEMPLATE}
           sed -i "s|<TAG>|${{ env.GITHUB_SHA_SHORT }}|g" ${KANIKO_TEMPLATE}
       - name: build and push kaniko image
-        run: kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
+        run: |
+          kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
+          kubectl logs --follow kaniko-${{ env.GITHUB_SHA_SHORT }} -n github-action
