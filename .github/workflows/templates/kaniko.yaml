@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  containers:
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - "--dockerfile=<DOCKERFILE>"
+        - "--context=<CONTEXT>"
+        - "--destination=<IMAGE_TAG>"
+        - "--use-new-run"
+        - "--snapshotMode=redo"
+      volumeMounts:
+        - name: aws-secret
+          mountPath: /root/.aws/
+        - name: homelab-registry-secret
+          mountPath: /root/.docker/
+  restartPolicy: Never
+  volumes:
+    - name: aws-secret
+      secret:
+        secretName: aws-secret
+    - name: homelab-registry-secret
+      secret:
+        secretName: homelab-registry-secret

@@ -11,11 +11,14 @@ jobs:
     runs-on: homelab
     env:
       CONTAINER: document
+      IMAGE: harbor.homelab.linhng98.com/library/docs
+      KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
     steps:
       - uses: actions/checkout@v3
       - name: set env
         run: |
           echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-8)" >> $GITHUB_ENV
+          echo "IMAGE_TAG=${IMAGE}:${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
       - name: install aws cli
         run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo install skaffold /usr/local/bin/
       - name: install aws cli
@@ -34,3 +37,16 @@ jobs:
         run: |
           export context_tgz=context-${{ env.GITHUB_SHA_SHORT }}.tar.gz
           aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
+          echo "KANIKO_CONTEXT=s3://mess-around-kaniko/${CONTAINER}/${context_tgz}" >> $GITHUB_ENV
+      - name: install kubectl cli
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/bin/kubectl
+      - name: config kaniko
+        run: |
+          sed -i "s|<DOCKERFILE>|Dockerfile|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<CONTEXT>|${{ env.KANIKO_CONTEXT }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<IMAGE_TAG>|${{ env.IMAGE_TAG }}|g" ${KANIKO_TEMPLATE}
+      - name: build and push kaniko image
+        run: kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
