@@ -52,6 +52,8 @@ harbor:
 
   registry:
     secret: <path:homelab/data/secrets/harbor#secretkey>
+    credentials:
+      htpasswdString: harbor_registry_user:$2a$10$XgNH9qmN5Kz5prh5MCpy5OREUo/Zlu8pM.ILrKg3DrSkvqgDxbTLu
     registry:
       resources:
         requests:
@@ -87,6 +89,7 @@ harbor:
         cpu: 10m
 
   notary:
+    secretName: harbor-notary-server
     enabled: true
     resources:
       requests:
