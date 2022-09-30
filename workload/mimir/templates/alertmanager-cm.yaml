@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-alertmanager
+  annotations:
+    k8s-sidecar-target-directory: /data/homelab
+  labels:
+    mimir_alertmanager_configs: "1"
+data:
+{{ (.Files.Glob "alertmanager/*").AsConfig | indent 2 }}

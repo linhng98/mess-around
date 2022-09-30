@@ -1,0 +1,11 @@
+---
+groups:
+  - name: node-alerts
+    rules:
+      - alert: NodeTempTooHight
+        expr: avg(node_hwmon_temp_celsius) by (instance) > 70
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: instance {{ $labels.instance }} have high cpu tempature

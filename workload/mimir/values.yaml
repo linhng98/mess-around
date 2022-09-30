@@ -124,6 +124,22 @@ mimir-distributed:
         memory: 32Mi
     persistentVolume:
       size: 1Gi
+    extraContainers:
+      - name: config-reloader
+        image: docker.io/kiwigrid/k8s-sidecar:1.19.5
+        env:
+          - name: LABEL
+            value: mimir_alertmanager_configs
+          - name: UNIQUE_FILENAMES
+            value: 'true'
+          - name: FOLDER
+            value: /data
+          - name: NAMESPACE
+            value: mimir
+          - name: RESOURCE
+            value: configmap
+          - name: FOLDER_ANNOTATION
+            value: k8s-sidecar-target-directory
 
   distributor:
     replicas: 3
@@ -163,7 +179,7 @@ mimir-distributed:
         image: docker.io/kiwigrid/k8s-sidecar:1.19.5
         env:
           - name: LABEL
-            value: mimir_recording_rules
+            value: mimir_rules
           - name: UNIQUE_FILENAMES
             value: 'true'
           - name: FOLDER
@@ -183,7 +199,6 @@ mimir-distributed:
     extraVolumeMounts:
       - name: sc-rules-volume
         mountPath: /data/rules
-
 
   querier:
     replicas: 2
