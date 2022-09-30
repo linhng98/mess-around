@@ -212,3 +212,7 @@ mimir-distributed:
   nginx:
     enabled: true
     replicas: 3
+
+  metaMonitoring:
+    serviceMonitor:
+      enabled: true
