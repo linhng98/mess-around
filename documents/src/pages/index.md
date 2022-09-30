@@ -29,10 +29,3 @@ title: Introduce
 | <img src="https://cncf-branding.netlify.app/img/projects/harbor/icon/color/harbor-icon-color.svg" width="30" height="30" /> | Harbor | Harbor is an open source registry that secures artifacts |
 | <img src="https://gitlab.com/uploads/-/system/project/avatar/22284858/kaniko.png" width="30" height="30" /> | Kaniko | kaniko is a build tool container images from a Dockerfile without the need of Docker daemon |
 | <img src="https://d33wubrfki0l68.cloudfront.net/c088b7acfcf11100903c44fe44f2f2d7e0f30531/47727/img/docusaurus.svg" width="30" height="30" /> | Docusaurus | Building, deploying, and maintaining open source project websites easily |
-
-## Reference
-
-- <https://www.youtube.com/watch?v=E_OlsA1hF4k>
-- <https://askubuntu.com/questions/1235723/automated-20-04-server-installation-using-pxe-and-live-server-image>
-- <https://ubuntu.com/server/docs/install/netboot-amd64>
-- <https://github.com/lablabs/ansible-role-rke2>
