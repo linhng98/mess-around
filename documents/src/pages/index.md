@@ -6,6 +6,19 @@ title: Introduce
 
 - Got idea and well-structed ansible code from [khuedoan's homelab](https://github.com/khuedoan/homelab.git), he is a talented and enthusiastic SRE, totally worth taking a look at his awesome project
 
+## What is mess-around stand for
+
+- `M`ultiplatform support, avoid vendor lock-in that any enterprise should not be immersed in.
+- `E`fficency and effortless bootstrap kubernete framework.
+- `S`implicity is prequesite for reliability.
+- `S`calability design in mind.
+- `A`utomation help people reduce human error, improve productivity.
+- `R`eliability targeted, improve end user experience and development velocity.
+- `O`ptimal solution.
+- `U`tility configuration could be reused and easy to cusomize.
+- `N`ative Kubernete applications, well-tested and production ready.
+- `D`urability is a part of what makes a great system.
+
 ## Technology stack
 
 | Icon | Name | Description |
