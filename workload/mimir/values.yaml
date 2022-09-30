@@ -165,7 +165,7 @@ mimir-distributed:
           - name: LABEL
             value: mimir_recording_rules
           - name: UNIQUE_FILENAMES
-            value: true
+            value: 'true'
           - name: FOLDER
             value: /data/rules
           - name: NAMESPACE
