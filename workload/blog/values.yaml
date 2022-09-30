@@ -3,7 +3,8 @@ deploychart:
   fullnameOverride: docusaurus
   replicaCount: 2
   image:
-    repository: harbor.homelab.linhng98.com/library/docs:b5cbab69
+    repository: harbor.homelab.linhng98.com/library/docs
+    tag: 180b788e
     containerPort: 80
 
   strategy:
