@@ -26,6 +26,8 @@ title: Introduce
 | <img src="https://raw.githubusercontent.com/cncf/artwork/d2ed716cc0769e6c65d2e58f9a503fca02b60a56/projects/rook/icon/color/rook-icon-color.svg" width="30" height="30" /> | Rook | Production ready management for File, Block and Object Storage |
 | <img src="https://avatars.githubusercontent.com/u/32311288?s=280&v=4" width="30" height="30" /> | Atlantis | Atlantis is an application for automating Terraform via pull requests |
 | <img src="https://avatars.githubusercontent.com/u/44036562?s=280&v=4" width="30" height="30" /> | Github Action | GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform |
+| <img src="https://cncf-branding.netlify.app/img/projects/harbor/icon/color/harbor-icon-color.svg" width="30" height="30" /> | Harbor | Harbor is an open source registry that secures artifacts |
+| <img src="https://gitlab.com/uploads/-/system/project/avatar/22284858/kaniko.png" width="30" height="30" /> | Kaniko | kaniko is a build tool container images from a Dockerfile without the need of Docker daemon |
 | <img src="https://d33wubrfki0l68.cloudfront.net/c088b7acfcf11100903c44fe44f2f2d7e0f30531/47727/img/docusaurus.svg" width="30" height="30" /> | Docusaurus | Building, deploying, and maintaining open source project websites easily |
 
 ## Reference
