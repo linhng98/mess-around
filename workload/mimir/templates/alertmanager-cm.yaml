@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-alertmanager
   annotations:
-    k8s-sidecar-target-directory: /data/homelab
+    k8s-sidecar-target-directory: /data/config/homelab
   labels:
     mimir_alertmanager_configs: "1"
 data:
