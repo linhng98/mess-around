@@ -13,6 +13,7 @@ spec:
         - "--destination=<IMAGE_TAG>"
         - "--use-new-run"
         - "--snapshot-mode=redo"
+        - "--cache=true"
       volumeMounts:
         - name: aws-secret
           mountPath: /root/.aws/
