@@ -158,6 +158,22 @@ mimir-distributed:
       requests:
         cpu: 10m
         memory: 128Mi
+    extraContainers:
+      - name: config-reloader
+        image: docker.io/kiwigrid/k8s-sidecar:1.19.5
+        env:
+          - name: LABEL
+            value: mimir_recording_rules
+          - name: UNIQUE_FILENAMES
+            value: true
+          - name: FOLDER
+            value: /data/rules
+          - name: NAMESPACE
+            value: mimir
+          - name: RESOURCE
+            value: configmap
+          - name: FOLDER_ANNOTATION
+            value: k8s-sidecar-target-directory
 
   querier:
     replicas: 2
