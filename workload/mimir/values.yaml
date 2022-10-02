@@ -131,7 +131,7 @@ mimir-distributed:
           - name: LABEL
             value: mimir_alertmanager_configs
           - name: UNIQUE_FILENAMES
-            value: 'true'
+            value: 'false'
           - name: FOLDER
             value: /data
           - name: NAMESPACE
