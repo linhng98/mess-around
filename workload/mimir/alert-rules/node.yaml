@@ -3,7 +3,7 @@ groups:
   - name: node-alerts
     rules:
       - alert: NodeTempTooHight
-        expr: avg(node_hwmon_temp_celsius) by (instance) > 60
+        expr: avg(node_hwmon_temp_celsius) by (instance) > 75
         for: 1m
         labels:
           severity: critical
