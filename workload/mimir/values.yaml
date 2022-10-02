@@ -133,7 +133,7 @@ mimir-distributed:
           - name: UNIQUE_FILENAMES
             value: 'true'
           - name: FOLDER
-            value: /data
+            value: /data/config
           - name: NAMESPACE
             value: mimir
           - name: RESOURCE
