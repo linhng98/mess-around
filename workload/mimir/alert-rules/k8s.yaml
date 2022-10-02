@@ -4,7 +4,7 @@ groups:
     rules:
       - alert: KubernetesVolumeOutOfDiskSpace
         expr: kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes * 100 < 10
-        for: 0m
+        for: 1m
         labels:
           severity: critical
         annotations:

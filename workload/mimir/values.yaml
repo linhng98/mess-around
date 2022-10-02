@@ -101,6 +101,9 @@ mimir-distributed:
         alertmanager_url: dnssrvnoa+http://_http-metrics._tcp.{{ template "mimir.fullname" . }}-alertmanager-headless.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}/alertmanager
         enable_api: true
         rule_path: /data/rules
+        for_outage_tolerance: 1h
+        for_grace_period: 10m
+        resend_delay: 30m
 
       ruler_storage:
         backend: local
@@ -115,7 +118,7 @@ mimir-distributed:
 
   alertmanager:
     enabled: true
-    replicas: 1
+    replicas: 2
     statefulSet:
       enabled: true
     resources:

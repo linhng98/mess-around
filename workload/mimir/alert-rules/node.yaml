@@ -4,7 +4,7 @@ groups:
     rules:
       - alert: NodeTempTooHight
         expr: avg(node_hwmon_temp_celsius) by (instance) > 60
-        for: 0m
+        for: 1m
         labels:
           severity: critical
         annotations:
