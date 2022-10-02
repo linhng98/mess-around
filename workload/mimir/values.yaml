@@ -140,15 +140,17 @@ mimir-distributed:
             value: configmap
           - name: FOLDER_ANNOTATION
             value: k8s-sidecar-target-directory
-        volumeMounts:
-          - name: sc-config-volume
-            mountPath: /data
-    extraVolumes:
-      - name: sc-config-volume
-        emptyDir: {}
-    extraVolumeMounts:
-      - name: sc-config-volume
-        mountPath: /data
+        securityContext:
+          runAsUser: 0
+    #    volumeMounts:
+    #      - name: sc-config-volume
+    #        mountPath: /data
+    #extraVolumes:
+    #  - name: sc-config-volume
+    #    emptyDir: {}
+    #extraVolumeMounts:
+    #  - name: sc-config-volume
+    #    mountPath: /data
 
   distributor:
     replicas: 3
