@@ -11,14 +11,14 @@ mimir-distributed:
         filepath: /data/metrics-activity.log
 
       alertmanager:
-        data_dir: /data/config
+        data_dir: /data
         enable_api: true
         external_url: /alertmanager
 
       alertmanager_storage:
         backend: local
         local:
-          path: /data/config
+          path: /data
 
       blocks_storage:
         backend: s3
@@ -133,7 +133,7 @@ mimir-distributed:
           - name: UNIQUE_FILENAMES
             value: 'true'
           - name: FOLDER
-            value: /data/config
+            value: /data
           - name: NAMESPACE
             value: mimir
           - name: RESOURCE
@@ -142,13 +142,13 @@ mimir-distributed:
             value: k8s-sidecar-target-directory
         volumeMounts:
           - name: sc-config-volume
-            mountPath: /data/config
+            mountPath: /data
     extraVolumes:
       - name: sc-config-volume
         emptyDir: {}
     extraVolumeMounts:
       - name: sc-config-volume
-        mountPath: /data/config
+        mountPath: /data
 
   distributor:
     replicas: 3
