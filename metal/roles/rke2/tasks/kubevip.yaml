@@ -7,7 +7,6 @@
       group: root
       mode: 0664
     with_fileglob:
-      - templates/kube-vip/kube-vip-loadbalancer.yaml.j2
       - templates/kube-vip/kube-vip-api-server.yaml.j2
       - templates/kube-vip/kube-vip-rbac.yaml.j2
 
