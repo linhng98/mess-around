@@ -1,0 +1,14 @@
+---
+apiVersion: v2
+name: istio-system
+version: 0.0.0
+dependencies:
+  - name: base
+    version: 1.15.1
+    repository: https://istio-release.storage.googleapis.com/charts
+  - name: istiod
+    version: 1.15.1
+    repository: https://istio-release.storage.googleapis.com/charts
+  - name: gateway
+    version: 1.15.1
+    repository: https://istio-release.storage.googleapis.com/charts
