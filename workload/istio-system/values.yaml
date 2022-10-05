@@ -40,3 +40,8 @@ kiali-operator:
         strategy: anonymous
       server:
         web_root: /
+      external_services:
+        prometheus:
+          url: http://mimir-nginx.mimir/prometheus
+          custom_headers:
+            X-Scope-OrgID: homelab
