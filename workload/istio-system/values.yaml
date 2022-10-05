@@ -28,3 +28,15 @@ gateway:
     limits:
       cpu: 100m
       memory: 1024Mi
+
+kiali-server:
+  auth:
+    strategy: anonymous
+  deployment:
+    ingress:
+      additional_labels:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      class_name: nginx
+      enabled: 'true'
+  server:
+    web_fqdn: kiali.homelab.linhng98.com
