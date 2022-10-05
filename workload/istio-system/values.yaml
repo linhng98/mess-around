@@ -36,21 +36,7 @@ kiali-operator:
       deployment:
         accessible_namespaces:
           - '**'
-      #  ingress:
-      #    class_name: nginx
-      #    enabled: true
-      #    override_yaml:
-      #      metadata:
-      #        annotations:
-      #          cert-manager.io/cluster-issuer: letsencrypt-prod
-      #      spec:
-      #        rules:
-      #          - http:
-      #              paths:
-      #                - path: /kiali
-      #                  pathType: Prefix
-      #                  backend:
-      #                    serviceName: kiali
-      #                    servicePort: 20001
+      auth:
+        strategy: anonymous
       server:
         web_root: /
