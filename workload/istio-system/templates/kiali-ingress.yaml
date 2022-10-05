@@ -15,7 +15,7 @@ spec:
             name: kiali
             port:
               number: 20001
-        path: /kiali
+        path: /
         pathType: Prefix
   tls:
   - hosts:
