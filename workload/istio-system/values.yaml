@@ -52,5 +52,5 @@ kiali-operator:
       #                  backend:
       #                    serviceName: kiali
       #                    servicePort: 20001
-      #server:
-      #  web_fqdn: kiali.homelab.linhng98.com
+      server:
+        web_root: /
