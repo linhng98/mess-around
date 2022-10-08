@@ -1,0 +1,9 @@
+---
+strimzi-kafka-operator:
+  watchNamespaces:
+    - strimzi-kafka
+  watchAnyNamespace: false
+
+  defaultImageRegistry: quay.io
+  defaultImageRepository: strimzi
+  defaultImageTag: 0.31.1
