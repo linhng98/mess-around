@@ -52,6 +52,18 @@ spec:
       type: persistent-claim
       size: 1Gi
       deleteClaim: false
+    template:
+      pod:
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    - key: strimzi.io/name
+                      operator: In
+                      values:
+                        - kafka-cluster-zookeeper
+                topologyKey: kubernetes.io/hostname
   entityOperator:
     topicOperator: {}
     userOperator: {}
