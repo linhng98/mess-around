@@ -21,7 +21,7 @@ istiod:
       tracer: zipkin
     tracer:
       zipkin:
-        address: otel-collector-collector.otel-collector:9411
+        address: jaeger-collector.jaeger:9411
 
 gateway:
   name: istio-ingressgateway

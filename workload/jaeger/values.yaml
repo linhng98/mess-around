@@ -57,6 +57,13 @@ jaeger:
       maxReplicas: 10
     serviceMonitor:
       enabled: true
+    service:
+      grpc:
+        port: 14250
+      http:
+        port: 14268
+      zipkin:
+        port: 9411
 
   query:
     enabled: true
