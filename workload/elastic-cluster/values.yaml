@@ -44,11 +44,11 @@ elasticsearch:
 
   resources:
     requests:
-      cpu: 50m
-      memory: 2Gi
+      cpu: 200m
+      memory: 3Gi
     limits:
-      cpu: 500m
-      memory: 4Gi
+      cpu: 2
+      memory: 6Gi
 
   volumeClaimTemplate:
     accessModes: [ReadWriteOnce]
