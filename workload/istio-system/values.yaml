@@ -8,7 +8,7 @@ istiod:
     enableTracing: true
     defaultConfig:
       tracing:
-        sampling: 50
+        sampling: 100
   pilot:
     resources:
       requests:
