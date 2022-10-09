@@ -56,6 +56,18 @@ jaeger:
       maxReplicas: 10
     serviceMonitor:
       enabled: true
+    cmdlineParams:
+      es.tls.ca: /tls/es/ca.crt
+      es.tls.enabled: 'true'
+      es.version: 7
+      es.create-index-templates: 'false'
+    extraSecretMounts:
+      - name: elastic-cert
+        mountPath: /tls/es
+        subPath: ''
+        secretName: elastic-cert
+        readOnly: true
+
 
   query:
     enabled: true
