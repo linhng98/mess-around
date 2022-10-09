@@ -68,3 +68,21 @@ cp-helm-charts:
 
   cp-control-center:
     enabled: false
+
+kafka-ui:
+  replicaCount: 1
+  env:
+    - name: KAFKA_CLUSTERS_0_NAME
+      value: confluent-kafka
+    - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+      value: confluent-kafka-cp-kafka:9092
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingressClassName: nginx
+    path: /
+    host: kafka.homelab.linhng98.com
+    tls:
+      enabled: true
+      secretName: kafka-ui-tls
