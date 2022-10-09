@@ -1,0 +1,64 @@
+---
+jaeger:
+  provisionDataStore:
+    cassandra: false
+    elasticsearch: false
+    kafka: false
+
+  storage:
+    # allowed values (cassandra, elasticsearch)
+    type: elasticsearch
+    elasticsearch:
+      scheme: http
+      host: elastic-cluster-es-http.elastic-system
+      port: 9200
+      user: elastic
+      usePassword: true
+      existingSecret: elastic-credential
+      existingSecretKey: password
+    kafka:
+      brokers:
+        - confluent-kafka-cp-kafka.confluent-kafka:9092
+      topic: jaeger_tracing
+      authentication: none
+
+  ingester:
+    enabled: true
+    replicaCount: 1
+    autoscaling:
+      enabled: false
+      minReplicas: 2
+      maxReplicas: 10
+
+    serviceMonitor:
+      enabled: true
+
+  agent:
+    enabled: false
+
+  collector:
+    enabled: true
+    replicaCount: 1
+    autoscaling:
+      enabled: false
+      minReplicas: 2
+      maxReplicas: 10
+    serviceMonitor:
+      enabled: true
+
+  query:
+    enabled: true
+    replicaCount: 2
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - &host jaeger.homelab.linhng98.com
+      tls:
+        - secretName: jaeger-query-tls
+          hosts:
+            - *host
+    serviceMonitor:
+      enabled: true
