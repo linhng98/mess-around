@@ -1,0 +1,15 @@
+---
+otel-collector:
+  replicaCount: 1
+  manager:
+    resources:
+      limits:
+        cpu: 200m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true

@@ -1,0 +1,30 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-collector
+spec:
+  mode: daemonset
+  config: |
+    receivers:
+      jaeger:
+        protocols:
+          grpc:
+      otlp:
+        protocols:
+          grpc:
+          http:
+
+    processors:
+
+    exporters:
+      jaeger:
+        endpoint: "jaeger-collector.jaeger:14250"
+        tls:
+          insecure: true
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp, jaeger]
+          processors: []
+          exporters: [jaeger]
