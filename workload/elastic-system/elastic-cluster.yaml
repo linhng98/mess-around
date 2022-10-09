@@ -6,7 +6,7 @@ metadata:
 spec:
   version: 8.4.3
   nodeSets:
-    - name: elastic
+    - name: default
       count: 3
       config:
         node.roles: [master, data, ingest, ml, transform]
