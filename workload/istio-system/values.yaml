@@ -18,6 +18,10 @@ istiod:
         limits:
           cpu: 200m
           memory: 500Mi
+      tracer: zipkin
+    tracer:
+      zipkin:
+        address: otel-collector-collector.otel-collector:9411
 
 gateway:
   name: istio-ingressgateway
