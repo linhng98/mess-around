@@ -4,6 +4,11 @@ base:
     istioNamespace: istio-system
 
 istiod:
+  meshConfig:
+    enableTracing: true
+    defaultConfig:
+      tracing:
+        sampling: 50
   pilot:
     resources:
       requests:
