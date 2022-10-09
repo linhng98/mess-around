@@ -101,7 +101,7 @@ kibana:
       path: /usr/share/kibana/config/certs
 
   ingress:
-    enabled: false
+    enabled: true
     className: nginx
     pathtype: Prefix
     annotations:
