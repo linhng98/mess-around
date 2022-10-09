@@ -26,6 +26,6 @@ spec:
     service:
       pipelines:
         traces:
-          receivers: [otlp, jaeger]
+          receivers: [otlp, jaeger, zipkin]
           processors: []
           exporters: [jaeger]
