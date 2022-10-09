@@ -9,6 +9,8 @@ elasticsearch:
     remote_cluster_client: 'true'
     ml: 'true'
 
+  protocol: https
+
   esConfig:
     elasticsearch.yml: |
       xpack.security.enabled: true
