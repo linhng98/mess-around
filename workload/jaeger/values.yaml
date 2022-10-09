@@ -35,6 +35,8 @@ jaeger:
     cmdlineParams:
       es.tls.ca: /tls/es/ca.crt
       es.tls.enabled: 'true'
+      es.version: 7
+      es.create-index-templates: 'false'
     extraSecretMounts:
       - name: elastic-cert
         mountPath: /tls/es
@@ -74,6 +76,8 @@ jaeger:
     cmdlineParams:
       es.tls.ca: /tls/es/ca.crt
       es.tls.enabled: 'true'
+      es.version: 7
+      es.create-index-templates: 'false'
     extraSecretMounts:
       - name: elastic-cert
         mountPath: /tls/es
