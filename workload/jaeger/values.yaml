@@ -10,7 +10,7 @@ jaeger:
     type: elasticsearch
     elasticsearch:
       scheme: https
-      host: elastic-cluster-es-http.elastic-system
+      host: elasticsearch-master.elastic-cluster
       port: 9200
       user: elastic
       usePassword: true
@@ -33,10 +33,11 @@ jaeger:
     serviceMonitor:
       enabled: true
     cmdlineParams:
-      es.tls.ca: /tls/es/ca.crt
       es.tls.enabled: 'true'
-      es.version: 7
-      es.create-index-templates: 'false'
+      es.tls.skip-host-verify: 'true'
+      #es.tls.ca: /tls/es/ca.crt
+      #es.version: 7
+      #es.create-index-templates: 'false'
     extraSecretMounts:
       - name: elastic-cert
         mountPath: /tls/es
@@ -74,9 +75,10 @@ jaeger:
     serviceMonitor:
       enabled: true
     cmdlineParams:
-      es.tls.ca: /tls/es/ca.crt
       es.tls.enabled: 'true'
-      es.create-index-templates: 'false'
+      es.tls.skip-host-verify: 'true'
+      #es.tls.ca: /tls/es/ca.crt
+      #es.create-index-templates: 'false'
     extraSecretMounts:
       - name: elastic-cert
         mountPath: /tls/es
