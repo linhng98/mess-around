@@ -1,5 +1,6 @@
 ---
 eck-operator:
+  managedNamespaces: [elastic-cluster]
   resources:
     limits:
       cpu: 500m
