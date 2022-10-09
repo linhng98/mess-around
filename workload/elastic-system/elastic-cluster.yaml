@@ -6,12 +6,11 @@ metadata:
 spec:
   version: 8.4.3
   nodeSets:
-    - name: default
+    - name: elastic
       count: 3
       config:
         node.roles: [master, data, ingest, ml, transform]
         xpack.ml.enabled: true
-        node.remote_cluster_client: false
       podTemplate:
         spec:
           initContainers:
