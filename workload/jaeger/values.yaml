@@ -9,7 +9,7 @@ jaeger:
     # allowed values (cassandra, elasticsearch)
     type: elasticsearch
     elasticsearch:
-      scheme: http
+      scheme: https
       host: elastic-cluster-es-http.elastic-system
       port: 9200
       user: elastic
