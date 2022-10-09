@@ -32,6 +32,14 @@ jaeger:
 
     serviceMonitor:
       enabled: true
+    cmdlineParams:
+      es.tls.ca: /tls/es/ca.crt
+    extraSecretMounts:
+      - name: elastic-cert
+        mountPath: /tls/es
+        subPath: ''
+        secretName: elastic-cert
+        readOnly: true
 
   agent:
     enabled: false
@@ -62,3 +70,11 @@ jaeger:
             - *host
     serviceMonitor:
       enabled: true
+    cmdlineParams:
+      es.tls.ca: /tls/es/ca.crt
+    extraSecretMounts:
+      - name: elastic-cert
+        mountPath: /tls/es
+        subPath: ''
+        secretName: elastic-cert
+        readOnly: true
