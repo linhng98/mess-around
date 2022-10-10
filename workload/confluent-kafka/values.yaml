@@ -80,6 +80,8 @@ kafka-ui:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/auth-type: basic
+      nginx.ingress.kubernetes.io/auth-secret: kafka-ui-basic-auth
     ingressClassName: nginx
     path: /
     host: kafka.homelab.linhng98.com
