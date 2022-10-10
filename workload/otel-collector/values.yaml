@@ -1,5 +1,5 @@
 ---
-otel-collector:
+opentelemetry-operator:
   replicaCount: 1
   manager:
     resources:
