@@ -2,7 +2,7 @@
 loki-stack:
   loki:
     enabled: true
-    isDefault: true
+    isDefault: false
     serviceMonitor:
       enabled: true
   promtail:
