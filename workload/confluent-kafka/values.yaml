@@ -88,3 +88,13 @@ kafka-ui:
     tls:
       enabled: true
       secretName: kafka-ui-tls
+
+prometheus-kafka-exporter:
+  replicaCount: 1
+  kafkaServer:
+    - confluent-kafka-cp-kafka:9092
+
+  prometheus:
+    serviceMonitor:
+      enabled: true
+      namespace: ''
