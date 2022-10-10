@@ -118,11 +118,22 @@ kibana:
 
 prometheus-elasticsearch-exporter:
   replicaCount: 1
+  secretMounts:
+    - name: elastic-certificates
+      secretName: elastic-certificates
+      path: /ssl
   es:
     uri: https://elasticsearch-master:9200
     sslSkipVerify: true
     ssl:
-      enabled: false
+      enabled: true
+      useExistingSecrets: true
+      ca:
+        path: /ssl/ca.crt
+      client:
+        enabled: true
+        pemPath: /ssl/node.crt
+        keyPath: /ssl/node.key
   env:
     ES_USER: elastic
   extraEnvSecrets:
