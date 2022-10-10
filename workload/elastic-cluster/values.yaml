@@ -122,7 +122,7 @@ prometheus-elasticsearch-exporter:
     uri: https://elasticsearch-master:9200
     sslSkipVerify: true
     ssl:
-      enabled: true
+      enabled: false
   env:
     ES_USER: elastic
   extraEnvSecrets:
