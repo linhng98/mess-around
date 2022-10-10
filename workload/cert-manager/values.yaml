@@ -8,3 +8,24 @@ cert-manager:
 
 issuer:
   email: example@gmail.com
+
+x509-cert-exporter:
+  podAnnotations:
+    prometheus.io/port: '9793'
+    prometheus.io/scrape: 'true'
+
+  prometheusServiceMonitor:
+    # -- Should a ServiceMonitor ressource be installed to scrape this exporter. For prometheus-operator (kube-prometheus) users.
+    create: true
+    # -- Target scrape interval set in the ServiceMonitor
+    scrapeInterval: 60s
+    # -- Target scrape timeout set in the ServiceMonitor
+    scrapeTimeout: 10s
+    # -- Extra labels to add on ServiceMonitor ressources
+    extraLabels: {}
+    # -- Relabel config for the ServiceMonitor, see: https://coreos.com/operators/prometheus/docs/latest/api.html#relabelconfig
+    relabelings: {}
+
+  prometheusRules:
+    # -- Should a PrometheusRule ressource be installed to alert on certificate expiration. For prometheus-operator (kube-prometheus) users.
+    create: true
