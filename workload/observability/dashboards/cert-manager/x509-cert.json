@@ -26,8 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 13922,
   "graphTooltip": 0,
-  "id": 116,
-  "iteration": 1665417170848,
+  "id": 38,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -93,7 +92,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "count(x509_cert_not_after)",
@@ -155,7 +154,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "sum(((x509_cert_not_after - time()) / 86400) < bool 0)",
@@ -217,7 +216,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "sum(0 < ((x509_cert_not_after - time()) / 86400) < bool $critical_threshold)",
@@ -280,7 +279,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "datasource": {
@@ -404,7 +403,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "count(x509_read_errors)",
@@ -467,7 +466,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "sum(x509_read_errors)",
@@ -499,10 +498,7 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -584,7 +580,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "datasource": {
@@ -606,12 +602,7 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": [
-                "secret_name",
-                "Value",
-                "issuer_CN",
-                "secret_namespace"
-              ]
+              "pattern": "^(issuer_CN|secret_name|secret_namespace|Value)$"
             }
           }
         }
@@ -701,7 +692,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "topk(10, sort_desc(count by (issuer_CN) (x509_cert_not_after)))",
@@ -807,7 +798,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "topk(10, sort_desc(count by (secret_namespace) (x509_cert_not_after{secret_namespace!=\"\"})))",
@@ -926,7 +917,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "bottomk(10, (x509_cert_not_after{secret_name!=\"\"} - x509_cert_not_before) / 86400)",
@@ -1035,7 +1026,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "targets": [
         {
           "expr": "topk(10, (x509_cert_not_after{secret_name!=\"\"} - x509_cert_not_before) / 86400)",
@@ -1131,7 +1122,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1218,7 +1209,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1306,7 +1297,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1393,7 +1384,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1444,7 +1435,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 36,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1695,13 +1686,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Certificates Expiration (X509 Certificate Exporter)",
   "uid": "lHnsYlPGk",
-  "version": 7,
+  "version": 1,
   "weekStart": ""
 }
