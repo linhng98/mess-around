@@ -135,7 +135,7 @@ prometheus-elasticsearch-exporter:
         pemPath: /ssl/node.crt
         keyPath: /ssl/node.key
   env:
-    ES_USER: elastic
+    ES_USERNAME: elastic
   extraEnvSecrets:
     ES_PASSWORD:
       secret: elastic-credentials
