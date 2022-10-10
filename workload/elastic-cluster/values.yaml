@@ -115,3 +115,15 @@ kibana:
       - secretName: kibana-tls
         hosts:
           - *host
+
+prometheus-elasticsearch-exporter:
+  replicaCount: 1
+  es:
+    uri: https://elasticsearch-master:9200
+    sslSkipVerify: true
+    ssl:
+      enabled: true
+  serviceMonitor:
+    enabled: true
+  prometheusRule:
+    enabled: true
