@@ -100,7 +100,7 @@ grafana:
         # allow Grafana to replicate dashboard structure from filesystem
         foldersFromFilesStructure: true
     datasources:
-      enabled: false
+      enabled: true
       defaultDatasourceEnabled: false
 
   datasources:
