@@ -10,5 +10,5 @@ dependencies:
     version: 0.4.3
     repository: https://provectus.github.io/kafka-ui
   - name: prometheus-kafka-exporter
-    version: 14.9.3
+    version: 1.6.0
     repository: https://prometheus-community.github.io/helm-charts
