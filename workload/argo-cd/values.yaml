@@ -3,7 +3,7 @@ argo-cd:
   global:
     image:
       repository: quay.io/argoproj/argocd
-      tag: latest
+      tag: v2.5.1
   controller:
     name: application-controller
     replicas: 1
