@@ -1,0 +1,25 @@
+---
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  version: '1.8'
+  ingress:
+    istio:
+      enabled: true
+      knative-ingress-gateway:
+        selector:
+          istio: ingressgateway
+  config:
+    istio:
+      gateway.knative-serving.knative-ingress-gateway: istio-ingressgateway.istio-system.svc.cluster.local
+    domain:
+      knative.example.com: ''
+    autoscaler:
+      enable-scale-to-zero: 'false'
+    gc:
+      min-non-active-revisions: '0'
+      max-non-active-revisions: '0'
+      retain-since-create-time: disabled
+      retain-since-last-active-time: disabled
