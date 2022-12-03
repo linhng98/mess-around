@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-recording-rules
+  name: {{ .Release.Name }}-rules
   annotations:
     k8s-sidecar-target-directory: /data/rules/homelab
   labels:
     mimir_rules: "1"
 data:
+{{ (.Files.Glob "alert-rules/*").AsConfig | indent 2 }}
 {{ (.Files.Glob "recording-rules/*").AsConfig | indent 2 }}
