@@ -84,14 +84,6 @@ groups:
         annotations:
           summary: Kubernetes Volume out of disk space (instance {{ $labels.instance }})
 
-      - alert: KubernetesVolumeFullInFourDays
-        expr: predict_linear(kubelet_volume_stats_available_bytes[6h], 4 * 24 * 3600) < 0
-        for: 0m
-        labels:
-          severity: critical
-        annotations:
-          summary: Kubernetes Volume full in four days (instance {{ $labels.instance }})
-
       - alert: KubernetesPersistentvolumeError
         expr: kube_persistentvolume_status_phase{phase=~"Failed|Pending", job="kube-state-metrics"} > 0
         for: 0m

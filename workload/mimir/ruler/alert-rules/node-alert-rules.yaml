@@ -118,14 +118,6 @@ groups:
         annotations:
           summary: Host CPU high iowait (instance {{ $labels.instance }})
 
-      - alert: HostContextSwitching
-        expr: (rate(node_context_switches_total[5m])) / (count without(cpu, mode) (node_cpu_seconds_total{mode="idle"})) > 1000
-        for: 0m
-        labels:
-          severity: warning
-        annotations:
-          summary: Host context switching (instance {{ $labels.instance }})
-
       - alert: HostSwapIsFillingUp
         expr: (1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes)) * 100 > 80
         for: 2m
