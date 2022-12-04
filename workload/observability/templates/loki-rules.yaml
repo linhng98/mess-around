@@ -6,7 +6,7 @@ metadata:
   annotations:
     k8s-sidecar-target-directory: /loki-rules/fake
   labels:
-    mimir_rules: "1"
+    loki_rules: "1"
 data:
 {{ ($.Files.Glob $path).AsConfig | indent 2 }}
 ---

@@ -21,13 +21,13 @@ loki-stack:
         image: docker.io/kiwigrid/k8s-sidecar:1.19.5
         env:
           - name: LABEL
-            value: mimir_rules
+            value: loki_rules
           - name: UNIQUE_FILENAMES
             value: 'true'
           - name: FOLDER
             value: *rule_path
           - name: NAMESPACE
-            value: mimir
+            value: observability
           - name: RESOURCE
             value: configmap
           - name: FOLDER_ANNOTATION
