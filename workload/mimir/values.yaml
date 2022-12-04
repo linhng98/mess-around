@@ -221,7 +221,6 @@ mimir-distributed:
         command: [sh, -c]
         args:
           - >-
-            mkdir /data/rules/homelab &&
             cp -Lr /tmp/rules/homelab/*.yaml /data/rules/homelab &&
             ls -la /data/rules/homelab
         volumeMounts:
