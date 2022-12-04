@@ -1,11 +1,13 @@
+{{- range $path, $_ :=  .Files.Glob  "ruler/**.yaml" }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mimir-ruler-rules
+  name: {{ $path | base }}
   annotations:
     k8s-sidecar-target-directory: /data/rules/homelab
   labels:
     mimir_rules: "1"
 data:
-{{ (.Files.Glob "alert-rules/*").AsConfig | indent 2 }}
-{{ (.Files.Glob "recording-rules/*").AsConfig | indent 2 }}
+{{ ($.Files.Glob $path).AsConfig | indent 2 }}
+---
+{{- end }}
