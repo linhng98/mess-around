@@ -190,30 +190,32 @@ mimir-distributed:
       requests:
         cpu: 10m
         memory: 128Mi
-    extraContainers:
-      - name: config-reloader
-        image: docker.io/kiwigrid/k8s-sidecar:1.19.5
-        env:
-          - name: LABEL
-            value: mimir_rules
-          - name: UNIQUE_FILENAMES
-            value: 'true'
-          - name: FOLDER
-            value: /data/rules
-          - name: NAMESPACE
-            value: mimir
-          - name: RESOURCE
-            value: configmap
-          - name: FOLDER_ANNOTATION
-            value: k8s-sidecar-target-directory
-        volumeMounts:
-          - name: sc-rules-volume
-            mountPath: /data/rules
+    # Remove sidecar reload because it constantly delete rule file, use https://github.com/stakater/Reloader instead
+    #extraContainers:
+    #  - name: config-reloader
+    #    image: docker.io/kiwigrid/k8s-sidecar:1.19.5
+    #    env:
+    #      - name: LABEL
+    #        value: mimir_rules
+    #      - name: UNIQUE_FILENAMES
+    #        value: 'true'
+    #      - name: FOLDER
+    #        value: /data/rules
+    #      - name: NAMESPACE
+    #        value: mimir
+    #      - name: RESOURCE
+    #        value: configmap
+    #      - name: FOLDER_ANNOTATION
+    #        value: k8s-sidecar-target-directory
+    #    volumeMounts:
+    #      - name: sc-rules-volume
+    #        mountPath: /data/rules
     extraVolumes:
-      - name: sc-rules-volume
-        emptyDir: {}
+      - name: rules-cm
+        configMap:
+          name: '{{ .Release.Name }}-rules'
     extraVolumeMounts:
-      - name: sc-rules-volume
+      - name: rules-cm
         mountPath: /data/rules
 
   querier:
