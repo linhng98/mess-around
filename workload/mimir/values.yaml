@@ -226,7 +226,7 @@ mimir-distributed:
             ls -la /data/rules/homelab
         volumeMounts:
           - name: rule-data
-            mountPath: /data/rules
+            mountPath: /data/rules/homelab
           - name: ruler-rules-cm
             mountPath: /tmp/rules/homelab
     extraVolumes:
@@ -237,7 +237,7 @@ mimir-distributed:
         emptyDir: {}
     extraVolumeMounts:
       - name: rule-data
-        mountPath: /data/rules
+        mountPath: /data/rules/homelab
 
   querier:
     replicas: 2
