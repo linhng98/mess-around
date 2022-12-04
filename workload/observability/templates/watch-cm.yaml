@@ -13,10 +13,7 @@ metadata:
   name: watch-cm
 subjects:
 - kind: ServiceAccount
-  name: mimir
-  apiGroup: ""
-- kind: ServiceAccount
-  name: default
+  name: observability-loki
   apiGroup: ""
 roleRef:
   kind: Role
