@@ -207,7 +207,7 @@ mimir-distributed:
           - name: FOLDER_ANNOTATION
             value: k8s-sidecar-target-directory
           - name: SLEEP_TIME
-            value: 3600
+            value: '3600'
         volumeMounts:
           - name: sc-rules-volume
             mountPath: /data/rules
