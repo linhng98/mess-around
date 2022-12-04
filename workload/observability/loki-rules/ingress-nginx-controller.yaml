@@ -1,0 +1,11 @@
+---
+groups:
+  - name: HighTrafficAccess
+    rules:
+      - alert: HighTrafficAccess
+        expr: rate({container="controller",namespace="ingress-nginx"} |= " 200 "[1m]) > 1
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: High traffic access from internet

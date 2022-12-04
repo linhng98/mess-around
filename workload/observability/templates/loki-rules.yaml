@@ -1,0 +1,13 @@
+{{- range $path, $_ :=  .Files.Glob  "loki-rules/**.yaml" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $path | base }}
+  annotations:
+    k8s-sidecar-target-directory: /loki-rules/fake
+  labels:
+    mimir_rules: "1"
+data:
+{{ ($.Files.Glob $path).AsConfig | indent 2 }}
+---
+{{- end }}

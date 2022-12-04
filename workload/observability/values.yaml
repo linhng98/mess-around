@@ -3,6 +3,48 @@ loki-stack:
   loki:
     enabled: true
     isDefault: false
+    config:
+      auth_enabled: false
+      ruler:
+        storage:
+          type: local
+          local:
+            directory: &rule_path /loki-rules
+        rule_path: *rule_path
+        alertmanager_url: http://observability-prom-alertmanager:9093
+        ring:
+          kvstore:
+            store: inmemory
+        enable_api: true
+    extraContainers:
+      - name: config-reloader
+        image: docker.io/kiwigrid/k8s-sidecar:1.19.5
+        env:
+          - name: LABEL
+            value: mimir_rules
+          - name: UNIQUE_FILENAMES
+            value: 'true'
+          - name: FOLDER
+            value: *rule_path
+          - name: NAMESPACE
+            value: mimir
+          - name: RESOURCE
+            value: configmap
+          - name: FOLDER_ANNOTATION
+            value: k8s-sidecar-target-directory
+          - name: METHOD
+            value: SLEEP
+          - name: SLEEP_TIME
+            value: '60'
+        volumeMounts:
+          - name: ruler-cm
+            mountPath: *rule_path
+    extraVolumes:
+      - name: ruler-cm
+        emptyDir: {}
+    extraVolumeMounts:
+      - name: ruler-cm
+        mountPath: *rule_path
     serviceMonitor:
       enabled: true
   promtail:
