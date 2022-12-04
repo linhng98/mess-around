@@ -221,12 +221,13 @@ mimir-distributed:
         command: [sh, -c]
         args:
           - >-
-            cp -Lr /tmp/rules/homelab/*.yaml /homelab-rules &&
-            ls -la /homelab-rules &&
-            cat /homelab-rules/k8s-alert-rules.yaml
+            mkdir /data-rules/homelab &&
+            cp -Lr /tmp/rules/homelab/*.yaml /data-rules/homelab &&
+            ls -la /data-rules/homelab &&
+            cat /data-rules/homelab/k8s-alert-rules.yaml
         volumeMounts:
           - name: rule-data
-            mountPath: /homelab-rules
+            mountPath: /data-rules
           - name: ruler-rules-cm
             mountPath: /tmp/rules/homelab
     extraVolumes:
@@ -237,7 +238,7 @@ mimir-distributed:
         emptyDir: {}
     extraVolumeMounts:
       - name: rule-data
-        mountPath: /data-rules/homelab
+        mountPath: /data-rules
 
   querier:
     replicas: 2
