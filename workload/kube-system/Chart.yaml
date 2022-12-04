@@ -9,3 +9,6 @@ dependencies:
   - name: kubeseal-webgui
     version: 3.1.1
     repository: https://jaydee94.github.io/kubeseal-webgui/
+  - name: reloader
+    version: v0.0.125
+    repository: https://stakater.github.io/stakater-charts

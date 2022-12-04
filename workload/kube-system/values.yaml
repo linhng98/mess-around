@@ -43,3 +43,8 @@ kubeseal-webgui:
       s5ZQUNm2iGdGa2LD8fTCQ91SP15dyk9/WyXNzV9nNKF9m+Fgyp03qc18vpt5fNxQ
       anJGkD83c0Wp5zqjI0vyYW03LIwux0bExtRyTkqq0ZM=
       -----END CERTIFICATE-----
+
+reloader:
+  reloader:
+    serviceMonitor:
+      enabled: true
