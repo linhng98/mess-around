@@ -1,6 +1,6 @@
 ---
 groups:
-  - name: node-alerts
+  - name: kubernetes-alerts
     rules:
       - alert: KubernetesVolumeOutOfDiskSpace
         expr: kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes * 100 < 10

@@ -1,6 +1,6 @@
 ---
 groups:
-  - name: mimir_alerts
+  - name: mimir-alerts
     rules:
       - alert: MimirIngesterUnhealthy
         annotations:
