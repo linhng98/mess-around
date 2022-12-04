@@ -215,11 +215,14 @@ mimir-distributed:
     #    volumeMounts:
     #      - name: ruler-rules-volume
     #        mountPath: /data/rules
-    extraContainers:
+    initContainers:
       - name: copy-ruler-config
         image: alpine:3.17.0
-        command: [/bin/sh, -c, --]
-        args: [while true; do cp -r /tmp/rules/homelab /data/rules/ && sleep 3600; done;]
+        command: [sh, -c]
+        args:
+          - >-
+            mkdir /data/rules/homelab
+            cp -Lr /tmp/rules/homelab/*.yaml /data/rules/homelab
         volumeMounts:
           - name: rule-data
             mountPath: /data/rules
