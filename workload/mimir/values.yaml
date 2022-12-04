@@ -213,7 +213,7 @@ mimir-distributed:
     extraVolumes:
       - name: rules-cm
         configMap:
-          name: '{{ .Release.Name }}-rules'
+          name: mimir-ruler-rules
     extraVolumeMounts:
       - name: rules-cm
         mountPath: /data/rules

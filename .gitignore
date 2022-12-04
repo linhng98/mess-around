@@ -3,3 +3,4 @@ charts
 .env
 .terragrunt*
 .terraform*
+debug.yaml

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-rules
+  name: mimir-ruler-rules
   annotations:
     k8s-sidecar-target-directory: /data/rules/homelab
   labels:
