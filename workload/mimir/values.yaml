@@ -192,35 +192,36 @@ mimir-distributed:
       requests:
         cpu: 10m
         memory: 128Mi
-    extraContainers:
-      - name: config-reloader
-        image: docker.io/kiwigrid/k8s-sidecar:1.19.5
-        env:
-          - name: LABEL
-            value: mimir_rules
-          - name: UNIQUE_FILENAMES
-            value: 'true'
-          - name: FOLDER
-            value: /data/rules
-          - name: NAMESPACE
-            value: mimir
-          - name: RESOURCE
-            value: configmap
-          - name: FOLDER_ANNOTATION
-            value: k8s-sidecar-target-directory
-          - name: METHOD
-            value: SLEEP
-          - name: SLEEP_TIME
-            value: '3600'
-        volumeMounts:
-          - name: sc-rules-volume
-            mountPath: /data/rules
+    #extraContainers:
+    #  - name: config-reloader
+    #    image: docker.io/kiwigrid/k8s-sidecar:1.19.5
+    #    env:
+    #      - name: LABEL
+    #        value: mimir_rules
+    #      - name: UNIQUE_FILENAMES
+    #        value: 'true'
+    #      - name: FOLDER
+    #        value: /data/rules
+    #      - name: NAMESPACE
+    #        value: mimir
+    #      - name: RESOURCE
+    #        value: configmap
+    #      - name: FOLDER_ANNOTATION
+    #        value: k8s-sidecar-target-directory
+    #      - name: METHOD
+    #        value: SLEEP
+    #      - name: SLEEP_TIME
+    #        value: '3600'
+    #    volumeMounts:
+    #      - name: ruler-rules-volume
+    #        mountPath: /data/rules
     extraVolumes:
-      - name: sc-rules-volume
-        emptyDir: {}
+      - name: ruler-rules-volume
+        configMap:
+          name: mimir-ruler-rules
     extraVolumeMounts:
-      - name: sc-rules-volume
-        mountPath: /data/rules
+      - name: ruler-rules-volume
+        mountPath: /data/rules/homelab
 
   querier:
     replicas: 2
