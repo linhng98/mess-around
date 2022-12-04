@@ -206,6 +206,8 @@ mimir-distributed:
             value: configmap
           - name: FOLDER_ANNOTATION
             value: k8s-sidecar-target-directory
+          - name: METHOD
+            value: LIST
           - name: SLEEP_TIME
             value: '3600'
         volumeMounts:
