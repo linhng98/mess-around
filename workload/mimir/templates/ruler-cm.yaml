@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: {{ $path | base }}
   annotations:
-    k8s-sidecar-target-directory: /data/rules/homelab
+    k8s-sidecar-target-directory: /data-rules/homelab
   labels:
     mimir_rules: "1"
 data:
