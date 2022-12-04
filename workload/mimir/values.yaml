@@ -186,6 +186,8 @@ mimir-distributed:
   ruler:
     enabled: true
     replicas: 2
+    annotations:
+      reloader.stakater.com/auto: 'true'
     resources:
       requests:
         cpu: 10m
