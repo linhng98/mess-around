@@ -729,6 +729,7 @@ groups:
         for: 6h
         labels:
           severity: warning
+          ignore: true
   - name: mimir_compactor_alerts
     rules:
       - alert: MimirCompactorHasNotSuccessfullyCleanedUpBlocks

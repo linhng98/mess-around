@@ -5,6 +5,7 @@ route:
     - receiver: homelab
       matchers:
         - cluster = homelab
+        - ignore != true
 receivers:
   - name: homelab
     slack_configs:
