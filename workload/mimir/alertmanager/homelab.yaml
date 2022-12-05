@@ -10,7 +10,7 @@ inhibit_rules:
       - severity = warning
     target_matchers:
       - ignore = true
-    equal: [alertname, cluster]
+    equal: [alertname]
 receivers:
   - name: homelab
     slack_configs:
