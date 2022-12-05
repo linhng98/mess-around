@@ -7,9 +7,9 @@ route:
         - cluster = homelab
         - ignore != true
 inhibit_rules:
-  target_matchers:
-    - ignore = true
-    - severity = warning
+  - target_matchers:
+      - ignore = true
+      - severity = warning
 receivers:
   - name: blackhole
     continue: false
