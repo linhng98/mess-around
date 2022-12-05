@@ -18,7 +18,7 @@ mimir-distributed:
       alertmanager_storage:
         backend: local
         local:
-          path: /data
+          path: /alert-rules
 
       blocks_storage:
         backend: s3
@@ -103,7 +103,7 @@ mimir-distributed:
       ruler:
         alertmanager_url: dnssrvnoa+http://_http-metrics._tcp.{{ template "mimir.fullname" . }}-alertmanager-headless.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}/alertmanager
         enable_api: true
-        rule_path: /data-rules
+        rule_path: /data
         for_outage_tolerance: 1h
         for_grace_period: 10m
         resend_delay: 30m
@@ -128,8 +128,6 @@ mimir-distributed:
       requests:
         cpu: 10m
         memory: 32Mi
-    persistentVolume:
-      size: 1Gi
     extraContainers:
       - name: config-reloader
         image: docker.io/kiwigrid/k8s-sidecar:1.19.5
@@ -139,7 +137,7 @@ mimir-distributed:
           - name: UNIQUE_FILENAMES
             value: 'false'
           - name: FOLDER
-            value: /data
+            value: /alert-rules
           - name: NAMESPACE
             value: mimir
           - name: RESOURCE
@@ -149,14 +147,14 @@ mimir-distributed:
         securityContext:
           runAsUser: 0
         volumeMounts:
-          - name: storage
-            mountPath: /data
-    #extraVolumes:
-    #  - name: sc-config-volume
-    #    emptyDir: {}
-    #extraVolumeMounts:
-    #  - name: sc-config-volume
-    #    mountPath: /data
+          - name: alert-rules
+            mountPath: /alert-rules
+    extraVolumes:
+      - name: alert-rules
+        emptyDir: {}
+    extraVolumeMounts:
+      - name: alert-rules
+        mountPath: /alert-rules
 
   distributor:
     replicas: 3
