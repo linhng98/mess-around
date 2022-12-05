@@ -5,7 +5,12 @@ route:
     - receiver: homelab
       matchers:
         - cluster = homelab
-        - ignore != true
+inhibit_rules:
+  - source_matchers:
+      - severity = warning
+    target_matchers:
+      - ignore = true
+    equal: [alertname, cluster]
 receivers:
   - name: homelab
     slack_configs:
