@@ -92,6 +92,7 @@ mimir-distributed:
         ingestion_burst_size: 20000000
         max_label_names_per_series: 300
         max_label_value_length: 8192
+        compactor_partial_block_deletion_delay: 4h
 
       memberlist:
         abort_if_cluster_join_fails: false
