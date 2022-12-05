@@ -6,13 +6,14 @@ route:
       matchers:
         - cluster = homelab
         - ignore != true
+    - receiver: blackhole
+      continue: false
 inhibit_rules:
   - target_matchers:
       - ignore = true
       - severity = warning
 receivers:
   - name: blackhole
-    continue: false
   - name: homelab
     slack_configs:
       - api_url: <path:homelab/data/webhook/slack/homelab#url>
