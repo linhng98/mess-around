@@ -57,6 +57,7 @@ mimir-distributed:
 
       compactor:
         data_dir: "/data"
+        compaction_interval: 15m
 
       frontend:
         align_queries_with_step: true
