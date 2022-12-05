@@ -16,6 +16,38 @@ loki-stack:
           kvstore:
             store: inmemory
         enable_api: true
+      limits_config:
+        enforce_metric_name: false
+        reject_old_samples: true
+        reject_old_samples_max_age: 168h
+        max_entries_limit_per_query: 5000
+      schema_config:
+        configs:
+          - from: 2020-10-24
+            store: boltdb-shipper
+            object_store: filesystem
+            schema: v11
+            index:
+              prefix: index_
+              period: 24h
+        grpc_listen_port: 9095
+      storage_config:
+        boltdb_shipper:
+          active_index_directory: /data/loki/boltdb-shipper-active
+          cache_location: /data/loki/boltdb-shipper-cache
+          cache_ttl: 24h         # Can be increased for faster performance over longer query periods, uses more disk space
+          shared_store: filesystem
+        filesystem:
+          directory: /data/loki/chunks
+      chunk_store_config:
+        max_look_back_period: 1d
+      table_manager:
+        retention_deletes_enabled: true
+        retention_period: 1d
+      compactor:
+        working_directory: /data/loki/boltdb-shipper-compactor
+        shared_store: filesystem
+        retention_enabled: true
     extraContainers:
       - name: config-reloader
         image: docker.io/kiwigrid/k8s-sidecar:1.19.5
