@@ -227,7 +227,7 @@ groups:
         for: 15m
         labels:
           severity: warning
-          ignore: true
+          ignore: 'true'
       - alert: CephOSDVersionMismatch
         annotations:
           description: There are {{ $value }} different versions of Ceph OSD components running.
