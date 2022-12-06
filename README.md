@@ -19,6 +19,10 @@
 
 - Visit project document and blog at [docs.homelab.linhng98.com](https://docs.homelab.linhng98.com)
 
+## Improments
+
+- [ ] Kernel tuning (max_user_watches, max_user_instances, ...)
+
 ## License
 
 - Distributed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
