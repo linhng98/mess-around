@@ -1,30 +1,31 @@
 ---
-nats:
-  image:
-    repository: nats
-    tag: 2.9.8-alpine
-    pullPolicy: IfNotPresent
+nats-jetstream:
+  nats:
+    image:
+      repository: nats
+      tag: 2.9.8-alpine
+      pullPolicy: IfNotPresent
 
-  jetstream:
+    jetstream:
+      enabled: true
+
+      memStorage:
+        enabled: true
+        size: 1Gi
+
+      fileStorage:
+        enabled: true
+        storageDirectory: /data
+        size: 5Gi
+
+  cluster:
+    enabled: true
+    replicas: 3
+
+  natsbox:
     enabled: true
 
-    memStorage:
-      enabled: true
-      size: 1Gi
-
-    fileStorage:
-      enabled: true
-      storageDirectory: /data
-      size: 5Gi
-
-cluster:
-  enabled: true
-  replicas: 3
-
-natsbox:
-  enabled: true
-
-exporter:
-  enabled: true
-  serviceMonitor:
+  exporter:
     enabled: true
+    serviceMonitor:
+      enabled: true
