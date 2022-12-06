@@ -1,5 +1,5 @@
 ---
-nats-jetstream:
+nats:
   nats:
     image:
       repository: nats
