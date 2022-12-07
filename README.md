@@ -25,6 +25,9 @@
 - [ ] Container runtime security (falco, trivy, ...)
 - [ ] Centralize tracing (grafana tempo)
 - [ ] Asynchronous distributed tracing (nats jetstream, otel manual instrument)
+- [ ] Automatic release (semantic release)
+- [ ] Automatic dependency update (renovate)
+- [ ] Push-based image tag update (release-bot)
 
 ## License
 
