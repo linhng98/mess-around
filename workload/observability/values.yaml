@@ -202,12 +202,15 @@ grafana:
       datasources:
         - name: Loki
           type: loki
+          uid: loki
           url: http://observability-loki:3100
         - name: Tempo
           type: tempo
+          uid: tempo
           url: http://tempo-gateway.tempo
           jsonData:
             serviceMap:
+              httpMethod: GET
               datasourceUid: Prometheus
             search:
               hide: false
@@ -216,6 +219,7 @@ grafana:
         - name: Prometheus
           isDefault: true
           type: prometheus
+          uid: prometheus
           url: http://mimir-nginx.mimir/prometheus
           basicAuth: false
           jsonData:
