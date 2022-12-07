@@ -18,14 +18,12 @@ spec:
     processors:
 
     exporters:
-      jaeger:
-        endpoint: "jaeger-collector.jaeger:14250"
-        tls:
-          insecure: true
+      otlphttp:
+        endpoint: "http://tempo-gateway.tempo/otlp/v1/traces"
 
     service:
       pipelines:
         traces:
           receivers: [otlp, jaeger, zipkin]
           processors: []
-          exporters: [jaeger]
+          exporters: [otlphttp]
