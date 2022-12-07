@@ -19,7 +19,7 @@ spec:
 
     exporters:
       otlphttp:
-        endpoint: http://tempo-distributor.tempo:4318/v1/traces
+        endpoint: http://tempo-distributor.tempo:4318
 
     service:
       pipelines:
