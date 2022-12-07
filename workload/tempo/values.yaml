@@ -62,8 +62,7 @@ tempo-distributed:
       enabled: true
 
     grafanaAgent:
-      enabled: true
-      installOperator: true
+      enabled: false
 
   prometheusRule:
     enabled: true
