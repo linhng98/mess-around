@@ -1,5 +1,9 @@
 ---
 tempo-distributed:
+  global:
+    dnsService: rke2-coredns-rke2-coredns
+    dnsNamespace: kube-system
+    clusterDomain: cluster.local
   ingester:
     replicas: 3
     persistence:
