@@ -1,0 +1,72 @@
+---
+tempo-distributed:
+  ingester:
+    replicas: 3
+    persistence:
+      enabled: true
+      size: 2Gi
+
+  metricsGenerator:
+    enabled: true
+    replicas: 1
+
+  distributor:
+    replicas: 3
+
+  compactor:
+    replicas: 1
+
+  querier:
+    replicas: 1
+
+  queryFrontend:
+    replicas: 1
+
+  search:
+    enabled: true
+
+  multitenancyEnabled: false
+
+  traces:
+    otlp:
+      http:
+        enabled: true
+        receiverConfig: {}
+      grpc:
+        enabled: true
+        receiverConfig: {}
+
+  storage:
+    trace:
+      backend: s3
+      s3:
+        bucket_name: tempo-bucket
+        endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph
+        access_key_id: <path:homelab/data/aws-credentials/ceph/tempo-bucket#AWS_ACCESS_KEY_ID>
+        secret_access_key: <path:homelab/data/aws-credentials/ceph/tempo-bucket#AWS_SECRET_ACCESS_KEY>
+        insecure: true
+
+  memcached:
+    enabled: true
+    replicas: 1
+
+  memcachedExporter:
+    enabled: true
+
+  metaMonitoring:
+    serviceMonitor:
+      enabled: true
+
+    grafanaAgent:
+      enabled: true
+      installOperator: true
+
+  prometheusRule:
+    enabled: true
+
+  minio:
+    enabled: false
+
+  gateway:
+    enabled: true
+    replicas: 3
