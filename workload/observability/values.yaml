@@ -203,6 +203,9 @@ grafana:
         - name: Loki
           type: loki
           url: http://observability-loki:3100
+        - name: Tempo
+          type: tempo
+          url: http://tempo-gateway.tempo
         - name: Prometheus
           isDefault: true
           type: prometheus
