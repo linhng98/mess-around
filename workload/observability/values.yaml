@@ -206,6 +206,13 @@ grafana:
         - name: Tempo
           type: tempo
           url: http://tempo-gateway.tempo
+          jsonData:
+            serviceMap:
+              datasourceUid: Prometheus
+            search:
+              hide: false
+            nodeGraph:
+              enabled: true
         - name: Prometheus
           isDefault: true
           type: prometheus
