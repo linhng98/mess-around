@@ -22,6 +22,9 @@
 ## Improments
 
 - [ ] Kernel tuning (max_user_watches, max_user_instances, ...)
+- [ ] Container runtime security (falco, trivy, ...)
+- [ ] Centralize tracing (grafana tempo)
+- [ ] Asynchronous distributed tracing (nats jetstream, otel manual instrument)
 
 ## License
 
