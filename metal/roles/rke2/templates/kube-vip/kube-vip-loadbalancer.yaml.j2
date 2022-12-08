@@ -1,18 +1,17 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  creationTimestamp: null
-  name: kube-vip-api-server
+  name: kube-vip-loadbalancer
   namespace: kube-system
 spec:
   selector:
     matchLabels:
-      name: kube-vip-api-server
+      name: kube-vip-loadbalancer
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: kube-vip-api-server
+        name: kube-vip-loadbalancer
     spec:
       containers:
       - args:
@@ -21,13 +20,13 @@ spec:
         - name: vip_arp
           value: "true"
         - name: vip_interface
-          value: "{{ rke2_interface | default(ansible_default_ipv4.interface) }}"
+          value: eno1
         - name: port
-          value: "{{ rke2_api_port | default('6443')}}"
+          value: "6443"
         - name: vip_cidr
-          value: "{{ rke2_api_cidr | default('24') }}"
+          value: "24"
         - name: cp_enable
-          value: "true"
+          value: "false"
         - name: cp_namespace
           value: kube-system
         - name: vip_ddns
@@ -35,7 +34,7 @@ spec:
         - name: enableUPNP
           value: "false"
         - name: svc_enable
-          value: "false"
+          value: "true"
         - name: vip_leaderelection
           value: "true"
         - name: vip_leaseduration
@@ -44,10 +43,8 @@ spec:
           value: "3"
         - name: vip_retryperiod
           value: "1"
-        - name: enableServicesElection
-          value: "true"
         - name: address
-          value: "{{ rke2_api_ip }}"
+          value: 192.168.2.100
         image: ghcr.io/kube-vip/kube-vip:v0.5.0
         imagePullPolicy: Always
         name: kube-vip
@@ -58,10 +55,9 @@ spec:
             - NET_ADMIN
             - NET_RAW
             - SYS_TIME
-      nodeSelector:
-        node-role.kubernetes.io/master: "true"
       hostNetwork: true
-      serviceAccountName: kube-vip
+      nodeSelector:
+        node-role.kubernetes.io/worker: "true"
       tolerations:
       - effect: NoSchedule
         operator: Exists
