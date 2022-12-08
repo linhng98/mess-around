@@ -240,3 +240,5 @@ grafana:
       auth_url: https://accounts.google.com/o/oauth2/auth
       token_url: https://accounts.google.com/o/oauth2/token
       allow_sign_up: true
+    feature_toggles:
+      enable: tempoApmTable
