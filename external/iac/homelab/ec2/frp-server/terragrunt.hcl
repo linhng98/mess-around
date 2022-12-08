@@ -47,6 +47,8 @@ inputs = {
     [common]
     bind_port = 7000
     authentication_method = token
+    vhost_http_port = 80
+    vhost_https_port = 443
     token = ${get_env("FRP_TOKEN", "RandomStronkToken")}
     dashboard_port = 7001
     dashboard_user = admin
