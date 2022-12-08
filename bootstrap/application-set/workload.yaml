@@ -30,11 +30,11 @@ spec:
           prune: true
           selfHeal: true
         retry:
-          limit: 10
+          limit: 1
           backoff:
-            duration: 1m
-            factor: 2
-            maxDuration: 16m
+            duration: 2m
+            factor: 1
+            maxDuration: 2m
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
