@@ -40,3 +40,4 @@ spec:
           - ServerSideApply=true
           - ApplyOutOfSyncOnly=true
           - PrunePropagationPolicy=background
+          - Validate=false
