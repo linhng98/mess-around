@@ -23,11 +23,13 @@
 
 - [x] Kernel tuning (max_user_watches, max_user_instances, ...)
 - [ ] Container runtime security (falco, trivy, ...)
-- [ ] Centralize tracing (grafana tempo)
+- [x] Centralize tracing (grafana tempo)
 - [ ] Asynchronous distributed tracing (nats jetstream, otel manual instrument)
 - [ ] Automatic release (semantic release)
 - [ ] Automatic dependency update (renovate)
 - [ ] Push-based image tag update (release-bot)
+- [ ] Admission webhook and policy as code (kyverno, OPA)
+- [ ] Chaos testing (chao mesh, litmus)
 
 ## License
 
