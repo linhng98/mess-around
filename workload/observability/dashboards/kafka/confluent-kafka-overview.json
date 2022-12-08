@@ -32,7 +32,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -45,7 +45,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of Brokers Online",
           "fieldConfig": {
@@ -114,7 +114,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "count(cp_kafka_server_replicamanager_leadercount{cluster=\"$cluster\", namespace=\"$namespace\"})",
@@ -131,7 +131,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of active controllers in the cluster.",
           "fieldConfig": {
@@ -198,7 +198,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(cp_kafka_controller_kafkacontroller_activecontrollercount{cluster=\"$cluster\", namespace=\"$namespace\"})",
@@ -214,7 +214,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Unclean leader election rate",
           "fieldConfig": {
@@ -281,7 +281,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(cp_kafka_controller_controllerstats_uncleanleaderelectionspersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
@@ -297,7 +297,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Partitions that are online",
           "fieldConfig": {
@@ -365,7 +365,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(cp_kafka_server_replicamanager_partitioncount{cluster=\"$cluster\", namespace=\"$namespace\"})",
@@ -381,7 +381,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of under-replicated partitions (| ISR | < | all replicas |).",
           "fieldConfig": {
@@ -449,7 +449,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(cp_kafka_server_replicamanager_underreplicatedpartitions{cluster=\"$cluster\", namespace=\"$namespace\"})",
@@ -466,7 +466,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of partitions that don\u2019t have an active leader and are hence not writable or readable.",
           "fieldConfig": {
@@ -534,7 +534,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(cp_kafka_controller_kafkacontroller_offlinepartitionscount{cluster=\"$cluster\", namespace=\"$namespace\"})",
@@ -554,7 +554,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Aggregated Kafka Broker Pods CPU Usage",
           "fill": 1,
@@ -596,7 +596,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(rate (container_cpu_usage_seconds_total{pod=~\"$namespace-cp-kafka-(\\\\d+)\", namespace=~\"$namespace\"}[5m])) by (pod_name)",
@@ -644,7 +644,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Kafka Broker Pods Memory Usage",
           "fill": 1,
@@ -686,7 +686,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(container_memory_usage_bytes{pod=~\"$namespace-cp-kafka-(\\\\d+)\", namespace=~\"$namespace\", container!=\"\"}) by (pod)",
@@ -736,7 +736,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Kafka Broker Pods Disk Usage",
           "fill": 1,
@@ -778,7 +778,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"datadir-0-$namespace-cp-kafka.*\"}",
@@ -826,7 +826,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Byte Rate",
           "fill": 1,
@@ -872,7 +872,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_kafka_server_brokertopicmetrics_bytesinpersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -884,7 +884,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_kafka_server_brokertopicmetrics_bytesoutpersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -931,7 +931,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -973,7 +973,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_kafka_server_brokertopicmetrics_messagesinpersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1019,7 +1019,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Produce Request Rate.",
           "fill": 1,
@@ -1061,7 +1061,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_kafka_server_brokertopicmetrics_totalproducerequestspersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1072,7 +1072,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_kafka_server_brokertopicmetrics_failedproducerequestspersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1118,7 +1118,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Fetch Request Rate",
           "fill": 1,
@@ -1160,7 +1160,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_kafka_server_brokertopicmetrics_totalfetchrequestspersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1171,7 +1171,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_kafka_server_brokertopicmetrics_failedfetchrequestspersec{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1217,7 +1217,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Network Processor Avg Idle Percent",
           "fill": 1,
@@ -1259,7 +1259,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_network_socketserver_networkprocessoravgidlepercent{cluster=\"$cluster\", namespace=\"$namespace\"}*100",
               "format": "time_series",
@@ -1305,7 +1305,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Request Handler Avg Idle Percent",
           "fill": 1,
@@ -1347,7 +1347,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_kafkarequesthandlerpool_requesthandleravgidlepercent{cluster=\"$cluster\", namespace=\"$namespace\"}*100",
               "format": "time_series",
@@ -1391,7 +1391,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "refId": "A"
         }
@@ -1403,7 +1403,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -1416,7 +1416,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Quorum Size of Zookeeper ensemble",
           "fieldConfig": {
@@ -1484,7 +1484,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "avg(cp_zookeeper_quorumsize{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1498,7 +1498,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of Alive Connections",
           "fieldConfig": {
@@ -1566,7 +1566,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_zookeeper_numaliveconnections{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1617,7 +1617,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of queued requests in the server. This goes up when the server receives more requests than it can process",
           "fill": 1,
@@ -1659,7 +1659,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_zookeeper_outstandingrequests{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -1710,7 +1710,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -1777,7 +1777,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "avg(cp_zookeeper_inmemorydatatree_nodecount{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1791,7 +1791,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of Watchers",
           "fieldConfig": {
@@ -1859,7 +1859,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "sum(cp_zookeeper_inmemorydatatree_watchcount{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -1877,7 +1877,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Aggregated Kafka Broker Pods CPU Usage",
           "fill": 1,
@@ -1919,7 +1919,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"$namespace-cp-kafka-(\\\\d+)\", namespace=~\"$namespace\"}[5m])) by (pod)",
@@ -1967,7 +1967,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Kafka Broker Pods Memory Usage",
           "fill": 1,
@@ -2009,7 +2009,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(container_memory_usage_bytes{pod=~\"$namespace-cp-zookeeper-(\\\\d+)\", namespace=~\"$namespace\", container!=\"\"}) by (pod)",
@@ -2057,7 +2057,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Kafka Broker Pods Disk Usage",
           "fill": 1,
@@ -2099,7 +2099,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"datadir-$namespace-cp-zookeeper.*\"}",
@@ -2147,7 +2147,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Amount of time it takes for the server to respond to a client request",
           "fill": 1,
@@ -2189,7 +2189,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_zookeeper_minrequestlatency{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2268,7 +2268,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Amount of time it takes for the server to respond to a client request",
           "fill": 1,
@@ -2310,7 +2310,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_zookeeper_avgrequestlatency{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2397,7 +2397,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Amount of time it takes for the server to respond to a client request",
           "fill": 1,
@@ -2439,7 +2439,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_zookeeper_maxrequestlatency{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2491,7 +2491,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "refId": "A"
         }
@@ -2503,7 +2503,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -2516,7 +2516,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -2582,7 +2582,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_worker_metrics_connector_count{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2596,7 +2596,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The total number of connector starts that succeeded.",
           "fieldConfig": {
@@ -2663,7 +2663,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_worker_metrics_connector_startup_success_total{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2677,7 +2677,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The total number of connector starts that failed.",
           "fieldConfig": {
@@ -2745,7 +2745,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_worker_metrics_connector_startup_failure_total{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2759,7 +2759,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -2825,7 +2825,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_worker_metrics_task_count{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2839,7 +2839,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The total number of task starts that succeeded.",
           "fieldConfig": {
@@ -2906,7 +2906,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_worker_metrics_task_startup_success_total{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -2920,7 +2920,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The total number of task starts that failed.",
           "fieldConfig": {
@@ -2988,7 +2988,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_worker_metrics_task_startup_failure_total{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3006,7 +3006,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -3047,7 +3047,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_metrics_connect_1_io_ratio{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3092,7 +3092,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -3133,7 +3133,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_metrics_connect_1_incoming_byte_rate{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3179,7 +3179,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -3220,7 +3220,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_connect_connect_metrics_connect_1_network_io_rate{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3264,7 +3264,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "refId": "A"
         }
@@ -3276,7 +3276,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -3289,7 +3289,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of Kafka REST servers",
           "fieldConfig": {
@@ -3357,7 +3357,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "count(cp_kafka_rest_jetty_metrics_connections_active{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -3371,7 +3371,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Total number of active TCP connections.",
           "fieldConfig": {
@@ -3439,7 +3439,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_rest_jetty_metrics_connections_active{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3453,7 +3453,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The average rate per second of opened TCP connections.",
           "fieldConfig": {
@@ -3521,7 +3521,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_rest_jetty_metrics_connections_opened_rate{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3535,7 +3535,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The average rate per second of closed TCP connections.",
           "fieldConfig": {
@@ -3603,7 +3603,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_rest_jetty_metrics_connections_closed_rate{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3619,7 +3619,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "refId": "A"
         }
@@ -3631,7 +3631,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -3648,7 +3648,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Total number of bytes consumed.",
           "fill": 1,
@@ -3691,7 +3691,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_ksql_server_metrics_bytes_consumed_total{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3737,7 +3737,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Messages consumed per second.",
           "fill": 1,
@@ -3779,7 +3779,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_ksql_server_metrics_messages_consumed_per_sec{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3824,7 +3824,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Messages produced per second.",
           "fill": 1,
@@ -3866,7 +3866,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_ksql_server_metrics_messages_produced_per_sec{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3911,7 +3911,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of active queries.",
           "fill": 1,
@@ -3953,7 +3953,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_ksql_server_metrics_num_active_queries{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -3998,7 +3998,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of idle queries.",
           "fill": 1,
@@ -4040,7 +4040,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_ksql_server_metrics_num_idle_queries{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -4085,7 +4085,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of persistent queries.",
           "fill": 1,
@@ -4127,7 +4127,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_ksql_server_metrics_num_persistent_queries{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -4170,7 +4170,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "refId": "A"
         }
@@ -4182,7 +4182,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -4195,7 +4195,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Number of Kafka Schema Registry servers",
           "fieldConfig": {
@@ -4263,7 +4263,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "count(cp_kafka_schema_registry_jetty_metrics_connections_active{cluster=\"$cluster\", namespace=\"$namespace\"})",
               "format": "time_series",
@@ -4277,7 +4277,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "Total number of active TCP connections.",
           "fieldConfig": {
@@ -4345,7 +4345,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_schema_registry_jetty_metrics_connections_active{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -4359,7 +4359,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The average rate per second of opened TCP connections.",
           "fieldConfig": {
@@ -4427,7 +4427,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_schema_registry_jetty_metrics_connections_opened_rate{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -4441,7 +4441,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "description": "The average rate per second of closed TCP connections.",
           "fieldConfig": {
@@ -4509,7 +4509,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "prometheus"
               },
               "expr": "cp_kafka_schema_registry_jetty_metrics_connections_closed_rate{cluster=\"$cluster\", namespace=\"$namespace\"}",
               "format": "time_series",
@@ -4525,7 +4525,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "refId": "A"
         }
@@ -4549,7 +4549,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "definition": "label_values(cp_zookeeper_configversion, cluster)",
         "hide": 0,
@@ -4576,7 +4576,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "definition": "label_values(cp_zookeeper_configversion, namespace)",
         "hide": 0,
