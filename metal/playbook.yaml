@@ -5,6 +5,14 @@
     roles:
       - pxe_server
 
+  - name: Common
+    remote_user: ubuntu
+    become: true
+    hosts: all
+    tags: common
+    roles:
+      - common
+
   - name: Install rke2 cluster
     remote_user: ubuntu
     become: true

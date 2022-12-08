@@ -1,0 +1,3 @@
+---
+  - name: Tunning linux kernel
+    ansible.builtin.include_tasks: tunning.yaml

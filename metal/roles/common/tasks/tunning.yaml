@@ -1,0 +1,7 @@
+---
+  - name: set tunning parameter
+    ansible.posix.sysctl:
+      name: '{{ item.key }}'
+      value: '{{ item.value }}'
+      state: present
+    loop: '{{ kernel_tunnings | dict2items }}'
