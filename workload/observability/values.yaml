@@ -240,6 +240,8 @@ grafana:
   grafana.ini:
     server:
       root_url: https://grafana.homelab.linhng98.com
+    users:
+      viewers_can_edit: true
     auth:
       disable_login_form: false
     auth.google:
@@ -250,5 +252,9 @@ grafana:
       auth_url: https://accounts.google.com/o/oauth2/auth
       token_url: https://accounts.google.com/o/oauth2/token
       allow_sign_up: true
+    auth.anonymous:
+      enabled: true
+      org_role: Viewer
+      hide_version: true
     feature_toggles:
       enable: tempoApmTable
