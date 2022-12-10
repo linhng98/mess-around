@@ -5,32 +5,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-  name: otel-grpc-ingress
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: &host otel-grpc.homelab.linhng98.com
-    http:
-      paths:
-      - backend:
-          service:
-            name: otel-collector-collector
-            port:
-              number: 4317
-        path: /
-        pathType: Prefix
-  tls:
-  - hosts:
-    - *host
-    secretName: otel-grpc
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
   name: otel-http-ingress
 spec:
