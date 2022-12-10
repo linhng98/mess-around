@@ -148,6 +148,16 @@ prom:
         - url: http://mimir-nginx.mimir/api/v1/push
           headers:
             X-Scope-OrgID: homelab
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - prometheus
+              topologyKey: kubernetes.io/hostname
 
 grafana:
   serviceMonitor:
