@@ -93,16 +93,16 @@ kibana:
           name: kibana-credentials
           key: encryptionkey
 
-  #kibanaConfig:
-  #  kibana.yml: |
-  #    server.ssl:
-  #      enabled: true
-  #      key: /usr/share/kibana/config/certs/node.key
-  #      certificate: /usr/share/kibana/config/certs/node.crt
-  #    xpack.security.encryptionKey: ${KIBANA_ENCRYPTION_KEY}
-  #    elasticsearch.ssl:
-  #      certificateAuthorities: /usr/share/kibana/config/certs/ca.crt
-  #      verificationMode: certificate
+  kibanaConfig:
+    kibana.yml: |
+      server.ssl:
+        enabled: true
+        key: /usr/share/kibana/config/certs/node.key
+        certificate: /usr/share/kibana/config/certs/node.crt
+      xpack.security.encryptionKey: ${KIBANA_ENCRYPTION_KEY}
+      elasticsearch.ssl:
+        certificateAuthorities: /usr/share/kibana/config/certs/ca.crt
+        verificationMode: certificate
 
   protocol: https
 
