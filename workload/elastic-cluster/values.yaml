@@ -3,12 +3,16 @@ elasticsearch:
   clusterName: elasticsearch
   nodeGroup: master
   roles:
-    master: 'true'
-    ingest: 'true'
-    data: 'true'
-    remote_cluster_client: 'true'
-    ml: 'true'
-
+    - master
+    - data
+    - data_content
+    - data_hot
+    - data_warm
+    - data_cold
+    - ingest
+    - ml
+    - remote_cluster_client
+    - transform
   protocol: https
 
   esConfig:
@@ -37,8 +41,6 @@ elasticsearch:
       path: /usr/share/elasticsearch/config/certs
 
   replicas: 3
-
-  imageTag: 7.17.3
 
   esJavaOpts: -Xms2g -Xmx2g
 
