@@ -2,13 +2,13 @@
 groups:
   - name: kubernetes-alerts
     rules:
-      - alert: KubernetesNodeReady
+      - alert: KubernetesNodeNotReady
         expr: kube_node_status_condition{condition="Ready",status="true"} == 0
-        for: 10m
+        for: 0m
         labels:
           severity: critical
         annotations:
-          summary: Kubernetes Node ready (instance {{ $labels.instance }})
+          summary: Kubernetes Node not ready (instance {{ $labels.instance }})
 
       - alert: KubernetesMemoryPressure
         expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
