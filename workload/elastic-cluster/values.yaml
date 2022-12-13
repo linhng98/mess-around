@@ -11,6 +11,22 @@ elasticsearch:
 
   protocol: https
 
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    className: nginx
+    pathtype: ImplementationSpecific
+    hosts:
+      - host: &elastic-host elastic.homelab.linhng98.com
+        paths:
+          - path: /
+    tls:
+      - secretName: elastic-tls
+        hosts:
+          - *elastic-host
+
   esConfig:
     elasticsearch.yml: |
       xpack.security.enabled: true
@@ -108,13 +124,13 @@ kibana:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     hosts:
-      - host: &host kibana.homelab.linhng98.com
+      - host: &kibana-host kibana.homelab.linhng98.com
         paths:
           - path: /
     tls:
       - secretName: kibana-tls
         hosts:
-          - *host
+          - *kibana-host
 
 prometheus-elasticsearch-exporter:
   replicaCount: 1
