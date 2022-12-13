@@ -74,6 +74,7 @@ kibana:
 
   elasticsearchHosts: https://elasticsearch-master:9200
   elasticsearchCertificateSecret: elastic-certificates
+  elasticsearchCredentialSecret: elasticsearch-credentials
 
   extraEnvs:
     - name: ELASTICSEARCH_USERNAME
