@@ -39,7 +39,7 @@ inputs = {
     "${dependency.allow_ssh_sg.outputs.security_group_id}",
     "${dependency.allow_frp_sg.outputs.security_group_id}",
     "${dependency.allow_internet_access_sg.outputs.security_group_id}",
-    "${dependency.allow_internet_access_sg.outputs.security_group_id}",
+    "${dependency.allow_ntopng_sg.outputs.security_group_id}",
   ]
   subnet_id                   = dependency.vpc.outputs.public_subnets[0]
   key_name                    = "linhnv"
