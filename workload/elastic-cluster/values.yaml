@@ -64,7 +64,7 @@ elasticsearch:
 
 kibana:
   replicas: 1
-  imageTag: 8.5.1
+  #imageTag: 8.5.1
   resources:
     requests:
       cpu: 50m
