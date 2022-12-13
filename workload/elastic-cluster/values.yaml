@@ -3,18 +3,13 @@ elasticsearch:
   clusterName: elasticsearch
   nodeGroup: master
   roles:
-    - master
-    - data
-    - data_content
-    - data_hot
-    - data_warm
-    - data_cold
-    - ingest
-    - ml
-    - remote_cluster_client
-    - transform
+    master: 'true'
+    ingest: 'true'
+    data: 'true'
+    remote_cluster_client: 'true'
+    ml: 'true'
+
   protocol: https
-  createCert: false
 
   esConfig:
     elasticsearch.yml: |
@@ -29,9 +24,6 @@ elasticsearch:
       xpack.security.http.ssl.certificate_authorities: /usr/share/elasticsearch/config/certs/ca.crt
       xpack.security.http.ssl.key: /usr/share/elasticsearch/config/certs/node.key
 
-  secret:
-    enabled: false
-
   extraEnvs:
     - name: ELASTIC_PASSWORD
       valueFrom:
@@ -45,6 +37,8 @@ elasticsearch:
       path: /usr/share/elasticsearch/config/certs
 
   replicas: 3
+
+  imageTag: 7.17.3
 
   esJavaOpts: -Xms2g -Xmx2g
 
@@ -64,7 +58,6 @@ elasticsearch:
 
 kibana:
   replicas: 1
-  #imageTag: 8.5.1
   resources:
     requests:
       cpu: 50m
@@ -77,14 +70,11 @@ kibana:
 
   extraEnvs:
     - name: ELASTICSEARCH_USERNAME
-      valueFrom:
-        secretKeyRef:
-          name: kibana-credentials
-          key: username
+      value: elastic
     - name: ELASTICSEARCH_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: kibana-credentials
+          name: elastic-credentials
           key: password
     - name: KIBANA_ENCRYPTION_KEY
       valueFrom:
@@ -125,7 +115,6 @@ kibana:
       - secretName: kibana-tls
         hosts:
           - *host
-
 
 prometheus-elasticsearch-exporter:
   replicaCount: 1
