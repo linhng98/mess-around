@@ -7,7 +7,7 @@ dependencies:
     version: 8.5.1
     repository: https://helm.elastic.co
   - name: kibana
-    version: 8.5.1
+    version: 7.17.3
     repository: https://helm.elastic.co
   - name: prometheus-elasticsearch-exporter
     version: 4.15.0

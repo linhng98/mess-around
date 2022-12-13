@@ -64,6 +64,7 @@ elasticsearch:
 
 kibana:
   replicas: 1
+  imageTag: 8.5.1
   resources:
     requests:
       cpu: 50m
@@ -73,8 +74,6 @@ kibana:
       memory: 2Gi
 
   elasticsearchHosts: https://elasticsearch-master:9200
-  elasticsearchCertificateSecret: elastic-certificates
-  elasticsearchCredentialSecret: elastic-credentials
 
   extraEnvs:
     - name: ELASTICSEARCH_USERNAME
@@ -106,6 +105,11 @@ kibana:
 
   protocol: https
 
+  secretMounts:
+    - name: elastic-certificates
+      secretName: elastic-certificates
+      path: /usr/share/kibana/config/certs
+
   ingress:
     enabled: true
     className: nginx
@@ -121,6 +125,7 @@ kibana:
       - secretName: kibana-tls
         hosts:
           - *host
+
 
 prometheus-elasticsearch-exporter:
   replicaCount: 1
