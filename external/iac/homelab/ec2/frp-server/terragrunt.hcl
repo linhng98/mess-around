@@ -23,6 +23,10 @@ dependency "allow_internet_access_sg" {
   config_path = "../../sg/internet-access"
 }
 
+dependency "allow_ntopng_sg" {
+  config_path = "../../sg/ntopng"
+}
+
 inputs = {
   ami           = "ami-02ee763250491e04a"
   instance_type = "t2.small"
@@ -34,6 +38,7 @@ inputs = {
   vpc_security_group_ids = [
     "${dependency.allow_ssh_sg.outputs.security_group_id}",
     "${dependency.allow_frp_sg.outputs.security_group_id}",
+    "${dependency.allow_internet_access_sg.outputs.security_group_id}",
     "${dependency.allow_internet_access_sg.outputs.security_group_id}",
   ]
   subnet_id                   = dependency.vpc.outputs.public_subnets[0]
