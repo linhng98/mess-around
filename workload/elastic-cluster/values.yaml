@@ -69,6 +69,7 @@ kibana:
       memory: 2Gi
 
   elasticsearchHosts: https://elasticsearch-master:9200
+  elasticsearchCertificateSecret: elastic-certificates
 
   extraEnvs:
     - name: ELASTICSEARCH_USERNAME
@@ -96,11 +97,6 @@ kibana:
         verificationMode: certificate
 
   protocol: https
-
-  secretMounts:
-    - name: elastic-certificates
-      secretName: elastic-certificates
-      path: /usr/share/kibana/config/certs
 
   ingress:
     enabled: true
