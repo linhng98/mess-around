@@ -28,6 +28,9 @@ elasticsearch:
       xpack.security.http.ssl.certificate_authorities: /usr/share/elasticsearch/config/certs/ca.crt
       xpack.security.http.ssl.key: /usr/share/elasticsearch/config/certs/node.key
 
+  secret:
+    enabled: false
+
   extraEnvs:
     - name: ELASTIC_PASSWORD
       valueFrom:
