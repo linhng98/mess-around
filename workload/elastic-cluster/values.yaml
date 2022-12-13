@@ -14,6 +14,7 @@ elasticsearch:
     - remote_cluster_client
     - transform
   protocol: https
+  createCert: false
 
   esConfig:
     elasticsearch.yml: |
