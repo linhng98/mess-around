@@ -1,0 +1,13 @@
+---
+  - name: Create daily upgrade script
+    file:
+      path: &cron /etc/cron.daily/upgrade.sh
+      state: touch
+  - name: Script to upgrade
+    copy:
+      dest: *cron
+      content: |
+        #!/bin/bash
+        apt-get update -y > /var/log/daily-update.log
+        apt-get upgrade -y > /var/log/daily-upgrade.log
+        apt-get autoclean

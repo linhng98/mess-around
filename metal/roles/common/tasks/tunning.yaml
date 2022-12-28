@@ -1,5 +1,5 @@
 ---
-  - name: set tunning parameter
+  - name: Set tunning parameter
     ansible.posix.sysctl:
       name: '{{ item.key }}'
       value: '{{ item.value }}'
