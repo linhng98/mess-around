@@ -2,3 +2,4 @@
 rke2_type: agent
 k8s_node_label:
   - node-role.kubernetes.io/agent=true
+  - rke2-upgrade=true

@@ -2,3 +2,4 @@
 rke2_type: server
 k8s_node_label:
   - node-role.kubernetes.io/control-plane=true
+  - rke2-upgrade=true

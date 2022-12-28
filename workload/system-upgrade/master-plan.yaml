@@ -1,0 +1,21 @@
+---
+# Server plan
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+  name: server-plan
+  namespace: system-upgrade
+  labels:
+    rke2-upgrade: server
+spec:
+  concurrency: 1
+  nodeSelector:
+    matchExpressions:
+      - {key: rke2-upgrade, operator: Exists}
+      - {key: rke2-upgrade, operator: NotIn, values: [disabled, 'false']}
+      - {key: node-role.kubernetes.io/control-plane, operator: In, values: ['true']}
+  serviceAccountName: system-upgrade
+  cordon: true
+  upgrade:
+    image: rancher/rke2-upgrade
+  channel: https://update.rke2.io/v1-release/channels/stable
