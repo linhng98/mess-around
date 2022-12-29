@@ -1,10 +1,11 @@
 ---
   - name: Create daily upgrade script
-    file:
-      path: &cron /etc/cron.daily/upgrade.sh
+    ansible.builtin.file:
+      path: &cron /etc/cron.daily/upgrade
       state: touch
+      mode: '0755'
   - name: Script to upgrade
-    copy:
+    ansible.builtin.copy:
       dest: *cron
       content: |
         #!/bin/bash
