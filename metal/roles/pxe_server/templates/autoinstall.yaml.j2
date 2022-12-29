@@ -7,7 +7,17 @@
     install-server: yes
     authorized-keys:
       - {{ ssh_public_key }}
-    allow-pw: no
+    allow-pw: false
+  user-data:
+    users:
+      - default
+      - name: ubuntu
+        gecos: ubuntu
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        lock_passwd: true
+        ssh_authorized_keys:
+          - {{ ssh_public_key }}
+
   network:
     version: 2
     ethernets:
