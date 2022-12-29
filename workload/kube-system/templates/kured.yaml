@@ -112,7 +112,7 @@ spec:
             - --force-reboot=false
             - --drain-grace-period=-1
 #            - --skip-wait-for-delete-timeout=0
-            - --drain-timeout=600
+            - --drain-timeout=600s
 #            - --period=1h
 #            - --ds-namespace=kube-system
 #            - --ds-name=kured
