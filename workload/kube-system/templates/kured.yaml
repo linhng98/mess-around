@@ -109,8 +109,8 @@ spec:
                   fieldPath: spec.nodeName
           command:
             - /usr/bin/kured
-            - --force-reboot=false
-            - --drain-grace-period=-1
+            - --force-reboot=true
+            - --drain-grace-period=60
 #            - --skip-wait-for-delete-timeout=0
             - --drain-timeout=600s
 #            - --period=1h
