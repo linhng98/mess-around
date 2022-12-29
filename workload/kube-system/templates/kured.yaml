@@ -113,7 +113,7 @@ spec:
             - --drain-grace-period=60
 #            - --skip-wait-for-delete-timeout=0
             - --drain-timeout=600s
-#            - --period=1h
+            - --period=15m
 #            - --ds-namespace=kube-system
 #            - --ds-name=kured
 #            - --lock-annotation=weave.works/kured-node-lock
