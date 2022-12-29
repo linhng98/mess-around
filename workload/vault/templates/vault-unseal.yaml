@@ -1,0 +1,69 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vault-unseal-a
+spec:
+  containers:
+  - name: vault-unseal
+    image: ghcr.io/lrstanley/vault-unseal:0.2.4
+    env:
+      - name: ENVIRONMENT
+        value: homelab
+      - name: CHECK_INTERVAL
+        value: 15s
+      - name: EMAIL_ENABLED
+        value: "false"
+      - name: NODES
+        value: http://vault-0.vault-internal.vault:8200,http://vault-1.vault-internal.vault:8200,http://vault-2.vault-internal.vault:8200
+      - name: TOKENS
+        valueFrom:
+          secretKeyRef:
+            name: vault-token
+            key: TOKEN_AB
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vault-unseal-b
+spec:
+  containers:
+  - name: vault-unseal
+    image: ghcr.io/lrstanley/vault-unseal:0.2.4
+    env:
+      - name: ENVIRONMENT
+        value: homelab
+      - name: CHECK_INTERVAL
+        value: 15s
+      - name: EMAIL_ENABLED
+        value: "false"
+      - name: NODES
+        value: vault-1.vault-internal.vault,vault-1.vault-internal.vault,vault-2.vault-internal.vault
+      - name: TOKENS
+        valueFrom:
+          secretKeyRef:
+            name: vault-token
+            key: TOKEN_BC
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vault-unseal-c
+spec:
+  containers:
+  - name: vault-unseal
+    image: ghcr.io/lrstanley/vault-unseal:0.2.4
+    env:
+      - name: ENVIRONMENT
+        value: homelab
+      - name: CHECK_INTERVAL
+        value: 15s
+      - name: EMAIL_ENABLED
+        value: "false"
+      - name: NODES
+        value: http://vault-0.vault-internal.vault:8200,http://vault-1.vault-internal.vault:8200,http://vault-2.vault-internal.vault:8200
+      - name: TOKENS
+        valueFrom:
+          secretKeyRef:
+            name: vault-token
+            key: TOKEN_AC
