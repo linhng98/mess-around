@@ -2,4 +2,7 @@
 host_key_checking: false
 ssh_public_key: "{{lookup('file', '~/.ssh/id_ed25519.pub') }}"
 ssh_private_key_file: ~/.ssh/id_ed25519
+hashed_passwd: $6$exDY1mhS4KUYCE/2$zmn9ToZwTKLhCw.b4/b.ZRTIZM30JZ4QrOQ2aOXJ8yk96xpcCof0kxKwuX1kqLG/ygbJ1f8wxED22bTL4F46P0
 apiserver_url: controlplane.homelab.linhng98.com
+rke2_version: v1.24.4+rke2r1
+rke2_cni: cilium
