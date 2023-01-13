@@ -56,10 +56,10 @@ spec:
             - NET_RAW
             - SYS_TIME
       hostNetwork: true
-      nodeSelector:
-        node-role.kubernetes.io/agent: "true"
-      tolerations:
-      - effect: NoSchedule
-        operator: Exists
-      - effect: NoExecute
-        operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist

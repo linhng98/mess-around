@@ -1,5 +1,5 @@
 ---
 rke2_type: server
 k8s_node_label:
-  - node-role.kubernetes.io/control-plane=true
+  # - node-role.kubernetes.io/control-plane=true (https://github.com/kubernetes/kubeadm/issues/2509)
   - rke2-upgrade=true
