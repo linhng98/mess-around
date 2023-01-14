@@ -20,8 +20,6 @@ spec:
         repoURL: *repo
         targetRevision: *rev
         path: '{{path}}'
-        plugin:
-          name: argocd-vault-plugin
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
