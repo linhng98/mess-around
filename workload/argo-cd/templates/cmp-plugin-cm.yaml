@@ -51,7 +51,7 @@ data:
               helm dependency update
             fi
       generate:
-        # **IMPORTANT**: passing `${ARGOCD_ENV_helm_args}` effectively allows users to run arbitrary code in the Argo CD 
+        # **IMPORTANT**: passing `${ARGOCD_ENV_helm_args}` effectively allows users to run arbitrary code in the Argo CD
         # repo-server (or, if using a sidecar, in the plugin sidecar). Only use this when the users are completely trusted. If
         # possible, determine which Helm arguments are needed by your users and explicitly pass only those arguments.
         command:
@@ -62,6 +62,7 @@ data:
             argocd-vault-plugin generate -
       lockRepo: false
   avp.yaml: |
+    ---
     apiVersion: argoproj.io/v1alpha1
     kind: ConfigManagementPlugin
     metadata:
