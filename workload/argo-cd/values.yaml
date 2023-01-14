@@ -152,6 +152,9 @@ argo-cd:
             subPath: argocd-vault-plugin
             mountPath: /usr/local/bin/argocd-vault-plugin
 
+    envFrom:
+      - secretRef:
+          name: argocd-vault-plugin-credential
     #volumeMounts:
     #  - name: custom-tools
     #    mountPath: /usr/local/bin/argocd-vault-plugin
