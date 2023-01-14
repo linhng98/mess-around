@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cmp-plugin
+data:
+  avp.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: argocd-vault-plugin
+    spec:
+      allowConcurrency: true
+      discover:
+        find:
+          command:
+            - sh
+            - "-c"
+            - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
+      init:
+        command:
+          - 'sh'
+          - '-c'
+          - |
+            if test -e Chart.yaml; then
+              helm dependency update
+            fi
+      generate:
+        command:
+          - 'sh'
+          - '-c'
+          - |
+            if test -e Chart.yaml; then
+              helm template --include-crds $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE . | argocd-vault-plugin generate -
+            elif test -e kustomization.yaml; then
+              kustomize build . | argocd-vault-plugin generate -
+            else
+              argocd-vault-plugin generate ./
+            fi
+      lockRepo: false
