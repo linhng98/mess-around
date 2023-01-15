@@ -3,7 +3,7 @@ kind: Secret
 metadata:
   name: vault-token
 type: Opaque
-data:
+stringData:
   TOKEN_A: <path:homelab/data/vault/token#A>
   TOKEN_B: <path:homelab/data/vault/token#B>
   TOKEN_C: <path:homelab/data/vault/token#C>
