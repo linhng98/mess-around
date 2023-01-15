@@ -159,7 +159,7 @@ prom:
                       - prometheus
               topologyKey: kubernetes.io/hostname
 
-  alertmanager_url:
+  alertmanager:
     enabled: false
 
 grafana:
