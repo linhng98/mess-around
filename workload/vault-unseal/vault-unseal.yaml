@@ -38,7 +38,7 @@ spec:
       - name: EMAIL_ENABLED
         value: "false"
       - name: NODES
-        value: vault-1.vault-internal.vault,vault-1.vault-internal.vault,vault-2.vault-internal.vault
+        value: http://vault-0.vault-internal.vault:8200,http://vault-1.vault-internal.vault:8200,http://vault-2.vault-internal.vault:8200
       - name: TOKENS
         valueFrom:
           secretKeyRef:
