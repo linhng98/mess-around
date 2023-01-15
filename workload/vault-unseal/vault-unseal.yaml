@@ -20,7 +20,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: vault-token
-            key: TOKEN_AB
+            key: TOKEN_A
 ---
 apiVersion: v1
 kind: Pod
@@ -43,7 +43,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: vault-token
-            key: TOKEN_BC
+            key: TOKEN_B
 ---
 apiVersion: v1
 kind: Pod
@@ -66,4 +66,4 @@ spec:
         valueFrom:
           secretKeyRef:
             name: vault-token
-            key: TOKEN_AC
+            key: TOKEN_C

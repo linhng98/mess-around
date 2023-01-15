@@ -244,14 +244,14 @@ grafana:
       viewers_can_edit: true
     auth:
       disable_login_form: false
-    auth.google:
-      enabled: true
-      client_id: <path:homelab/data/google_oauth2/grafana#client_id>
-      client_secret: <path:homelab/data/google_oauth2/grafana#client_secret>
-      scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
-      auth_url: https://accounts.google.com/o/oauth2/auth
-      token_url: https://accounts.google.com/o/oauth2/token
-      allow_sign_up: true
+    #auth.google:
+    #  enabled: true
+    #  client_id: <path:homelab/data/google_oauth2/grafana#client_id>
+    #  client_secret: <path:homelab/data/google_oauth2/grafana#client_secret>
+    #  scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+    #  auth_url: https://accounts.google.com/o/oauth2/auth
+    #  token_url: https://accounts.google.com/o/oauth2/token
+    #  allow_sign_up: true
     auth.anonymous:
       enabled: true
       org_role: Viewer
