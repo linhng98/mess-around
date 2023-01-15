@@ -26,7 +26,7 @@ rook-ceph-cluster:
 
   monitoring:
     enabled: true
-    createPrometheusRules: true
+    createPrometheusRules: false
 
   cephClusterSpec:
     dashboard:
