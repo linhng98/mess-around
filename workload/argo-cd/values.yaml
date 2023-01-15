@@ -1,9 +1,10 @@
 ---
 argo-cd:
   global:
-    image:
-      repository: quay.io/argoproj/argocd
-      tag: v2.5.1
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
+    statefulsetAnnotations:
+      reloader.stakater.com/auto: "true"
   controller:
     name: application-controller
     replicas: 1
