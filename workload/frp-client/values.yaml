@@ -12,13 +12,12 @@ deploychart:
 
   fullnameOverride: frpc-client
 
-  sealedSecrets:
-    enabled: true
-    encryptedData:
-      mapFile:
-        - mountPath: /etc/frp
-          name: frpc-client
-          files:
-            - name: frpc.ini
-              value: AgAqQRdOyq1w505J3kI0/zP+gw87i8DHSJpzjiLIiG0a/3dxVaBAf7gT0z6GZ7/SV3C/Zt5aSN1x0/iDSP1tc2WsG5S51eeNwhe2FCGynMazGNF/yP/2IQV0pNCAd7OP1x9xRVrjyQ1pxFrarpFVLohh/OYf3WJaW3TUQcTl9gminq9TTq6a82AE5gpa4vpUaH5Jsg0PaP4wWjIgOCUg1StObwYS501j9z+tKRYCUb2U8YFpw/wKPqgVWfeIH673RQk16eFJ4GF7G9WOGFTjMVp67EQumAIGjm3NT7+1JH+RrahT80S2h/jp6srq6+gE0ct779tqpKLpRU/AddSJTJhZkTNwq/TeLqLarJQcnrmiLZU5C2uuHDeKD1T5Cr53hq6XRNP4Vgwoe6Hf8v4qZCMdVmD3NyWqlcD/QYe9ZBZ1IwjwYdvf6UpNNXB3FCVM9GMhG0FmzTQlQu4ZSSqvUtvjsYpy7zBbJRZq+ntWyJK6/ek0c0z9w+E96KhgSOaYxQK98Jl+w8EfpP26xdanYu2daq1tq0iGvB4MKt8yKJbFzzC793jwZHWx0qapkw0inRiXrj/fg0m6b9hZ5foXSbc1khtL4O5pXZYvMCvvwTMiEQSqOmtkci/HHM6wXtdjsOz4jXSkK93LwFFpUp6ucoFnEWSOSAaHIgutme8YvX+AkqmHvrh+JE5X1UJmbmob1DyFAVbR4zALKyu7yzGwyZootAHYeTfF+8qktJxeV3FWROhHpCT+02AB9u7E9hiJvmV0zx7Rfj9XUE9wlUnPGZVv5j8T5AK8zoCPvXbFF1ow3sJCZjBGo5IwFDPg3spNGemoO6N8KuGw4cEM5oeWKlOlOk8fOeEsU1GMpyFQivx8VNqVejmqnAhk3ygASKCMQfg/ePwSpgIjQzkI97MES2OSh4EwXrYMIZO6sQCOTp8JZcyluyczSKVjNoV0Eko/cuVW1K2VnvCt6jYx8YrUZ1ouJO2xSUyGrmLgvF159Lx88GD4e+fJd3JbdZThloU7qHg42Z6i6r9aaBlc6sGKy2ADilzBAhwE1CtNM6kzTKahnVa0EA9BdulzMjcVYBGuuVr1B1Rvf/5JbK4a5LCoKqRrpEChCL0umK5qxO8OhM1qFnwkXlAA4obl5lHxh2KhdLLeOU98ezpnEGMHdajpGUQxMskjZzQiqe3QuvKCZCJ7Y1UDNHnNnRktQRG8Io0N9O5dXCLa4p5tAtl1AaNRhfA8b7B7+oxTFm8NKX2cEfvpFAENRvOLXXN0gcVpiCkYlDBN80f37RWFdd5T3yP8nKqX7uULsh/6yoPHKTMJ5O4Q4ZxexCPJpRHl4Z0o6L7qjalhi6YYfv+TiQZPkm/SSqWfPofhjVMRSCMACMzY9Gzvh9+TkaADEjMxmPLGz3Aa9kFdnux5LxFXDpLyt3FFR//nXyBY8yed10N4Pf5+Lnm7xH+SLhL3bTkLqRY2g4ykuYb23GdCNHnrBbmUkqm5ESgR9rydd+qNd8YQGWILekkIDGBkETltD9VAZMpYL1p849OIqWSUcDy1TMpwONK55TOtOMgCS8A5jYywsW0EHY3Wn/5SmMJ1LsYUyQ/F0f6Hsg+puVXRpm9ZeAlFNQLjCqPiNBMoNlQ0XYthkQE0xzAb8Drd0Bk03jjAxiyqYOzXnaC1xA92P9OmOQLkxwJL0j12N5P/eM3v95MvXDC/2Zvaw9MEzVuLanGk7E0Y8iXFcX0PY2VV0+QgeUgR/03g9Z1wFw85jXOuZu6utikfArAcYugbCy5WHq4eKhj3yqKHmEgywCmXQ6TsFd+FHzVX7ngz2MpYIMk1+d/VUsYivtMNa/Ov73FMTUYGqlpnJITCKIGe6/u0zXqR9BTL7oAahSBnTj1qaA00fck5C9v6D9kmEC+7
-              path: frpc.ini
+  extraVolumes:
+    - name: frpc-config
+      secret:
+        secretName: frpc-config
+
+  volumeMounts:
+    - name: frpc-config
+      mountPath: /etc/frp
+      readOnly: true
