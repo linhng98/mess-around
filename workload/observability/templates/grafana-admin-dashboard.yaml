@@ -4,5 +4,5 @@ metadata:
   name: grafana-admin-dashboard
 type: Opaque
 data:
-  admin-user: <path:homelab/data/secrets/grafana#admin-user>
-  admin-password: <path:homelab/data/secrets/grafana#admin-password>
+  admin-user: <path:homelab/data/secrets/grafana#admin-user | base64encode>
+  admin-password: <path:homelab/data/secrets/grafana#admin-password | base64encode>
