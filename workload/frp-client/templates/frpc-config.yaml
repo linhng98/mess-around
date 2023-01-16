@@ -4,4 +4,4 @@ metadata:
   name: frpc-config
 type: Opaque
 data:
-  frpc.init: <path:homelab/data/config/frpc#frpc.ini | base64encode>
+  frpc.ini: <path:homelab/data/config/frpc#frpc.ini | base64encode>
