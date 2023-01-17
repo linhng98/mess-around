@@ -4,7 +4,7 @@ deploychart:
   replicaCount: 2
   image:
     repository: harbor.homelab.linhng98.com/homelab/docs
-    tag: 180b788e
+    tag: be40e2a4
     containerPort: 80
 
   strategy:
