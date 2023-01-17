@@ -11,7 +11,7 @@ jobs:
     runs-on: homelab
     env:
       CONTAINER: document
-      IMAGE: harbor.homelab.linhng98.com/library/docs
+      IMAGE: harbor.homelab.linhng98.com/homelab/docs
       KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
     steps:
       - uses: actions/checkout@v3

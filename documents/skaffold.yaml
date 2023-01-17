@@ -6,7 +6,7 @@ build:
     gitCommit:
       variant: AbbrevCommitSha
   artifacts:
-    - image: harbor.homelab.linhng98.com/library/docs
+    - image: harbor.homelab.linhng98.com/homelab/docs
       kaniko:
         useNewRun: true
         snapshotMode: redo
