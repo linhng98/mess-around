@@ -1,8 +1,10 @@
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: v1
+kind: Secret
 metadata:
   name: aws-secret
-  namespace: github-action
-spec:
-  encryptedData:
-    credentials: AgA8QGzpg2W5YxHhDkpp38BSAgh3Whb5P4Ty+N+p0FPMtaFmsfuUu20le4406HHBDOirLpivKCjfDtPTefDnSzLOrLVQMARIpJy0lDFZ4TJLqTwR5/ZKe7Nc3+qLxwMwlc83XwXp3VN7Z00JYI1d6cUQAciGni33z9thZAzNR5nwGkSDctcnScqmR84ISu6oCRTLwct1z7fx0n4KVOeCTayJoJvq7SxNmL3ibvC9jYV+DC6irFBCtOwy41WNu32jvP1lYD/IEdMjzy968MZniU7XeapTdIcBu4jPSK045Uy/WUimW3VSCZVc/PaeXzkKewwO8fk4QnXxQ9oROTah6Twthj6MBK8jUehx9w/5trpCP9TkuE+ez1aS7Lef/yaETkLXA6q1JGWEVEIimls5aYHj9hYjSoVM8e8M7nnrtghqGWVs7FNiLBoQE1zzYOWQ3/t7UIx5cAWEN6bgXLP4CZDSLYIfOS6oSnQX0PAN4FQzdis9RFzaxZoM4SFLW8U3Oyq1oQe9XTBuKb/fkKgQVBS0OLK9Gf0JENhbrCpZbirrL4I1Qs0CHGGsahEkCb2qDQpyjwqRK9wLSNdVvcoPRiugvsgB4eqbnuw0mAzpdd5tGKDvUD28NrsUSqnbkLmmfCCgnI325nTi/43vA2LM6OJBHfAFxA2MKPftHr52BGTYoNpSnM4KdQDi3gc9Y8BWN44BmbE/XMhLtdtZRTxYSz9KNY90sy3FuAMXF+XXyjZmUZABhsNciXeHhSneSuiKLekEpZl33Iyw70AK5AlsRZK3jpSUEXaHnjgEY08RbQJ6RidZYi0lOZ7UHR8b5FEyGjKqcKVQKXHqlJEx6MF2FoX6xVpftnLxggBl4D2yzYPm6X0AVvyOGA==
+type: Opaque
+stringData:
+  credentials: |
+    [profile aws-kaniko-bucket]
+    aws_access_key_id=<path:homelab/data/aws-credentials/kaniko-context#aws_access_key_id>
+    aws_secret_access_key=<path:homelab/data/aws-credentials/kaniko-context#aws_secret_access_key>
