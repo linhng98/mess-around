@@ -19,6 +19,9 @@ spec:
           mountPath: /root/.aws/
         - name: homelab-registry-secret
           mountPath: /kaniko/.docker/
+      #env:
+      #  - name: AWS_REGION
+      #    value: ap-southeast-1
   restartPolicy: Never
   volumes:
     - name: aws-secret

@@ -6,5 +6,6 @@ type: Opaque
 stringData:
   credentials: |
     [default]
+    region=ap-southeast-1
     aws_access_key_id=<path:homelab/data/aws-credentials/kaniko-context#aws_access_key_id>
     aws_secret_access_key=<path:homelab/data/aws-credentials/kaniko-context#aws_secret_access_key>
