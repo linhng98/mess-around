@@ -4,8 +4,6 @@ metadata:
   name: aws-secret
 type: Opaque
 stringData:
-  config: |
-    [profile aws-kaniko-bucket]
-    region=ap-southeast-1
+  credentials: |
     aws_access_key_id=<path:homelab/data/aws-credentials/kaniko-context#aws_access_key_id>
     aws_secret_access_key=<path:homelab/data/aws-credentials/kaniko-context#aws_secret_access_key>
