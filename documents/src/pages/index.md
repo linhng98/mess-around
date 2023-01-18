@@ -35,10 +35,15 @@ title: Introduce
 | <img src="https://grafana.com/static/img/menu/grafana2.svg" width="30" height="30" /> | Grafana | Multi-platform open source analytics and interactive visualization web application |
 | <img src="https://grafana.com/static/img/menu/loki.svg" width="30" height="30" /> | Loki | Scalable, highly available, multi-tenant log aggregation system inspired by Prometheus |
 | <img src="https://grafana.com/static/img/logos/logo-mimir.svg" width="30" height="30" /> | Mimir | Horizontally scalable, highly available, multi-tenant, long-term storage for Prometheus |
+| <img src="https://grafana.com/static/assets/img/logos/grafana-tempo.svg" width="30" height="30" /> | Tempo | High-scale distributed tracing backend |
 | <img src="https://grafana.com/static/img/menu/prometheus.svg" width="30" height="30" /> | Prometheus | Prometheus is a free software application used for event monitoring and alerting |
+| <img src="https://cncf-branding.netlify.app/img/projects/opentelemetry/icon/color/opentelemetry-icon-color.png" width="30" height="30" /> | Opentelemetry | Observability framework made up of a collection of tools, APIs, and SDKs |
 | <img src="https://raw.githubusercontent.com/cncf/artwork/d2ed716cc0769e6c65d2e58f9a503fca02b60a56/projects/rook/icon/color/rook-icon-color.svg" width="30" height="30" /> | Rook | Production ready management for File, Block and Object Storage |
 | <img src="https://avatars.githubusercontent.com/u/32311288?s=280&v=4" width="30" height="30" /> | Atlantis | Atlantis is an application for automating Terraform via pull requests |
 | <img src="https://avatars.githubusercontent.com/u/44036562?s=280&v=4" width="30" height="30" /> | Github Action | GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform |
 | <img src="https://cncf-branding.netlify.app/img/projects/harbor/icon/color/harbor-icon-color.svg" width="30" height="30" /> | Harbor | Harbor is an open source registry that secures artifacts |
-| <img src="https://gitlab.com/uploads/-/system/project/avatar/22284858/kaniko.png" width="30" height="30" /> | Kaniko | kaniko is a build tool container images from a Dockerfile without the need of Docker daemon |
+| <img src="https://gitlab.com/uploads/-/system/project/avatar/22284858/kaniko.png" width="40" height="40" /> | Kaniko | kaniko is a build tool container images from a Dockerfile without the need of Docker daemon |
+| <img src="https://istio.io/latest/img/istio-bluelogo-whitebackground-framed.svg" width="50" height="50" /> | Istio | A service mesh for observability, security in depth, and management |
+| <img src="https://cncf-branding.netlify.app/img/projects/nats/icon/color/nats-icon-color.png" width="30" height="30" /> | NATS | NATS is an open-source messaging system |
+| <img src="https://www.elastic.co/favicon-32x32.png" width="30" height="30" /> | Elasticsearch | Elasticsearch is a distributed, free and open search and analytics engine |
 | <img src="https://d33wubrfki0l68.cloudfront.net/c088b7acfcf11100903c44fe44f2f2d7e0f30531/47727/img/docusaurus.svg" width="30" height="30" /> | Docusaurus | Building, deploying, and maintaining open source project websites easily |
