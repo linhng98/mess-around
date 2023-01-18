@@ -1,0 +1,37 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elastic-cluster
+spec:
+  version: 8.6.0
+  nodeSets:
+    - name: master
+      count: 3
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 5Gi
+      config:
+        node.roles: ["master", "data", "ingest", "ml", "transform"]
+        node.store.allow_mmap: true
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
+  http:
+    service:
+      spec:
+        type: ClusterIP
+  transport:
+    service:
+      spec:
+        type: ClusterIP
