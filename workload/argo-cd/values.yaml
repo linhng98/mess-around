@@ -5,6 +5,20 @@ argo-cd:
       reloader.stakater.com/auto: "true"
     statefulsetAnnotations:
       reloader.stakater.com/auto: "true"
+  configs:
+    cm:
+      create: true
+      admin.enabled: true
+      timeout.reconciliation: 180s
+      timeout.hard.reconciliation: 0s
+      application.instanceLabelKey: argocd.argoproj.io/instance
+      resource.exclusions: |
+        - apiGroups:
+            - cilium.io
+          kinds:
+            - CiliumIdentity
+          clusters:
+            - "*"
   controller:
     name: application-controller
     replicas: 1
