@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: renovate-env
+type: Opaque
+stringData:
+  RENOVATE_PLATFORM: github
+  LOG_LEVEL: debug
+  RENOVATE_TOKEN: <path:homelab/data/access-token/github/mess-around#token>
+  RENOVATE_REPOSITORIES: linhng98/mess-around
