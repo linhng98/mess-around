@@ -3,7 +3,7 @@ nats:
   nats:
     image:
       repository: nats
-      tag: 2.9.8-alpine
+      tag: 2.9.11-alpine
       pullPolicy: IfNotPresent
 
     jetstream:
