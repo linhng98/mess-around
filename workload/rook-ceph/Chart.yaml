@@ -7,5 +7,5 @@ dependencies:
     version: v1.10.1
     repository: https://charts.rook.io/release
   - name: rook-ceph-cluster
-    version: v1.10.1
+    version: v1.10.10
     repository: https://charts.rook.io/release
