@@ -68,7 +68,7 @@ argo-cd:
         name: cmp-plugin
     initContainers:
       - name: download-tools
-        image: alpine:3.8
+        image: alpine:3.17
         command: [sh, -c]
 
         env:
