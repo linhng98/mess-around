@@ -7,6 +7,9 @@ mimir-distributed:
 
   mimir:
     config: |
+      usage_stats:
+        installation_mode: helm
+
       activity_tracker:
         filepath: /data/metrics-activity.log
 
@@ -165,6 +168,8 @@ mimir-distributed:
         memory: 512Mi
 
   ingester:
+    zoneAwareReplication:
+      enabled: false
     replicas: 3
     statefulSet:
       enabled: true
@@ -237,6 +242,8 @@ mimir-distributed:
         memory: 128Mi
 
   store_gateway:
+    zoneAwareReplication:
+      enabled: false
     replicas: 2
     resources:
       requests:
