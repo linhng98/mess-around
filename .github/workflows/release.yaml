@@ -26,3 +26,4 @@ jobs:
             @semantic-release/git
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIT_AUTHOR_NAME: "@linhng98"
