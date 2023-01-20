@@ -7,7 +7,7 @@ on:
 jobs:
   semantic-release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: homelab
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -17,8 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-      - name: Install dependencies
-        run: npm ci
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
