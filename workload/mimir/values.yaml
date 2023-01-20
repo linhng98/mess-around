@@ -200,6 +200,8 @@ mimir-distributed:
     extraContainers:
       - name: config-reloader
         image: docker.io/kiwigrid/k8s-sidecar:1.22.0
+        securityContext:
+          runAsUser: 1000
         env:
           - name: LABEL
             value: mimir_rules
