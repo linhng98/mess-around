@@ -1,5 +1,6 @@
 ![build](https://img.shields.io/github/actions/workflow/status/linhng98/mess-around/build-docs.yaml?branch=master)
 ![license](https://img.shields.io/github/license/linhng98/mess-around)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 ![forks](https://img.shields.io/github/forks/linhng98/mess-around?style=social)
 ![stars](https://img.shields.io/github/stars/linhng98/mess-around?style=social)
 
