@@ -1,6 +1,6 @@
 ---
 name: build custom docker image
-run-name: ${{ github.actor }} release new ${{ github.github.event_path }} image tag
+run-name: ${{ github.actor }} release new custom docker image
 on:
   push:
     branches:
@@ -36,10 +36,11 @@ jobs:
           echo "CONTAINER=atlantis" >> $GITHUB_ENV
       - name: get image tag env
         run: |
-          echo "TAG=${TAG}" >> $GITHUB_ENV
           export IMG_PATH=docker-images/${{ env.CONTAINER }}
           echo "IMG_PATH=${IMG_PATH}" >> $GITHUB_ENV
           source ${IMG_PATH}/config.env
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+          echo "BUILD_ID=context-${{ env.CONTAINER }}-${TAG}" >> $GITHUB_ENV
       - name: install tools
         run: |
           sudo apt update -y
@@ -65,9 +66,9 @@ jobs:
           sed -i "s|<DOCKERFILE>|Dockerfile|g" ${KANIKO_TEMPLATE}
           sed -i "s|<CONTEXT>|${{ env.KANIKO_CONTEXT }}|g" ${KANIKO_TEMPLATE}
           sed -i "s|<IMAGE_TAG>|${{ env.REPOSITORY }}/${{ env.CONTAINER }}:${{ env.TAG }}|g" ${KANIKO_TEMPLATE}
-          sed -i "s|<BUILD_ID>|context-${{ env.CONTAINER }}-${{ env.TAG }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<BUILD_ID>|${{ env.BUILD_ID }}|g" ${KANIKO_TEMPLATE}
       - name: build and push kaniko image
         run: |
           kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
-          kubectl wait --timeout 60s --for=condition=Ready pod/kaniko-${{ env.GITHUB_SHA_SHORT }} -n github-action
-          kubectl logs --follow kaniko-${{ env.GITHUB_SHA_SHORT }} -n github-action
+          kubectl wait --timeout 60s --for=condition=Ready pod/kaniko-${{ env.BUILD_ID }} -n github-action
+          kubectl logs --follow kaniko-${{ env.BUILD_ID }} -n github-action
