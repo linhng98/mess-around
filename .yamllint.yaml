@@ -19,7 +19,7 @@ rules:
   empty-lines: enable
   empty-values: disable
   float-values: disable
-  hyphens: false
+  hyphens: enable
   indentation: disable
   key-duplicates: enable
   key-ordering: disable
