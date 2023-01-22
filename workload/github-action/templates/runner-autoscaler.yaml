@@ -13,14 +13,6 @@ spec:
       repository: linhng98/mess-around
       labels:
         - homelab
-      volumes:
-        # when not using instance role
-        - name: aws-secret
-          secret:
-            secretName: aws-secret
-      volumeMounts:
-        - mountPath: /tmp/.aws/
-          name: aws-secret
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
