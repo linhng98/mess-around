@@ -27,8 +27,10 @@ jobs:
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
-          cp -r /tmp/.aws ~/.aws
           aws --version
+      - name: mount aws s3 credentials for kaniko context access
+        run: |
+          cp -r /tmp/.aws ~/.aws
       - name: create compress tar
         run: |
           tar -C documents -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
