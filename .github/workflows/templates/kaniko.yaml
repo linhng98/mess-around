@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kaniko-<TAG>
+  name: kaniko-<BUILD_ID>
 spec:
   containers:
     - name: kaniko

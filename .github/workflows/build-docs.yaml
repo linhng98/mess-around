@@ -27,10 +27,8 @@ jobs:
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
-          aws --version
-      - name: mount aws s3 credentials for kaniko context access
-        run: |
           cp -r /tmp/.aws ~/.aws
+          aws --version
       - name: create compress tar
         run: |
           tar -C documents -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
@@ -49,7 +47,7 @@ jobs:
           sed -i "s|<DOCKERFILE>|Dockerfile|g" ${KANIKO_TEMPLATE}
           sed -i "s|<CONTEXT>|${{ env.KANIKO_CONTEXT }}|g" ${KANIKO_TEMPLATE}
           sed -i "s|<IMAGE_TAG>|${{ env.IMAGE_TAG }}|g" ${KANIKO_TEMPLATE}
-          sed -i "s|<TAG>|${{ env.GITHUB_SHA_SHORT }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<BUILD_ID>|${{ env.GITHUB_SHA_SHORT }}|g" ${KANIKO_TEMPLATE}
       - name: build and push kaniko image
         run: |
           kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
