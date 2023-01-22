@@ -1,4 +1,6 @@
-FROM debian:buster-slim
+FROM summerwind/actions-runner:ubuntu-22.04
+
+USER root
 
 RUN apt update -y
 
@@ -11,3 +13,5 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
     chmod +x kubectl && \
     mv kubectl /usr/bin/kubectl
+
+USER runner
