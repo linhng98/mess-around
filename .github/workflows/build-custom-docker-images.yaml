@@ -36,8 +36,9 @@ jobs:
       - name: get image tag env
         run: |
           echo "TAG=${TAG}" >> $GITHUB_ENV
-          echo "IMG_PATH=docker-images/${{ env.CONTAINER }}" >> $GITHUB_ENV
-          source ${{ env.IMG_PATH }}/config.env
+          export IMG_PATH=docker-images/${{ env.CONTAINER }}
+          echo "IMG_PATH=${IMG_PATH}" >> $GITHUB_ENV
+          source ${IMG_PATH}/config.env
       - name: install tools
         run: |
           sudo apt update -y
