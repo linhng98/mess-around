@@ -55,7 +55,7 @@ jobs:
       - name: upload context kaniko
         run: |
           export context_tgz=context-${{ env.CONTAINER }}-${{ env.TAG }}.tar.gz
-          tar -C docker-images/${{ env.CONTAINER }} ${context_tgz} .
+          tar -C docker-images/${{ env.CONTAINER }} -zcvf ${context_tgz} .
           aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
           echo "KANIKO_CONTEXT=s3://mess-around-kaniko/${CONTAINER}/${context_tgz}" >> $GITHUB_ENV
       - name: config kaniko
