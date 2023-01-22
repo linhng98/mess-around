@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} release new custom docker image
 on:
   push:
     branches:
-      - feat/custom-images
+      - master
     paths:
       - docker-images/**/Dockerfile
 
@@ -20,7 +20,7 @@ jobs:
       - uses: dorny/paths-filter@v2
         id: filter
         with:
-          base: feat/custom-images
+          base: master
           filters: |
             builder:
               - 'docker-images/builder/Dockerfile'

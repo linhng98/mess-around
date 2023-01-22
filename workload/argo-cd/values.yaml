@@ -2,9 +2,9 @@
 argo-cd:
   global:
     deploymentAnnotations:
-      reloader.stakater.com/auto: "true"
+      reloader.stakater.com/auto: 'true'
     statefulsetAnnotations:
-      reloader.stakater.com/auto: "true"
+      reloader.stakater.com/auto: 'true'
   configs:
     cm:
       create: true

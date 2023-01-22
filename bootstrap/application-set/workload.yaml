@@ -40,7 +40,7 @@ spec:
           - PrunePropagationPolicy=background
           - Validate=false
       ignoreDifferences: # related to argo issue https://github.com/argoproj/argo-cd/issues/11074
-      - group: monitoring.coreos.com
-        kind: ServiceMonitor
-        jqPathExpressions:
-        - .spec.endpoints[]?.relabelings[]?.action
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          jqPathExpressions:
+            - .spec.endpoints[]?.relabelings[]?.action
