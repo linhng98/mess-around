@@ -13,7 +13,7 @@ env:
   KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
 
 jobs:
-  build-push-document-container:
+  build-push-custom-docker-image:
     runs-on: homelab
     steps:
       - uses: actions/checkout@v3
