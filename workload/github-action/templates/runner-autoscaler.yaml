@@ -5,8 +5,10 @@ kind: RunnerDeployment
 metadata:
   name: homelab
 spec:
+  replicas: 3
   template:
     spec:
+      image: harbor.homelab.linhng98.com/homelab/builder:0.0.1
       dockerdWithinRunnerContainer: false
       repository: linhng98/mess-around
       labels:
