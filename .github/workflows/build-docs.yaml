@@ -5,11 +5,13 @@ on:
   push:
     paths:
       - documents/**
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   build-push-document-container:
     runs-on: homelab
-    container: harbor.homelab.linhng98.com/homelab/builder:0.0.1
     env:
       CONTAINER: document
       IMAGE: harbor.homelab.linhng98.com/homelab/docs
@@ -25,9 +27,6 @@ jobs:
         run: |
           tar -C documents -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
       - name: upload context kaniko
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           export context_tgz=context-${{ env.GITHUB_SHA_SHORT }}.tar.gz
           aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
