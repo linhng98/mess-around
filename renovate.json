@@ -1,8 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ],
   "enabledManagers": [
     "helm-requirements",
     "helm-values",
@@ -12,17 +9,20 @@
     "terragrunt",
     "terragrunt-version"
   ],
+  "extends": [
+    "config:base"
+  ],
   "packageRules": [
     {
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
       "matchPackagePatterns": [
         "*"
       ],
       "matchUpdateTypes": [
         "minor",
         "patch"
-      ],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
+      ]
     }
   ]
 }

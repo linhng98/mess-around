@@ -1,0 +1,74 @@
+---
+name: build custom docker image
+run-name: ${{ github.actor }} release new custom docker image
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - docker-images/**/Dockerfile
+
+env:
+  REPOSITORY: harbor.homelab.linhng98.com/homelab
+  KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
+
+jobs:
+  build-push-document-container:
+    runs-on: homelab
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          base: master
+          filters: |
+            builder:
+              - 'docker-images/builder/Dockerfile'
+            atlantis:
+              - 'docker-images/atlantis/Dockerfile'
+      - name: set target builder
+        if: steps.filter.outputs.builder == 'true'
+        run: |
+          echo "CONTAINER=builder" >> $GITHUB_ENV
+      - name: set target atlantis
+        if: steps.filter.outputs.atlantis == 'true'
+        run: |
+          echo "CONTAINER=atlantis" >> $GITHUB_ENV
+      - name: get image tag env
+        run: |
+          export IMG_PATH=docker-images/${{ env.CONTAINER }}
+          echo "IMG_PATH=${IMG_PATH}" >> $GITHUB_ENV
+          source ${IMG_PATH}/config.env
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+          echo "BUILD_ID=context-${{ env.CONTAINER }}-${TAG}" >> $GITHUB_ENV
+      - name: install tools
+        run: |
+          sudo apt update -y
+          sudo apt install -y unzip git
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+          aws --version
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/bin/kubectl
+      - name: mount aws s3 credentials for kaniko context access
+        run: |
+          cp -r /tmp/.aws ~/.aws
+      - name: upload context kaniko
+        run: |
+          export context_tgz=context-${{ env.CONTAINER }}-${{ env.TAG }}.tar.gz
+          tar -C ${{ env.IMG_PATH }} -zcvf ${context_tgz} .
+          aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
+          echo "KANIKO_CONTEXT=s3://mess-around-kaniko/${CONTAINER}/${context_tgz}" >> $GITHUB_ENV
+      - name: config kaniko
+        run: |
+          sed -i "s|<DOCKERFILE>|Dockerfile|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<CONTEXT>|${{ env.KANIKO_CONTEXT }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<IMAGE_TAG>|${{ env.REPOSITORY }}/${{ env.CONTAINER }}:${{ env.TAG }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<BUILD_ID>|${{ env.BUILD_ID }}|g" ${KANIKO_TEMPLATE}
+      - name: build and push kaniko image
+        run: |
+          kubectl apply -f ${KANIKO_TEMPLATE} -n github-action
+          kubectl wait --timeout 60s --for=condition=Ready pod/kaniko-${{ env.BUILD_ID }} -n github-action
+          kubectl logs --follow kaniko-${{ env.BUILD_ID }} -n github-action

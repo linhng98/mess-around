@@ -1,6 +1,6 @@
 ---
 name: release
-run-name: mess-around release new version
+run-name: release new version
 on:
   workflow_dispatch:
 
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "lts/*"
+          node-version: lts/*
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
         with:
