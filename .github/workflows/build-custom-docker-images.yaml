@@ -49,15 +49,13 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/bin/kubectl
-      - name: create compress tar
-        run: |
-          tar -C docker-images/${{ env.CONTAINER }} -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
       - name: mount aws s3 credentials for kaniko context access
         run: |
           cp -r /tmp/.aws ~/.aws
       - name: upload context kaniko
         run: |
           export context_tgz=context-${{ env.CONTAINER }}-${{ env.TAG }}.tar.gz
+          tar -C docker-images/${{ env.CONTAINER }} ${context_tgz}
           aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
           echo "KANIKO_CONTEXT=s3://mess-around-kaniko/${CONTAINER}/${context_tgz}" >> $GITHUB_ENV
       - name: config kaniko
