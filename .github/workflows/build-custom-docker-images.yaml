@@ -12,5 +12,8 @@ jobs:
   build-push-document-container:
     runs-on: homelab
     steps:
+      - uses: actions/checkout@v3
       - name: echo
         run: echo "building ..."
+      - name: list file
+        run: ls -la
