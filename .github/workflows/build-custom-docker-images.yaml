@@ -35,9 +35,9 @@ jobs:
           echo "CONTAINER=atlantis" >> $GITHUB_ENV
       - name: get image tag env
         run: |
-          source docker-images/${{ env.CONTAINER }}/config.env
           echo "TAG=${TAG}" >> $GITHUB_ENV
-
+          echo "IMG_PATH=docker-images/${{ env.CONTAINER }}" >> $GITHUB_ENV
+          source ${{ env.IMG_PATH }}/config.env
       - name: install tools
         run: |
           sudo apt update -y
@@ -55,14 +55,14 @@ jobs:
       - name: upload context kaniko
         run: |
           export context_tgz=context-${{ env.CONTAINER }}-${{ env.TAG }}.tar.gz
-          tar -C docker-images/${{ env.CONTAINER }} -zcvf ${context_tgz} .
+          tar -C ${{ env.IMG_PATH }} -zcvf ${context_tgz} .
           aws s3 cp ${context_tgz} s3://mess-around-kaniko/${CONTAINER}/${context_tgz}
           echo "KANIKO_CONTEXT=s3://mess-around-kaniko/${CONTAINER}/${context_tgz}" >> $GITHUB_ENV
       - name: config kaniko
         run: |
           sed -i "s|<DOCKERFILE>|Dockerfile|g" ${KANIKO_TEMPLATE}
           sed -i "s|<CONTEXT>|${{ env.KANIKO_CONTEXT }}|g" ${KANIKO_TEMPLATE}
-          sed -i "s|<IMAGE_TAG>|${{ env.CONTAINER }}/${{ env.IMAGE_TAG }}:${{ env.TAG }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<IMAGE_TAG>|${{ env.REPOSITORY }}/${{ env.CONTAINER }}:${{ env.TAG }}|g" ${KANIKO_TEMPLATE}
           sed -i "s|<BUILD_ID>|context-${{ env.CONTAINER }}-${{ env.TAG }}|g" ${KANIKO_TEMPLATE}
       - name: build and push kaniko image
         run: |
