@@ -20,18 +20,23 @@ jobs:
           export GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-8)
           echo "GITHUB_SHA_SHORT=${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
           echo "IMAGE_TAG=${IMAGE}:${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
-      - name: install aws cli
+      - name: install tools
         run: |
           sudo apt update -y
           sudo apt install -y unzip git
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
-          cp -r /tmp/.aws ~/.aws
           aws --version
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/bin/kubectl
       - name: create compress tar
         run: |
           tar -C documents -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
+      - name: mount aws s3 credentials for kaniko context access
+        run: |
+          cp -r /tmp/.aws ~/.aws
       - name: upload context kaniko
         run: |
           export context_tgz=context-${{ env.GITHUB_SHA_SHORT }}.tar.gz
@@ -39,9 +44,6 @@ jobs:
           echo "KANIKO_CONTEXT=s3://mess-around-kaniko/${CONTAINER}/${context_tgz}" >> $GITHUB_ENV
       - name: install kubectl cli
         run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          sudo mv kubectl /usr/bin/kubectl
       - name: config kaniko
         run: |
           sed -i "s|<DOCKERFILE>|Dockerfile|g" ${KANIKO_TEMPLATE}
