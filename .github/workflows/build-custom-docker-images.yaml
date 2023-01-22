@@ -1,6 +1,6 @@
 ---
 name: build custom docker image 
-run-name: ${{ github.actor }} release new ${{ github.action_path }} image tag
+run-name: ${{ github.actor }} release new ${{ github.github.event_path }} image tag
 on:
   push:
     branches:
