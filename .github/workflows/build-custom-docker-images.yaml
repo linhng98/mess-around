@@ -10,6 +10,7 @@ on:
 
 env:
   REPOSITORY: harbor.homelab.linhng98.com/homelab
+  KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
 
 jobs:
   build-push-document-container:
