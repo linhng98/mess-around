@@ -69,7 +69,7 @@ loki-stack:
 
     extraContainers:
       - name: config-reloader
-        image: docker.io/kiwigrid/k8s-sidecar:1.22.0
+        image: docker.io/kiwigrid/k8s-sidecar:1.22.1
         env:
           - name: LABEL
             value: loki_rules
