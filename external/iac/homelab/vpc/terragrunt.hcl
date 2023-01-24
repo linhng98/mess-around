@@ -7,6 +7,7 @@ include {
   expose = true
 }
 
+
 inputs = {
   name = "homelab-vpc"
   cidr = "10.0.0.0/16"
