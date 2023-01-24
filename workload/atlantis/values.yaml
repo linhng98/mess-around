@@ -6,21 +6,13 @@ atlantis:
     token: <path:homelab/data/access-token/github/mess-around#token>
     secret: <path:homelab/data/webhook/github-action/mess-around#secret>
 
-  aws:
-    credentials: |
-      [default]
-      aws_access_key_id=<path:homelab/data/aws-credentials/terragrunt#AWS_ACCESS_KEY_ID>
-      aws_secret_access_key=<path:homelab/data/aws-credentials/terragrunt#AWS_SECRET_ACCESS_KEY>
-
   image:
     repository: harbor.homelab.linhng98.com/homelab/atlantis
     tag: 0.1.0
     pullPolicy: IfNotPresent
 
-  statefulSet:
-    securityContext:
-      fsGroup: 1000
-      runAsUser: 1000
+  loadEnvFromSecrets:
+    - aws-credential
 
   repoConfig: |
     ---
