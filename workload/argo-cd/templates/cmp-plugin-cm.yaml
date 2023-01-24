@@ -58,8 +58,9 @@ data:
           - sh
           - "-c"
           - |
-            helm template --include-crds $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} --api-versions policy/v1/PodDisruptionBudget,networking.k8s.io/v1/Ingress . |
-            argocd-vault-plugin generate -
+            helm template --include-crds $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} . \
+            --api-versions policy/v1/PodDisruptionBudget \
+            --api-versions networking.k8s.io/v1/Ingress | argocd-vault-plugin generate -
       lockRepo: false
   avp.yaml: |
     ---
