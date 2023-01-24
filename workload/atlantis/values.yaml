@@ -1,0 +1,61 @@
+---
+atlantis:
+  orgAllowlist: github.com/linhng98/mess-around
+  github:
+    user: linhng98
+    token: <path:homelab/data/access-token/github/mess-around#token>
+    secret: <path:homelab/data/webhook/github-action/mess-around#secret>
+
+  aws:
+    credentials: |
+      [default]
+      aws_access_key_id=<path:homelab/data/aws-credentials/terragrunt#AWS_ACCESS_KEY_ID>
+      aws_secret_access_key=<path:homelab/data/aws-credentials/terragrunt#AWS_SECRET_ACCESS_KEY>
+
+  image:
+    repository: harbor.homelab.linhng98.com/homelab/atlantis
+    tag: 0.1.0
+    pullPolicy: IfNotPresent
+
+  # allowForkPRs enables atlantis to run on a fork Pull Requests
+  allowForkPRs: false
+
+  # allowDraftPRs enables atlantis to run on a draft Pull Requests
+  allowDraftPRs: false
+
+  # hidePrevPlanComments enables atlantis to hide previous plan comments
+  hidePrevPlanComments: false
+
+  ## defaultTFVersion set the default terraform version to be used in atlantis server
+  defaultTFVersion: 1.3.7
+
+  # disableApply disables running `atlantis apply` regardless of which flags are sent with it
+  disableApply: false
+
+  # disableApplyAll disables running `atlantis apply` without any flags
+  disableApplyAll: true
+
+  # disableRepoLocking stops atlantis locking projects and or workspaces when running terraform
+  disableRepoLocking: false
+
+  # Use Diff Markdown Format for color coding diffs
+  enableDiffMarkdownFormat: false
+
+  # Optionally specify an username and a password for basic authentication
+  basicAuth:
+    username: <path:homelab/data/secrets/atlantis#username>
+    password: <path:homelab/data/secrets/atlantis#password>
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    host: &host atlantis.homelab.linhng98.com
+    tls:
+      - secretName: atlantis-tls
+        hosts:
+          - *host
+
+  servicemonitor:
+    enabled: true
