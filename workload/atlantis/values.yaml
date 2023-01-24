@@ -17,6 +17,33 @@ atlantis:
     tag: 0.1.0
     pullPolicy: IfNotPresent
 
+  repoConfig: |
+    ---
+    repos:
+    - id: /.*/
+      branch: /.*/
+      apply_requirements: [approved, mergeable, undiverged]
+      plan_requirements: [mergeable, undiverged]
+      workflow: terragrunt
+      allow_custom_workflows: false
+      delete_source_branch_on_merge: true
+      repo_locking: true
+    workflows:
+      terragrunt:
+        plan:
+          steps:
+          - env:
+              name: TERRAGRUNT_TFPATH
+              command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+          - run: terragrunt plan -input=false -out=$PLANFILE
+          - run: terragrunt show -json $PLANFILE > $SHOWFILE
+        apply:
+          steps:
+          - env:
+              name: TERRAGRUNT_TFPATH
+              command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+          - run: terragrunt apply -input=false $PLANFILE
+
   # allowForkPRs enables atlantis to run on a fork Pull Requests
   allowForkPRs: false
 
