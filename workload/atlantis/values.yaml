@@ -17,6 +17,11 @@ atlantis:
     tag: 0.1.0
     pullPolicy: IfNotPresent
 
+  statefulSet:
+    securityContext:
+      fsGroup: 1000
+      runAsUser: 1000
+
   repoConfig: |
     ---
     repos:
