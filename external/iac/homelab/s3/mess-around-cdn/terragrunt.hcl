@@ -31,7 +31,7 @@ inputs = {
   EOF
 
   versioning = {
-    enabled = false
+    enabled = true
   }
   force_destroy = true
 }
