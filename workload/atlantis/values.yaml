@@ -2,7 +2,7 @@
 atlantis:
   orgAllowlist: github.com/linhng98/mess-around
   github:
-    user: linhng98
+    user: atlantisbot
     token: <path:homelab/data/access-token/github/mess-around#token>
     secret: <path:homelab/data/webhook/github-action/mess-around#secret>
 
