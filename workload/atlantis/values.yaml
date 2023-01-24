@@ -34,14 +34,14 @@ atlantis:
           - env:
               name: TERRAGRUNT_TFPATH
               command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
-          - run: terragrunt plan -input=false -out=$PLANFILE
-          - run: terragrunt show -json $PLANFILE > $SHOWFILE
+          - run: terragrunt0.40.0 plan -input=false -out=$PLANFILE
+          - run: terragrunt0.40.0 show -json $PLANFILE > $SHOWFILE
         apply:
           steps:
           - env:
               name: TERRAGRUNT_TFPATH
               command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
-          - run: terragrunt apply -input=false $PLANFILE
+          - run: terragrunt0.40.0 apply -input=false $PLANFILE
 
   # allowForkPRs enables atlantis to run on a fork Pull Requests
   allowForkPRs: false
