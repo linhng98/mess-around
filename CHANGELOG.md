@@ -1,3 +1,16 @@
+## [1.0.1](https://github.com/linhng98/mess-around/compare/v1.0.0...v1.0.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* **arc:** use customized image ([5426030](https://github.com/linhng98/mess-around/commit/542603049d44e553f3b3fd6397ff39e049f6e320))
+* **arc:** use customized image runner controller ([773b216](https://github.com/linhng98/mess-around/commit/773b21649f960da84b478b1efc1658e2a2b9fcf0))
+* **argocd:** add ingress v1 ([9f0fa4b](https://github.com/linhng98/mess-around/commit/9f0fa4bb808239dd8f7752325f4f79d0545a79d3))
+* **argocd:** support apiversion has ingress ([4077977](https://github.com/linhng98/mess-around/commit/4077977cdcc00126ebade7d1bc79913d21ddce68))
+* **ci:** change base homelab image ([24e6471](https://github.com/linhng98/mess-around/commit/24e647143b8b72edeefc77a8dd939cf7e5010746))
+* **mimir:** run as non-root user ([b125189](https://github.com/linhng98/mess-around/commit/b12518937e7b71381803ffd263c30b385cc7779d))
+* **mimir:** run as non-root user ([dd8df17](https://github.com/linhng98/mess-around/commit/dd8df17f250dddf0b09398d1ab7cba723ca2ab58))
+
 # 1.0.0 (2023-01-20)
 
 
