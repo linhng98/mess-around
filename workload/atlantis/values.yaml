@@ -22,6 +22,7 @@ atlantis:
     repos:
     - id: /.*/
       branch: /.*/
+      apply_requirements: [approved, mergeable, undiverged]
       workflow: terragrunt
       allow_custom_workflows: false
       delete_source_branch_on_merge: true
