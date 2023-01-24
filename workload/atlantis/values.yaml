@@ -52,6 +52,7 @@ atlantis:
     ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
+    path: /
     host: &host atlantis.homelab.linhng98.com
     tls:
       - secretName: atlantis-tls
