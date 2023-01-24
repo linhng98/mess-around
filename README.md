@@ -52,11 +52,12 @@
 ## Improvements
 
 - [x] Kernel tuning (max_user_watches, max_user_instances, ...)
-- [ ] Container runtime security (falco, trivy, ...)
 - [x] Centralize tracing (grafana tempo)
 - [x] Asynchronous distributed tracing (nats jetstream, otel manual instrument)
-- [ ] Automatic release (semantic release)
-- [ ] Automatic dependency update (renovate)
+- [x] Automatic release (semantic release)
+- [x] Automatic dependency update (renovate)
+- [x] IAC automation via pull request (atlantis)
+- [ ] Container runtime security (falco, trivy, ...)
 - [ ] Push-based image tag update (release-bot)
 - [ ] Admission webhook and policy as code (kyverno, OPA)
 - [ ] Chaos testing (chao mesh, litmus)
