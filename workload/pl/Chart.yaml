@@ -1,8 +1,0 @@
----
-apiVersion: v2
-name: pixie
-version: 0.0.0
-dependencies:
-  - name: pixie-operator-chart
-    version: 0.0.36
-    repository: https://pixie-operator-charts.storage.googleapis.com
