@@ -1,0 +1,7 @@
+---
+falco:
+  driver:
+    enabled: true
+    kind: ebpf
+    ebpf:
+      hostNetwork: true
