@@ -8,3 +8,4 @@ pixie-operator-chart:
   clusterName: mess-around
   deployKey: <path:homelab/data/access-token/pixie/mess-around#deploykey>
   useEtcdOperator: true
+  devCloudNamespace: plc-dev
