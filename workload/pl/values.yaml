@@ -7,3 +7,4 @@ pixie-operator-chart:
   name: pixie
   clusterName: mess-around
   deployKey: <path:homelab/data/access-token/pixie/mess-around#deploykey>
+  useEtcdOperator: true
