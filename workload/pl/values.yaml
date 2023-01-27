@@ -8,3 +8,11 @@ pixie-operator-chart:
   clusterName: mess-around
   deployKey: <path:homelab/data/access-token/pixie/mess-around#deploykey>
   useEtcdOperator: true
+  pod:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 5Gi
+      requests:
+        cpu: 50m
+        memory: 2Gi
