@@ -51,6 +51,6 @@ stringData:
 
     [netflow-collector]
     type = udp
-    local_ip = 192.168.2.110
+    local_ip = 192.168.2.240
     local_port = 9995
     remote_port = 9995

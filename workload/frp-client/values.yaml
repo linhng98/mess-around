@@ -1,6 +1,8 @@
 ---
 deploychart:
   replicaCount: 1
+  additionAnnotations:
+    reloader.stakater.com/auto: 'true'
   image:
     repository: snowdreamtech/frpc:0.44.0
   pullPolicy: IfNotPresent
