@@ -48,3 +48,9 @@ stringData:
     custom_domains = *.istio.linhng98.com
     local_port = 443
     remote_port = 443
+
+    [netflow-collector]
+    type = udp
+    local_ip = 192.168.2.110
+    local_port = 9995
+    remote_port = 9995
