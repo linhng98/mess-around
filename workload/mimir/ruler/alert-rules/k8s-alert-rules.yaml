@@ -93,7 +93,7 @@ groups:
           summary: Kubernetes PersistentVolume error (instance {{ $labels.instance }})
 
       - alert: KubernetesStatefulsetDown
-        expr: (kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas_current) != 1
+        expr: (kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas_current) < 1
         for: 1m
         labels:
           severity: critical
