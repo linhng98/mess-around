@@ -5,6 +5,7 @@ on:
   pull_request:
   push:
 
+
 jobs:
   pre-commit:
     runs-on: homelab
