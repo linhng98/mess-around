@@ -1,0 +1,39 @@
+---
+  - name: Get maxmind license key
+    ansible.builtin.set_fact:
+      maxmind_license_key: "{{ lookup('env', 'MAXMIND_LICENSE_KEY') }}"
+    delegate_to: localhost
+
+  - name: Creates maxmind tar.gz dir
+    file:
+      path: /opt/maxmind
+      state: directory
+
+  - name: Creates maxmind data dir
+    file:
+      path: /etc/elastiflow/maxmind
+      state: directory
+
+  - name: Download ASN maxmind db
+    ansible.builtin.get_url:
+      url: https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key={{ maxmind_license_key }}&suffix=tar.gz
+      dest: /opt/maxmind/GeoLite2-ASN_20230127.tar.gz
+      mode: '0644'
+
+  - name: Download City maxmind db
+    ansible.builtin.get_url:
+      url: https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key={{ maxmind_license_key }}&suffix=tar.gz
+      dest: /opt/maxmind/GeoLite2-City_20230127.tar.gz
+      mode: '0644'
+
+  - name: Extract ASN
+    ansible.builtin.unarchive:
+      src: /opt/maxmind/GeoLite2-ASN_20230127.tar.gz
+      dest: /etc/elastiflow/maxmind
+      remote_src: yes
+
+  - name: Extract City
+    ansible.builtin.unarchive:
+      src: /opt/maxmind/GeoLite2-City_20230127.tar.gz
+      dest: /etc/elastiflow/maxmind
+      remote_src: yes
