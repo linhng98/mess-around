@@ -4,7 +4,7 @@ USER root
 
 RUN apt update -y
 
-RUN apt install -y git unzip curl
+RUN apt install -y git unzip curl gcc make
 
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
