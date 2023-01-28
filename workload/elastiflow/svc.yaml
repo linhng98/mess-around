@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elastiflow-collector
+spec:
+  loadBalancerIP: 192.168.2.240
+  ports:
+    - name: netflow
+      port: 9995
+      protocol: UDP
+      targetPort: netflow
+  selector:
+    name: elastiflow-collector
+  type: LoadBalancer

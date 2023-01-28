@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: elastiflow-collector
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  selector:
+    matchLabels:
+      name: elastiflow-collector
+  template:
+    metadata:
+      labels:
+        name: elastiflow-collector
+    spec:
+      containers:
+        - name: elastiflow-collector
+          image: elastiflow/flow-collector:6.1.3
+          ports:
+            - containerPort: 9995
+              name: netflow
+              protocol: UDP
+          envFrom:
+            - secretRef:
+                name: elastiflow-config
+          volumeMounts:
+            - mountPath: /etc/elastiflow/maxmind
+              name: maxmind-db
+              readOnly: true
+            - name: metadata
+              mountPath: /etc/elastiflow/metadata
+      volumes:
+        - name: maxmind-db
+          hostPath:
+            path: /etc/elastiflow/maxmind
+            type: Directory
+        - name: metadata
+          configMap:
+            name: elastiflow-metadata
