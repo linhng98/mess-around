@@ -3,3 +3,6 @@
 
 # 0.1.1
 - Install gcc, make
+
+# 0.1.2
+- Install pre-commit, vim, golang, rust, terraform, terragrunt
