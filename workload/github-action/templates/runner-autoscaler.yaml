@@ -8,7 +8,7 @@ spec:
   replicas: 3
   template:
     spec:
-      image: harbor.homelab.linhng98.com/homelab/builder:0.1.0
+      image: harbor.homelab.linhng98.com/homelab/builder:0.1.1
       dockerdWithinRunnerContainer: false
       repository: linhng98/mess-around
       labels:
