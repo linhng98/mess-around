@@ -1,3 +1,25 @@
+# [1.1.0](https://github.com/linhng98/mess-around/compare/v1.0.1...v1.1.0) (2023-01-28)
+
+
+### Bug Fixes
+
+* **pixie:** change pixie namespace to pl ([532040d](https://github.com/linhng98/mess-around/commit/532040d2e5627526891ab5821d8f686f13c7aa92))
+* **pixie:** use etcd for temporary storage ([c16177e](https://github.com/linhng98/mess-around/commit/c16177ec2aad675c40ecfd0daf57fb96fc87afb6))
+* **semantic-release:** disable success release comment on PR ([7f9fa1f](https://github.com/linhng98/mess-around/commit/7f9fa1ff4c9423985cf3b51bbf53edba92f5b4e0))
+
+
+### Features
+
+* **falco:** install falco ([be10952](https://github.com/linhng98/mess-around/commit/be10952429651c78d70ee01ce76370d5d4439611))
+* install elastiflow-collector ([ae19cbf](https://github.com/linhng98/mess-around/commit/ae19cbf3506fb51e521e97e1913c18dc6a60e751))
+* install pixie ([#44](https://github.com/linhng98/mess-around/issues/44)) ([35f0dc1](https://github.com/linhng98/mess-around/commit/35f0dc1c0e9d98fb4712f1f948132e3c02e616c8))
+* **pre-commit:** pre-commit check style and scan secret ([#50](https://github.com/linhng98/mess-around/issues/50)) ([673d5ff](https://github.com/linhng98/mess-around/commit/673d5ffe92c136dd5d5e92cdfeb17b13df4fb4d2))
+
+
+### Reverts
+
+* Revert "remove: pixie" ([2603a01](https://github.com/linhng98/mess-around/commit/2603a01f986f6925fbee50911dd4b2808ed36ef6))
+
 ## [1.0.1](https://github.com/linhng98/mess-around/compare/v1.0.0...v1.0.1) (2023-01-24)
 
 
