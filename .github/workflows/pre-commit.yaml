@@ -3,13 +3,13 @@ name: pre-commit hook check
 run-name: pre-commit hook check
 on:
   pull_request:
-  push:
 
 jobs:
   pre-commit:
     runs-on: homelab
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - name: run pre-commit check
+        run: |
           export PATH=$PATH:$HOME/.cargo/bin
           pre-commit run --show-diff-on-failure --color=always --all-files
