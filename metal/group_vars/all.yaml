@@ -2,7 +2,7 @@
 host_key_checking: false
 ssh_public_key: "{{lookup('file', '~/.ssh/id_ed25519.pub') }}"
 ssh_private_key_file: ~/.ssh/id_ed25519
-hashed_passwd: $6$idontknow$Z0Zqd3/NSIhANap4iJgRgxDRZM64wofbVjGDqvqjGMNjSX4/5HPF/3aTVwN2GQa5dtzYtucsxnUCZ3tOLF/bG/ # generated using command "openssl passwd -6 -salt salt yourpassword"
+hashed_passwd: $6$eToIaezheoLia76r$HlnitapvMmqn.ia6XBSarKaPr3T4vclWXQW.6JCiKTATKsxZdlua59IecH9/4fvnOVrwSuPEXhiRLnyAIRasR. # generated using command "openssl passwd -6 -salt salt yourpassword"
 apiserver_url: controlplane.homelab.linhng98.com
 rke2_version: v1.24.10+rke2r1
 rke2_cni: cilium
