@@ -1,0 +1,6 @@
+---
+rook-ceph:
+  crds:
+    enabled: false
+  monitoring:
+    enabled: true
