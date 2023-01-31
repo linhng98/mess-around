@@ -13,10 +13,9 @@ env:
 jobs:
   build-push-document-container:
     runs-on: homelab
-    container: harbor.homelab.linhng98.com/homelab/builder:0.0.1
     env:
       CONTAINER: document
-      IMAGE: harbor.homelab.linhng98.com/homelab/docs
+      IMAGE: linhng98/mess-around-docs
       KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
     steps:
       - uses: actions/checkout@v3

@@ -7,7 +7,7 @@ atlantis:
     secret: <path:homelab/data/webhook/github-action/mess-around#secret>
 
   image:
-    repository: harbor.homelab.linhng98.com/homelab/atlantis
+    repository: linhng98/atlantis
     tag: 0.1.0
     pullPolicy: IfNotPresent
 
