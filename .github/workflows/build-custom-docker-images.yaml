@@ -42,7 +42,7 @@ jobs:
           echo "IMG_PATH=${IMG_PATH}" >> $GITHUB_ENV
           source ${IMG_PATH}/config.env
           echo "TAG=${TAG}" >> $GITHUB_ENV
-          echo "BUILD_ID=context-${{ env.CONTAINER }}-${TAG}" >> $GITHUB_ENV
+          echo "BUILD_ID=context-${{ env.CONTAINER }}-${TAG}-${{ env.GITHUB_RUN_ATTEMPT }}" >> $GITHUB_ENV
       - name: upload context kaniko
         run: |
           export context_tgz=context-${{ env.CONTAINER }}-${{ env.TAG }}.tar.gz
