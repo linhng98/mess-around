@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: elastiflow-collector
 spec:
-  loadBalancerIP: 192.168.2.240
+  loadBalancerIP: 192.168.1.202
   ports:
     - name: netflow
       port: 9995

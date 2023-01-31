@@ -14404,8 +14404,8 @@
       {
         "current": {
           "selected": true,
-          "text": "192.168.2.111:9100",
-          "value": "192.168.2.111:9100"
+          "text": "192.168.1.111:9100",
+          "value": "192.168.1.111:9100"
         },
         "datasource": {
           "type": "prometheus",

@@ -17,40 +17,40 @@ stringData:
 
     [api-server]
     type = tcp
-    local_ip = 192.168.2.100
+    local_ip = 192.168.1.100
     local_port = 6443
     remote_port = 6443
 
     [http-nginx]
     type = http
-    local_ip = 192.168.2.235
+    local_ip = 192.168.1.200
     custom_domains = *.homelab.linhng98.com
     local_port = 80
     remote_port = 80
 
     [https-nginx]
     type = https
-    local_ip = 192.168.2.235
+    local_ip = 192.168.1.200
     custom_domains = *.homelab.linhng98.com
     local_port = 443
     remote_port = 443
 
     [http-istio]
     type = http
-    local_ip = 192.168.2.230
+    local_ip = 192.168.1.201
     custom_domains = *.istio.linhng98.com
     local_port = 80
     remote_port = 80
 
     [https-istio]
     type = https
-    local_ip = 192.168.2.230
+    local_ip = 192.168.1.201
     custom_domains = *.istio.linhng98.com
     local_port = 443
     remote_port = 443
 
     [netflow-collector]
     type = udp
-    local_ip = 192.168.2.240
+    local_ip = 192.168.1.202
     local_port = 9995
     remote_port = 9995

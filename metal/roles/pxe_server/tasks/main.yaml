@@ -65,7 +65,8 @@
     loop: "{{ groups['metal'] }}"
 
   - name: Check server ready
-    command: ssh -o StrictHostKeyChecking=no ubuntu@{{ hostvars[item]['ansible_host'] }} -i {{ ssh_private_key_file }} 'echo ready'
+    command: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no ubuntu@{{ hostvars[item]['ansible_host'] }} -i {{ ssh_private_key_file }} 'echo
+      ready'
     register: echo_output
     until: '"ready"  in echo_output.stdout'
     retries: 20

@@ -1,7 +1,7 @@
 ---
 rook-ceph:
   crds:
-    enabled: true
+    enabled: false
   monitoring:
     enabled: true
 
