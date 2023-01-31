@@ -43,7 +43,7 @@ title: Introduce
 | <img src="https://avatars.githubusercontent.com/u/44036562?s=280&v=4" width="30" height="30" /> | Github Action | GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform |
 | <img src="https://cncf-branding.netlify.app/img/projects/harbor/icon/color/harbor-icon-color.svg" width="30" height="30" /> | Harbor | Harbor is an open source registry that secures artifacts |
 | <img src="https://gitlab.com/uploads/-/system/project/avatar/22284858/kaniko.png" width="40" height="40" /> | Kaniko | kaniko is a build tool container images from a Dockerfile without the need of Docker daemon |
-| <img src="https://istio.io/latest/img/istio-bluelogo-whitebackground-framed.svg" width="50" height="50" /> | Istio | A service mesh for observability, security in depth, and management |
+| <img src="https://github.com/cncf/artwork/raw/master/projects/istio/icon/white/istio-icon-white.png" width="30" height="30" /> | Istio | A service mesh for observability, security in depth, and management |
 | <img src="https://cncf-branding.netlify.app/img/projects/nats/icon/color/nats-icon-color.png" width="30" height="30" /> | NATS | NATS is an open-source messaging system |
 | <img src="https://www.elastic.co/favicon-32x32.png" width="30" height="30" /> | Elasticsearch | Elasticsearch is a distributed, free and open search and analytics engine |
 | <img src="https://d33wubrfki0l68.cloudfront.net/c088b7acfcf11100903c44fe44f2f2d7e0f30531/47727/img/docusaurus.svg" width="30" height="30" /> | Docusaurus | Building, deploying, and maintaining open source project websites easily |
