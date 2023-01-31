@@ -10,6 +10,7 @@ on:
 
 env:
   REPOSITORY: linhng98
+  KANIKO_CACHE_REPO: harbor.homelab.linhng98.com/kaniko-cache
   KANIKO_TEMPLATE: .github/workflows/templates/kaniko.yaml
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -55,6 +56,7 @@ jobs:
           sed -i "s|<CONTEXT>|${{ env.KANIKO_CONTEXT }}|g" ${KANIKO_TEMPLATE}
           sed -i "s|<IMAGE_TAG>|${{ env.REPOSITORY }}/${{ env.CONTAINER }}:${{ env.TAG }}|g" ${KANIKO_TEMPLATE}
           sed -i "s|<BUILD_ID>|${{ env.BUILD_ID }}|g" ${KANIKO_TEMPLATE}
+          sed -i "s|<CACHE_REPO>|${KANIKO_CACHE_REPO}/${{ env.CONTAINER }}|g" ${KANIKO_TEMPLATE}
       - name: build and push kaniko image
         run: |
           kubectl apply -f ${KANIKO_TEMPLATE} -n github-action

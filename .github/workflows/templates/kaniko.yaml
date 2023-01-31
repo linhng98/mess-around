@@ -14,14 +14,12 @@ spec:
         - "--use-new-run"
         - "--snapshot-mode=redo"
         - "--cache=true"
-        - "--cache-dir=/cache"
+        - "--cache-repo=<CACHE_REPO>"
       volumeMounts:
         - name: aws-secret
           mountPath: /root/.aws/
         - name: homelab-registry-secret
           mountPath: /kaniko/.docker/
-        - name: kaniko-cache
-          mountPath: /cache
       #env:
       #  - name: AWS_REGION
       #    value: ap-southeast-1
@@ -33,7 +31,3 @@ spec:
     - name: homelab-registry-secret
       secret:
         secretName: homelab-registry-secret
-    - name: kaniko-cache
-      persistentVolumeClaim:
-        claimName: kaniko-cache
-        readOnly: false
