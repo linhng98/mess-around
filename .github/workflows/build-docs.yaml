@@ -27,9 +27,6 @@ jobs:
       - name: create compress tar
         run: |
           tar -C documents -zcvf context-${{ env.GITHUB_SHA_SHORT }}.tar.gz .
-      - name: mount aws s3 credentials for kaniko context access
-        run: |
-          cp -r /tmp/.aws ~/.aws
       - name: upload context kaniko
         run: |
           export context_tgz=context-${{ env.GITHUB_SHA_SHORT }}.tar.gz
