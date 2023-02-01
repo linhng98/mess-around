@@ -17,23 +17,28 @@
   - name: Download ASN maxmind db
     ansible.builtin.get_url:
       url: https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key={{ maxmind_license_key }}&suffix=tar.gz
-      dest: /opt/maxmind/GeoLite2-ASN_20230127.tar.gz
+      dest: /opt/maxmind/GeoLite2-ASN.tar.gz
       mode: '0644'
 
   - name: Download City maxmind db
     ansible.builtin.get_url:
       url: https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key={{ maxmind_license_key }}&suffix=tar.gz
-      dest: /opt/maxmind/GeoLite2-City_20230127.tar.gz
+      dest: /opt/maxmind/GeoLite2-City.tar.gz
       mode: '0644'
 
   - name: Extract ASN
     ansible.builtin.unarchive:
-      src: /opt/maxmind/GeoLite2-ASN_20230127.tar.gz
+      src: /opt/maxmind/GeoLite2-ASN.tar.gz
       dest: /etc/elastiflow/maxmind
       remote_src: yes
 
   - name: Extract City
     ansible.builtin.unarchive:
-      src: /opt/maxmind/GeoLite2-City_20230127.tar.gz
+      src: /opt/maxmind/GeoLite2-City.tar.gz
       dest: /etc/elastiflow/maxmind
       remote_src: yes
+
+  - name: Rename dir
+    ansible.builtin.shell: |
+      mv /etc/elastiflow/maxmind/GeoLite2-ASN_* /etc/elastiflow/maxmind/GeoLite2-ASN
+      mv /etc/elastiflow/maxmind/GeoLite2-City_* /etc/elastiflow/maxmind/GeoLite2-City
