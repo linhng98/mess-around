@@ -9,8 +9,7 @@
       dest: *cron
       content: |
         #!/bin/bash
-        apt-get update -y > /var/log/daily-update.log
-        apt-get upgrade -y > /var/log/daily-upgrade.log
+        apt-get install unattended-upgrades -y
         apt-get autoclean
         if test -f "/var/run/reboot-required"; then
           reboot
