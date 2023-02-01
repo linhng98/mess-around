@@ -265,6 +265,7 @@ mimir-distributed:
 
   chunks-cache:
     enabled: true
+    allocatedMemory: 2048
     replicas: 1
 
   index-cache:

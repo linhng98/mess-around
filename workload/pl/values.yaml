@@ -15,4 +15,4 @@ pixie-operator-chart:
         memory: 5Gi
       requests:
         cpu: 50m
-        memory: 2Gi
+        memory: 1Gi
