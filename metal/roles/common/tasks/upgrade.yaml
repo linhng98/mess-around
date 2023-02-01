@@ -11,6 +11,6 @@
         #!/bin/bash
         apt-get install unattended-upgrades -y
         apt-get autoclean
-        if test -f "/var/run/reboot-required"; then
-          reboot
-        fi
+        #if test -f "/var/run/reboot-required"; then
+        #  reboot
+        #fi
