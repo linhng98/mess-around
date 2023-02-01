@@ -17,6 +17,14 @@ bootstrap:
 	helm dependency update ${ROOK_CLUSTER_CHART}
 	helm upgrade --install rook-ceph-operator --namespace rook-ceph-operator --create-namespace --kubeconfig ${KUBECONFIG} -f "${ROOK_OPERATOR_CHART}/values.yaml" ${ROOK_OPERATOR_CHART}
 	helm upgrade --install rook-ceph --namespace rook-ceph --create-namespace --kubeconfig ${KUBECONFIG} -f "${ROOK_CLUSTER_CHART}/values.yaml" ${ROOK_CLUSTER_CHART}
+
+	osd=0
+	while [[ ${osd} == 0 ]]; do
+		osd=$(kubectl --kubeconfig ${KUBECONFIG} get pod -n rook-ceph | grep -E "rook-ceph-osd-[0-9]-*" | grep Running | wc -l)
+		echo "Waiting for rook ceph cluster ready ..."
+		sleep 5
+	done
+
 	helm upgrade --install vault --namespace vault --create-namespace --kubeconfig ${KUBECONFIG} -f "${VAULT_CHART}/values.yaml" ${VAULT_CHART}
 	helm upgrade --install argo-cd --namespace argo-cd --create-namespace --kubeconfig ${KUBECONFIG} -f "${ARGO_CHART}/values.yaml" ${ARGO_CHART}
 	kubectl --kubeconfig ${KUBECONFIG} apply -f application-set/
