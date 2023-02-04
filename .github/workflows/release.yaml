@@ -8,7 +8,6 @@ jobs:
   semantic-release:
     name: Release
     runs-on: homelab
-    environment: semantic-release
     steps:
       - name: Checkout
         uses: actions/checkout@v3
