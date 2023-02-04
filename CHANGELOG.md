@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/linhng98/mess-around/compare/v1.1.0...v1.2.0) (2023-02-04)
+
+
+### Bug Fixes
+
+* **elastiflow:** db dir not exist due to dir name change ([f3c67f2](https://github.com/linhng98/mess-around/commit/f3c67f20b65ffea124d2aa452b5f7b7b012fe558))
+* **kaniko:** change repo to dockerhub and use efs cache ([5616b80](https://github.com/linhng98/mess-around/commit/5616b8093aafeb7c9e8df7e69acc6542b1c5b15f))
+* **rook:** create bucket in another namespace ([f1b32e2](https://github.com/linhng98/mess-around/commit/f1b32e2d37549e515ba986564c3ea784d848b9f9))
+
+
+### Features
+
+* **ansible:** upgrade daily and automatic reboot ([85c2e01](https://github.com/linhng98/mess-around/commit/85c2e01c87e0284fbdc5435a56674e741cb51e9d))
+* **arc:** use harbor as cache image ([408849a](https://github.com/linhng98/mess-around/commit/408849a47038732f8592b5a32a2ed9540e391fa4))
+* **rook:** enable cephfs shared volume ([3a2d2bb](https://github.com/linhng98/mess-around/commit/3a2d2bb8f59866801c476d38253f0175a0260918))
+* **tempo:** example manual inject and extract context and emit event to tempo ([4b39919](https://github.com/linhng98/mess-around/commit/4b39919b492bd392a775dbc0a6f5f44cd9bdbe6b))
+
 # [1.1.0](https://github.com/linhng98/mess-around/compare/v1.0.1...v1.1.0) (2023-01-28)
 
 
