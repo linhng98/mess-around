@@ -86,7 +86,7 @@ argo-cd:
     extraContainers:
       - name: avp-helm
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v2.5.10
+        image: quay.io/argoproj/argocd:v2.6.0
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
@@ -114,7 +114,7 @@ argo-cd:
       # argocd-vault-plugin with Kustomize
       - name: avp-kustomize
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v2.5.10
+        image: quay.io/argoproj/argocd:v2.6.0
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
@@ -142,7 +142,7 @@ argo-cd:
       # argocd-vault-plugin with plain YAML
       - name: avp
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v2.5.10
+        image: quay.io/argoproj/argocd:v2.6.0
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
