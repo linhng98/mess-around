@@ -4,5 +4,5 @@ name: nats-jetstream
 version: 0.0.0
 dependencies:
   - name: nats
-    version: 0.19.8
+    version: 0.19.9
     repository: https://nats-io.github.io/k8s/helm/charts/
