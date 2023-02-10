@@ -15,6 +15,7 @@ dependency "zones" {
   config_path = "../zones"
 }
 
+
 inputs = {
   zone_name = sort(keys(dependency.zones.outputs.route53_zone_zone_id))[0]
   records = [
