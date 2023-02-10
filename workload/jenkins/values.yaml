@@ -1,0 +1,76 @@
+---
+jenkins:
+  controller:
+    adminSecret: true
+    admin:
+      existingSecret: jenkins-admin
+      userKey: user
+      passwordKey: password
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        cpu: 2000m
+        memory: 4096Mi
+    installPlugins:
+      - kubernetes:3845.va_9823979a_744
+      - workflow-aggregator:590.v6a_d052e5a_a_b_5
+      - git:5.0.0
+      - configuration-as-code:1569.vb_72405b_80249
+      - blueocean:1.27.1
+
+    initializeOnce: true
+    statefulSetAnnotations:
+      reloader.stakater.com/auto: 'true'
+    podAnnotations:
+      reloader.stakater.com/auto: 'true'
+
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      ingressClassName: nginx
+      path: /
+      hostName: &host jenkins.homelab.linhng98.com
+      tls:
+        - secretName: *host
+          hosts:
+            - *host
+
+    # Expose Prometheus metrics
+    prometheus:
+      enabled: true
+
+  agent:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+      limits:
+        cpu: 4
+        memory: 8Gi
+
+    podTemplates:
+      build-tools: |
+        - name: build-tools
+          label: build-tools
+          serviceAccount: jenkins
+          containers:
+            - name: python
+              image: python:3
+              ttyEnabled: true
+              privileged: true
+              resourceRequestCpu: "10m"
+              resourceRequestMemory: "128Mi"
+              resourceLimitCpu: "1"
+              resourceLimitMemory: "1024Mi"
+            - name: golang
+              image: golang:1.19.5-alpine3.17
+              ttyEnabled: true
+              privileged: true
+              resourceRequestCpu: "10m"
+              resourceRequestMemory: "128Mi"
+              resourceLimitCpu: "1"
+              resourceLimitMemory: "1024Mi"
