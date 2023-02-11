@@ -139,13 +139,13 @@ prom:
         cluster: homelab
       retention: 1d
       shards: 3
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            accessModes: [ReadWriteOnce]
-            resources:
-              requests:
-                storage: 5Gi
+      #storageSpec:
+      #  volumeClaimTemplate:
+      #    spec:
+      #      accessModes: [ReadWriteOnce]
+      #      resources:
+      #        requests:
+      #          storage: 5Gi
       remoteWrite:
         - url: http://mimir-nginx.mimir/api/v1/push
           headers:
