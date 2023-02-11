@@ -265,8 +265,14 @@ mimir-distributed:
 
   chunks-cache:
     enabled: true
-    allocatedMemory: 2048
     replicas: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        cpu: 100m
+        memory: 5Gi
 
   index-cache:
     enabled: true
@@ -278,6 +284,13 @@ mimir-distributed:
   results-cache:
     enabled: true
     replicas: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        cpu: 100m
+        memory: 5Gi
 
   minio:
     enabled: false
