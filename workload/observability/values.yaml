@@ -137,7 +137,7 @@ prom:
 
       externalLabels:
         cluster: homelab
-      retention: 1d
+      retention: 1h # reduce retention to 1h due to https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#err-mimir-sample-timestamp-too-old
       shards: 3
       #storageSpec:
       #  volumeClaimTemplate:
