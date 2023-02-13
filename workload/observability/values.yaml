@@ -134,6 +134,7 @@ prom:
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
       hostNetwork: false
+      walCompression: false
 
       externalLabels:
         cluster: homelab
