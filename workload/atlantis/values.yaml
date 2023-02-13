@@ -11,6 +11,9 @@ atlantis:
     tag: 0.1.0
     pullPolicy: IfNotPresent
 
+  environment:
+    TF_PLUGIN_CACHE_DIR: /atlantis-data/plugin-cache
+
   loadEnvFromSecrets:
     - aws-credential
 
