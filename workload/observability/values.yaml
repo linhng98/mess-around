@@ -120,7 +120,6 @@ prom:
     enabled: false
 
   prometheusOperator:
-    hostNetwork: false
     prometheusConfigReloader:
       resources:
         requests:
@@ -133,7 +132,6 @@ prom:
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
-      hostNetwork: false
 
       externalLabels:
         cluster: homelab
