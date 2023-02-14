@@ -11,12 +11,19 @@ mimir-distributed:
         installation_mode: helm
 
       activity_tracker:
-        filepath: /data/metrics-activity.log
+        filepath: /active-query-tracker/activity.log
 
       alertmanager:
         data_dir: /data
         enable_api: true
         external_url: /alertmanager
+        {{- if .Values.alertmanager.zoneAwareReplication.enabled }}
+        sharding_ring:
+          zone_awareness_enabled: true
+        {{- end }}
+        {{- if .Values.alertmanager.fallbackConfig }}
+        fallback_config_file: /configs/alertmanager_fallback_config.yaml
+        {{- end }}
 
       alertmanager_storage:
         backend: local
@@ -26,6 +33,7 @@ mimir-distributed:
       blocks_storage:
         backend: s3
         bucket_store:
+          max_chunk_pool_bytes: 12884901888 # 12GiB
           {{- if index .Values "chunks-cache" "enabled" }}
           chunks_cache:
             backend: memcached
@@ -59,36 +67,91 @@ mimir-distributed:
           dir: /data/tsdb
 
       compactor:
-        data_dir: "/data"
+        compaction_interval: 30m
+        deletion_delay: 2h
         compaction_interval: 1h
+        max_closing_blocks_concurrency: 2
+        max_opening_blocks_concurrency: 4
+        symbols_flushers_concurrency: 4
+        data_dir: "/data"
+        sharding_ring:
+          wait_stability_min_duration: 1m
 
       frontend:
-        align_queries_with_step: true
-        log_queries_longer_than: 10s
+        parallelize_shardable_queries: true
         {{- if index .Values "results-cache" "enabled" }}
         results_cache:
           backend: memcached
           memcached:
+            timeout: 500ms
             addresses: {{ include "mimir.resultsCacheAddress" . }}
             max_item_size: {{ mul (index .Values "results-cache").maxItemMemory 1024 1024 }}
         cache_results: true
         {{- end }}
-
+        {{- if .Values.query_scheduler.enabled }}
+        scheduler_address: {{ template "mimir.fullname" . }}-query-scheduler-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverGrpcListenPort" . }}
+        {{- end }}
       frontend_worker:
+        grpc_client_config:
+          max_send_msg_size: 419430400 # 400MiB
+        {{- if .Values.query_scheduler.enabled }}
+        scheduler_address: {{ template "mimir.fullname" . }}-query-scheduler-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverGrpcListenPort" . }}
+        {{- else }}
         frontend_address: {{ template "mimir.fullname" . }}-query-frontend-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverGrpcListenPort" . }}
-
+        {{- end }}
+      {{- if and .Values.enterprise.enabled }}
+      gateway:
+        proxy:
+          admin_api:
+            url: http://{{ template "mimir.fullname" . }}-admin-api.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          alertmanager:
+            url: http://{{ template "mimir.fullname" . }}-alertmanager-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          compactor:
+            url: http://{{ template "mimir.fullname" . }}-compactor.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          default:
+            url: http://{{ template "mimir.fullname" . }}-admin-api.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          distributor:
+            url: dns:///{{ template "mimir.fullname" . }}-distributor-headless.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:{{ include "mimir.serverGrpcListenPort" . }}
+          ingester:
+            url: http://{{ template "mimir.fullname" . }}-ingester-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          query_frontend:
+            url: http://{{ template "mimir.fullname" . }}-query-frontend.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          ruler:
+            url: http://{{ template "mimir.fullname" . }}-ruler.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          store_gateway:
+            url: http://{{ template "mimir.fullname" . }}-store-gateway-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          {{- if and .Values.enterprise.enabled .Values.graphite.enabled }}
+          graphite_write_proxy:
+            url: http://{{ template "mimir.fullname" . }}-graphite-write-proxy.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          graphite_querier:
+            url: http://{{ template "mimir.fullname" . }}-graphite-querier.{{ .Release.Namespace }}.svc:{{ include "mimir.serverHttpListenPort" . }}
+          {{- end}}
+      {{- end }}
       ingester:
         ring:
           final_sleep: 0s
           num_tokens: 512
+          tokens_file_path: /data/tokens
           unregister_on_shutdown: false
-
+          {{- if .Values.ingester.zoneAwareReplication.enabled }}
+          zone_awareness_enabled: true
+          {{- end }}
       ingester_client:
         grpc_client_config:
           max_recv_msg_size: 104857600
           max_send_msg_size: 104857600
-
+      {{- if .Values.enterprise.enabled }}
+      instrumentation:
+        enabled: true
+        distributor_client:
+          address: dns:///{{ template "mimir.fullname" . }}-distributor-headless.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:{{ include "mimir.serverGrpcListenPort" . }}
+      license:
+        path: "/license/license.jwt"
+      {{- end }}
       limits:
+        max_total_query_length: 12000h
+        max_query_parallelism: 240
+        max_cache_freshness: 10m
         compactor_blocks_retention_period: "604800s"
         max_global_series_per_user: 0
         max_global_series_per_metric: 0
@@ -103,15 +166,18 @@ mimir-distributed:
         abort_if_cluster_join_fails: false
         compression_enabled: false
         join_members:
-        - {{ include "mimir.fullname" . }}-gossip-ring
+        - dns+{{ include "mimir.fullname" . }}-gossip-ring.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:{{ include "mimir.memberlistBindPort" . }}
+
+      querier:
+        max_concurrent: 16
+
+      query_scheduler:
+        max_outstanding_requests_per_tenant: 800
 
       ruler:
         alertmanager_url: dnssrvnoa+http://_http-metrics._tcp.{{ template "mimir.fullname" . }}-alertmanager-headless.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}/alertmanager
         enable_api: true
         rule_path: /data
-        for_outage_tolerance: 1h
-        for_grace_period: 10m
-        resend_delay: 30m
 
       ruler_storage:
         backend: local
@@ -123,6 +189,21 @@ mimir-distributed:
 
       server:
         grpc_server_max_concurrent_streams: 1000
+        grpc_server_max_connection_age: 2m
+        grpc_server_max_connection_age_grace: 5m
+        grpc_server_max_connection_idle: 1m
+
+      store_gateway:
+        sharding_ring:
+          wait_stability_min_duration: 1m
+          {{- if .Values.store_gateway.zoneAwareReplication.enabled }}
+          kvstore:
+            prefix: multi-zone/
+          {{- end }}
+          tokens_file_path: /data/tokens
+          {{- if .Values.store_gateway.zoneAwareReplication.enabled }}
+          zone_awareness_enabled: true
+          {{- end }}
 
   alertmanager:
     enabled: true
