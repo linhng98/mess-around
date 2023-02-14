@@ -7,9 +7,6 @@ mimir-distributed:
 
   mimir:
     config: |
-      usage_stats:
-        installation_mode: helm
-
       activity_tracker:
         filepath: /data/metrics-activity.log
 
@@ -134,7 +131,7 @@ mimir-distributed:
         memory: 32Mi
     extraContainers:
       - name: config-reloader
-        image: docker.io/kiwigrid/k8s-sidecar:1.22.2
+        image: docker.io/kiwigrid/k8s-sidecar:1.22.0
         env:
           - name: LABEL
             value: mimir_alertmanager_configs
@@ -149,7 +146,7 @@ mimir-distributed:
           - name: FOLDER_ANNOTATION
             value: k8s-sidecar-target-directory
         securityContext:
-          runAsUser: 1000
+          runAsUser: 0
         volumeMounts:
           - name: alert-rules
             mountPath: /alert-rules
@@ -168,8 +165,6 @@ mimir-distributed:
         memory: 512Mi
 
   ingester:
-    zoneAwareReplication:
-      enabled: false
     replicas: 3
     statefulSet:
       enabled: true
@@ -199,9 +194,7 @@ mimir-distributed:
         memory: 128Mi
     extraContainers:
       - name: config-reloader
-        image: docker.io/kiwigrid/k8s-sidecar:1.22.2
-        securityContext:
-          runAsUser: 1000
+        image: docker.io/kiwigrid/k8s-sidecar:1.22.0
         env:
           - name: LABEL
             value: mimir_rules
@@ -244,8 +237,6 @@ mimir-distributed:
         memory: 128Mi
 
   store_gateway:
-    zoneAwareReplication:
-      enabled: false
     replicas: 2
     resources:
       requests:
