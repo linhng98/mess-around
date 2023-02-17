@@ -27,6 +27,10 @@ dependency "allow_ntopng_sg" {
   config_path = "../../sg/ntopng"
 }
 
+dependency "allow_netmaker_sg" {
+  config_path = "../../sg/netmaker"
+}
+
 inputs = {
   ami           = "ami-02ee763250491e04a"
   instance_type = "t2.small"
@@ -40,6 +44,8 @@ inputs = {
     "${dependency.allow_frp_sg.outputs.security_group_id}",
     "${dependency.allow_internet_access_sg.outputs.security_group_id}",
     "${dependency.allow_ntopng_sg.outputs.security_group_id}",
+    "${dependency.allow_ntopng_sg.outputs.security_group_id}",
+    "${dependency.allow_netmaker_sg.outputs.security_group_id}",
   ]
   subnet_id                   = dependency.vpc.outputs.public_subnets[0]
   key_name                    = "linhnv"
