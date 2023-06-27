@@ -1,5 +1,5 @@
 terraform {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-security-group.git//?ref=v4.17.1"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-security-group.git//?ref=v4.17.2"
 }
 
 include {
