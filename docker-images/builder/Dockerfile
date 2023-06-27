@@ -30,3 +30,8 @@ USER runner
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN export PATH=$PATH:$HOME/.cargo/bin
+
+RUN v="3.41.1" && \
+    curl -LO https://github.com/trufflesecurity/trufflehog/releases/download/v${v}/trufflehog_${v}_linux_amd64.tar.gz --output trufflehog.tar.gz && \
+    tar -zxvf trufflehog.tar.gz && \
+    mv trufflehog /usr/local/bin/trufflehog
