@@ -16,10 +16,10 @@ harbor:
       className: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        ingress.kubernetes.io/ssl-redirect: 'true'
-        ingress.kubernetes.io/proxy-body-size: '0'
-        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-        nginx.ingress.kubernetes.io/proxy-body-size: '0'
+        ingress.kubernetes.io/ssl-redirect: "true"
+        ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
   externalURL: https://harbor.homelab.linhng98.com
   caSecretName: harbor-core-tls
   secretKey: <path:homelab/data/secrets/harbor#secretkey>
@@ -73,6 +73,7 @@ harbor:
         cpu: 10m
 
   core:
+    secretName: harbor-token-ca
     secret: <path:homelab/data/secrets/harbor#secretkey>
     xsrfkey: <path:homelab/data/secrets/harbor#xsrfkey>
     replicas: 1
