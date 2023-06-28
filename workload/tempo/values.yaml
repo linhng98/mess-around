@@ -2,7 +2,6 @@
 tempo-distributed:
   reportingEnabled: false
   global_overrides:
-    per_tenant_override_config: /conf/overrides.yaml
     metrics_generator_processors:
       - service-graphs
       - span-metrics
