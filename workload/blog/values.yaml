@@ -21,6 +21,7 @@ deploychart:
     className: nginx
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/enable-opentelemetry: "true"
     hosts:
       - host: &host docs.homelab.linhng98.com
         paths:

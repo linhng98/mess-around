@@ -8,3 +8,11 @@ ingress-nginx:
         enabled: true
     service:
       loadBalancerIP: 192.168.1.200
+    config:
+      enable-opentelemetry: "true"
+      opentelemetry-operation-name: "HTTP $request_method $service_name $uri"
+      otlp-collector-host: "otel-collector-collector.otel-collector.svc"
+      otlp-collector-port: "4317"
+      otel-service-name: "ingress-nginx"
+      otel-sampler: "AlwaysOn"
+      otel-sampler-ratio: "1.0"

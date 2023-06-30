@@ -5,21 +5,22 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    nginx.ingress.kubernetes.io/enable-opentelemetry: "true"
   name: kibana
 spec:
   ingressClassName: nginx
   rules:
-  - host: &host kibana.homelab.linhng98.com
-    http:
-      paths:
-      - backend:
-          service:
-            name: kibana-kb-http
-            port:
-              number: 5601
-        path: /
-        pathType: Prefix
+    - host: &host kibana.homelab.linhng98.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: kibana-kb-http
+                port:
+                  number: 5601
+            path: /
+            pathType: Prefix
   tls:
-  - hosts:
-    - *host
-    secretName: kibana-tls
+    - hosts:
+        - *host
+      secretName: kibana-tls
