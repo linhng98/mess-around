@@ -8,6 +8,8 @@ ingress-nginx:
         enabled: true
     service:
       loadBalancerIP: 192.168.1.200
+    opentelemetry:
+      enabled: true
     config:
       enable-opentelemetry: "true"
       opentelemetry-operation-name: "HTTP $request_method $service_name $uri"
