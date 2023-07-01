@@ -22,7 +22,7 @@ spec:
             {
               name: high-latency,
               type: latency,
-              latency: {threshold_ms: 100}
+              latency: {threshold_ms: 120}
             },
             {
               name: error,
