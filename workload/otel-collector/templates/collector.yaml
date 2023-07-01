@@ -21,7 +21,7 @@ spec:
           - name: high-latency
             type: latency
             latency:
-              threshold_ms: 200
+              threshold_ms: 250
           - name: error
             type: status_code
             status_code:
