@@ -28,7 +28,7 @@ spec:
               name: error,
               type: status_code,
               status_code: {status_codes: [ERROR]}
-        },
+        }
         ]
     exporters:
       otlphttp:
