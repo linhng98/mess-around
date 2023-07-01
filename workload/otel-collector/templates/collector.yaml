@@ -35,5 +35,5 @@ spec:
       pipelines:
         traces:
           receivers: [otlp, jaeger, zipkin]
-          processors: []
+          processors: [tail_sampling]
           exporters: [otlphttp]
