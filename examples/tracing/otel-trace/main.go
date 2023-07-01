@@ -30,6 +30,7 @@ const (
 	OTEL_ENDPOINT = "otel-http.homelab.linhng98.com"
 	SERVICE_NAME  = "mess-around"
 	NUM_TRY       = 10
+	RAND_WAIT     = 100
 	TIMEOUT       = 10 * time.Second
 )
 
@@ -97,7 +98,7 @@ func serveService(ctx context.Context, wg *sync.WaitGroup, in chan msg, out chan
 			propgator.Inject(traceCtx, carrier)
 			msg.CtxCarrier = carrier
 
-			sleepTime := 20 + rand.Intn(30)
+			sleepTime := 20 + rand.Intn(RAND_WAIT)
 			time.Sleep(time.Duration(sleepTime) * time.Millisecond)
 			if out != nil {
 				out <- msg
