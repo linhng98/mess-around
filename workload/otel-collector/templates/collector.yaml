@@ -14,7 +14,6 @@ spec:
         protocols:
           grpc:
           http:
-
     processors:
       tail_sampling:
         decision_wait: 10s
@@ -24,14 +23,13 @@ spec:
               name: high-latency
               type: latency,
               latency: {threshold_ms: 100}
-            },
-            {
+          },
+          {
               name: error,
               type: status_code,
               status_code: {status_codes: [ERROR]}
-            }
-          ]
-
+        },
+        ]
     exporters:
       otlphttp:
         endpoint: http://tempo-distributor.tempo:4318
