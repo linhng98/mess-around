@@ -1,0 +1,107 @@
+---
+redis:
+  architecture: standalone
+  auth:
+    enabled: true
+    password: RandomStronkPassword
+postgresql:
+  auth:
+    postgresPassword: RandomStronkPassword
+deploychart:
+  replicaCount: 1
+  kind: Deployment
+  image:
+    repository: ankane/pgsync
+    tag: v0.7.4
+    containerPort:
+    command: [/bin/sh, -c, --]
+    args: [while true; do sleep 30; done;]
+      #command:
+      #  - "pgsync"
+
+  env:
+    SCHEMA: /ect/config/pgsync-schemas.json
+    ELASTICSEARCH_SCHEME: https
+    ELASTICSEARCH_PORT: '9200'
+    ELASTICSEARCH_HOST: elastic-cluster-es-http.eck
+    ELASTICSEARCH_USER: elastic
+    ELASTICSEARCH_PASSWORD: 2UQ2Ib6xui528myw9h782Cmo
+    ELASTICSEARCH_VERIFY_CERTS: 'false'
+    PG_HOST: pgsync-postgresql
+    PG_USER: postgres
+    PG_PASSWORD: RandomStronkPassword
+    REDIS_HOST: pgsync-redis-master
+    REDIS_AUTH: RandomStronkPassword
+
+  configmap:
+    pgsync-schemas.json: |
+      [
+        {
+          "database": "postgres",
+          "index": "postgres_actor",
+          "nodes": {
+            "table": "actor",
+            "columns": ["actor_id", "first_name", "last_name"]
+          }
+        },
+        {
+          "database": "postgres",
+          "index": "postgres_customer",
+          "nodes": {
+            "table": "customer",
+            "columns": ["customer_id", "first_name", "last_name", "email"]
+          }
+        }
+      ]
+
+  mountConfigmap:
+    - name: pgsync-schemas.json
+      path: /etc/config/pgsync-schemas.json
+
+python11:
+  replicaCount: 1
+  kind: Deployment
+  image:
+    repository: python
+    tag: 3.11.4-bullseye
+    containerPort:
+    command: [/bin/sh, -c, --]
+    args: [while true; do sleep 30; done;]
+  env:
+    SCHEMA: /ect/config/pgsync-schemas.json
+    ELASTICSEARCH_SCHEME: https
+    ELASTICSEARCH_PORT: '9200'
+    ELASTICSEARCH_HOST: elastic-cluster-es-http.eck
+    ELASTICSEARCH_USER: elastic
+    ELASTICSEARCH_PASSWORD: 2UQ2Ib6xui528myw9h782Cmo
+    ELASTICSEARCH_VERIFY_CERTS: 'false'
+    PG_HOST: pgsync-postgresql
+    PG_USER: postgres
+    PG_PASSWORD: RandomStronkPassword
+    REDIS_HOST: pgsync-redis-master
+    REDIS_AUTH: RandomStronkPassword
+
+  configmap:
+    pgsync-schemas.json: |
+      [
+        {
+          "database": "postgres",
+          "index": "postgres_actor",
+          "nodes": {
+            "table": "actor",
+            "columns": ["actor_id", "first_name", "last_name"]
+          }
+        },
+        {
+          "database": "postgres",
+          "index": "postgres_customer",
+          "nodes": {
+            "table": "customer",
+            "columns": ["customer_id", "first_name", "last_name", "email"]
+          }
+        }
+      ]
+
+  mountConfigmap:
+    - name: pgsync-schemas.json
+      path: /etc/config/pgsync-schemas.json

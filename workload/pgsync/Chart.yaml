@@ -1,0 +1,18 @@
+---
+apiVersion: v2
+name: pgsync
+version: 0.0.0
+dependencies:
+  - name: redis
+    version: 17.11.7
+    repository: https://charts.bitnami.com/bitnami
+  - name: postgresql
+    version: 12.6.4
+    repository: https://charts.bitnami.com/bitnami
+  - name: deploychart
+    version: 4.0.4
+    repository: https://linhng98.github.io/helm-charts
+  - name: deploychart
+    alias: python11
+    version: 4.0.4
+    repository: https://linhng98.github.io/helm-charts
