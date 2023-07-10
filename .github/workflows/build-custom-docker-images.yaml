@@ -29,6 +29,8 @@ jobs:
               - 'docker-images/builder/Dockerfile'
             atlantis:
               - 'docker-images/atlantis/Dockerfile'
+            pgsync:
+              - 'docker-images/pgsync/Dockerfile'
       - name: set target builder
         if: steps.filter.outputs.builder == 'true'
         run: |
@@ -37,6 +39,10 @@ jobs:
         if: steps.filter.outputs.atlantis == 'true'
         run: |
           echo "CONTAINER=atlantis" >> $GITHUB_ENV
+      - name: set target pgsync
+        if: steps.filter.outputs.pgsync == 'true'
+        run: |
+          echo "CONTAINER=pgsync" >> $GITHUB_ENV
       - name: get image tag env
         run: |
           export IMG_PATH=docker-images/${{ env.CONTAINER }}
