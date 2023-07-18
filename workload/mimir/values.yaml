@@ -1,10 +1,8 @@
----
 mimir-distributed:
   global:
     dnsService: rke2-coredns-rke2-coredns
     dnsNamespace: kube-system
     clusterDomain: cluster.local
-
   mimir:
     config: |
       usage_stats:
@@ -175,7 +173,6 @@ mimir-distributed:
           {{- if .Values.store_gateway.zoneAwareReplication.enabled }}
           zone_awareness_enabled: true
           {{- end }}
-
   alertmanager:
     zoneAwareReplication:
       enabled: false
@@ -194,7 +191,7 @@ mimir-distributed:
           - name: LABEL
             value: mimir_alertmanager_configs
           - name: UNIQUE_FILENAMES
-            value: 'false'
+            value: "false"
           - name: FOLDER
             value: /alert-rules
           - name: NAMESPACE
@@ -214,14 +211,12 @@ mimir-distributed:
     extraVolumeMounts:
       - name: alert-rules
         mountPath: /alert-rules
-
   distributor:
     replicas: 3
     resources:
       requests:
         cpu: 10m
         memory: 512Mi
-
   ingester:
     zoneAwareReplication:
       enabled: false
@@ -234,7 +229,6 @@ mimir-distributed:
         memory: 512Mi
     persistentVolume:
       size: 5Gi
-
   overrides_exporter:
     enabled: true
     replicas: 1
@@ -242,12 +236,11 @@ mimir-distributed:
       requests:
         cpu: 10m
         memory: 128Mi
-
   ruler:
     enabled: true
     replicas: 2
     annotations:
-      reloader.stakater.com/auto: 'true'
+      reloader.stakater.com/auto: "true"
     resources:
       requests:
         cpu: 10m
@@ -259,7 +252,7 @@ mimir-distributed:
           - name: LABEL
             value: mimir_rules
           - name: UNIQUE_FILENAMES
-            value: 'true'
+            value: "true"
           - name: FOLDER
             value: /data-rules
           - name: NAMESPACE
@@ -271,7 +264,7 @@ mimir-distributed:
           - name: METHOD
             value: SLEEP
           - name: SLEEP_TIME
-            value: '60'
+            value: "60"
         volumeMounts:
           - name: ruler-cm
             mountPath: /data-rules
@@ -281,21 +274,18 @@ mimir-distributed:
     extraVolumeMounts:
       - name: ruler-cm
         mountPath: /data-rules
-
   querier:
     replicas: 2
     resources:
       requests:
         cpu: 10m
         memory: 128Mi
-
   query_frontend:
     replicas: 1
     resources:
       requests:
         cpu: 10m
         memory: 128Mi
-
   store_gateway:
     zoneAwareReplication:
       enabled: false
@@ -306,7 +296,6 @@ mimir-distributed:
         memory: 50Mi
     persistentVolume:
       size: 5Gi
-
   compactor:
     replicas: 3
     resources:
@@ -315,29 +304,22 @@ mimir-distributed:
         memory: 50Mi
     persistentVolume:
       size: 5Gi
-
   chunks-cache:
     enabled: true
     replicas: 1
-
   index-cache:
     enabled: true
     replicas: 1
-
   metadata-cache:
     enabled: true
-
   results-cache:
     enabled: true
     replicas: 1
-
   minio:
     enabled: false
-
   nginx:
     enabled: true
     replicas: 3
-
   metaMonitoring:
     serviceMonitor:
       enabled: true
