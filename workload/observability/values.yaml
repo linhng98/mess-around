@@ -1,4 +1,3 @@
----
 loki-stack:
   loki:
     enabled: true
@@ -16,12 +15,10 @@ loki-stack:
           kvstore:
             store: inmemory
         enable_api: true
-
       memberlist:
         join_members:
           # the value must be defined as string to be evaluated when secret manifest is being generating
           - '{{ include "loki.fullname" . }}-memberlist'
-
       ingester:
         chunk_idle_period: 3m
         chunk_block_size: 262144
@@ -53,7 +50,7 @@ loki-stack:
         boltdb_shipper:
           active_index_directory: /data/loki/boltdb-shipper-active
           cache_location: /data/loki/boltdb-shipper-cache
-          cache_ttl: 24h         # Can be increased for faster performance over longer query periods, uses more disk space
+          cache_ttl: 24h # Can be increased for faster performance over longer query periods, uses more disk space
           shared_store: filesystem
         filesystem:
           directory: /data/loki/chunks
@@ -66,7 +63,6 @@ loki-stack:
         working_directory: /data/loki/boltdb-shipper-compactor
         shared_store: filesystem
         retention_enabled: true
-
     extraContainers:
       - name: config-reloader
         image: docker.io/kiwigrid/k8s-sidecar:1.25.0
@@ -107,32 +103,26 @@ loki-stack:
         - url: http://{{ .Release.Name }}-loki:3100/loki/api/v1/push
     serviceMonitor:
       enabled: true
-
 metrics-server:
   metrics:
     enabled: true
-
   serviceMonitor:
     enabled: true
-
 prom:
   grafana:
     enabled: false
-
   prometheusOperator:
     prometheusConfigReloader:
       resources:
         requests:
           cpu: 10m
           memory: 50Mi
-
   prometheus:
     prometheusSpec:
       ruleSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
-
       externalLabels:
         cluster: homelab
       retention: 15m # reduce retention to 15m due to https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#err-mimir-sample-timestamp-too-old
@@ -158,14 +148,11 @@ prom:
                     values:
                       - prometheus
               topologyKey: kubernetes.io/hostname
-
   alertmanager:
     enabled: false
-
 grafana:
   serviceMonitor:
     enabled: true
-
   ingress:
     enabled: true
     ingressClassName: nginx
@@ -182,18 +169,15 @@ grafana:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-
   admin:
     existingSecret: grafana-admin-dashboard
     userKey: admin-user
     passwordKey: admin-password
-
   persistence:
     enabled: false
   plugins:
     - vonage-status-panel
     - grafana-piechart-panel
-
   sidecar:
     enableUniqueFilenames: false
     dashboards:
@@ -208,7 +192,6 @@ grafana:
     datasources:
       enabled: true
       defaultDatasourceEnabled: false
-
   datasources:
     datasources.yaml:
       apiVersion: 1
@@ -239,7 +222,6 @@ grafana:
             httpHeaderName1: X-Scope-OrgID
           secureJsonData:
             httpHeaderValue1: homelab
-
   grafana.ini:
     server:
       root_url: https://grafana.homelab.linhng98.com

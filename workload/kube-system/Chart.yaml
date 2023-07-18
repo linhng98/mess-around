@@ -1,4 +1,3 @@
----
 apiVersion: v2
 name: system-app
 version: 0.0.0

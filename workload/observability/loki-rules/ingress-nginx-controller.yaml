@@ -1,4 +1,3 @@
----
 groups:
   - name: HighTrafficAccess
     rules:

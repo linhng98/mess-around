@@ -1,9 +1,7 @@
----
 name: release
 run-name: release new version
 on:
   workflow_dispatch:
-
 jobs:
   semantic-release:
     name: Release

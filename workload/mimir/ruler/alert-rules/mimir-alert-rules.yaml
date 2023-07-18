@@ -1,4 +1,3 @@
----
 groups:
   - name: mimir-alerts
     rules:
@@ -591,8 +590,7 @@ groups:
           severity: critical
       - alert: MimirIngesterHasUnshippedBlocks
         annotations:
-          message: Mimir Ingester {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has compacted a block {{ $value | humanizeDuration
-            }} ago but it hasn't been successfully uploaded to the storage yet.
+          message: Mimir Ingester {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has compacted a block {{ $value | humanizeDuration }} ago but it hasn't been successfully uploaded to the storage yet.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimiringesterhasunshippedblocks
         expr: |
           (time() - cortex_ingester_oldest_unshipped_block_timestamp_seconds > 3600)
@@ -661,8 +659,7 @@ groups:
           severity: critical
       - alert: MimirQuerierHasNotScanTheBucket
         annotations:
-          message: Mimir Querier {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not successfully scanned the bucket since {{ $value
-            | humanizeDuration }}.
+          message: Mimir Querier {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not successfully scanned the bucket since {{ $value | humanizeDuration }}.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimirquerierhasnotscanthebucket
         expr: |
           (time() - cortex_querier_blocks_last_successful_scan_timestamp_seconds > 60 * 30)
@@ -673,8 +670,7 @@ groups:
           severity: critical
       - alert: MimirQuerierHighRefetchRate
         annotations:
-          message: Mimir Queries in {{ $labels.cluster }}/{{ $labels.namespace }} are refetching series from different store-gateways (because of missing
-            blocks) for the {{ printf "%.0f" $value }}% of queries.
+          message: Mimir Queries in {{ $labels.cluster }}/{{ $labels.namespace }} are refetching series from different store-gateways (because of missing blocks) for the {{ printf "%.0f" $value }}% of queries.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimirquerierhighrefetchrate
         expr: |
           100 * (
@@ -692,8 +688,7 @@ groups:
           severity: warning
       - alert: MimirStoreGatewayHasNotSyncTheBucket
         annotations:
-          message: Mimir store-gateway {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not successfully synched the bucket since
-            {{ $value | humanizeDuration }}.
+          message: Mimir store-gateway {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not successfully synched the bucket since {{ $value | humanizeDuration }}.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimirstoregatewayhasnotsyncthebucket
         expr: |
           (time() - cortex_bucket_stores_blocks_last_successful_sync_timestamp_seconds{component="store-gateway"} > 60 * 30)
@@ -713,8 +708,7 @@ groups:
           severity: warning
       - alert: MimirBucketIndexNotUpdated
         annotations:
-          message: Mimir bucket index for tenant {{ $labels.user }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not been updated since {{ $value
-            | humanizeDuration }}.
+          message: Mimir bucket index for tenant {{ $labels.user }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not been updated since {{ $value | humanizeDuration }}.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimirbucketindexnotupdated
         expr: |
           min by(cluster, namespace, user) (time() - cortex_bucket_index_last_successful_update_timestamp_seconds) > 7200
@@ -734,8 +728,7 @@ groups:
     rules:
       - alert: MimirCompactorHasNotSuccessfullyCleanedUpBlocks
         annotations:
-          message: Mimir Compactor {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not successfully cleaned up blocks in the last
-            6 hours.
+          message: Mimir Compactor {{ $labels.pod }} in {{ $labels.cluster }}/{{ $labels.namespace }} has not successfully cleaned up blocks in the last 6 hours.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimircompactorhasnotsuccessfullycleanedupblocks
         expr: |
           (time() - cortex_compactor_block_cleanup_last_successful_run_timestamp_seconds > 60 * 60 * 6)
@@ -819,8 +812,7 @@ groups:
     rules:
       - alert: MimirContinuousTestNotRunningOnWrites
         annotations:
-          message: Mimir continuous test {{ $labels.test }} in {{ $labels.cluster }}/{{ $labels.namespace }} is not effectively running because writes are
-            failing.
+          message: Mimir continuous test {{ $labels.test }} in {{ $labels.cluster }}/{{ $labels.namespace }} is not effectively running because writes are failing.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimircontinuoustestnotrunningonwrites
         expr: |
           sum by(cluster, namespace, test) (rate(mimir_continuous_test_writes_failed_total[5m])) > 0
@@ -829,8 +821,7 @@ groups:
           severity: warning
       - alert: MimirContinuousTestNotRunningOnReads
         annotations:
-          message: Mimir continuous test {{ $labels.test }} in {{ $labels.cluster }}/{{ $labels.namespace }} is not effectively running because queries
-            are failing.
+          message: Mimir continuous test {{ $labels.test }} in {{ $labels.cluster }}/{{ $labels.namespace }} is not effectively running because queries are failing.
           runbook_url: https://grafana.com/docs/mimir/latest/operators-guide/mimir-runbooks/#mimircontinuoustestnotrunningonreads
         expr: |
           sum by(cluster, namespace, test) (rate(mimir_continuous_test_queries_failed_total[5m])) > 0

@@ -1,8 +1,6 @@
----
 base:
   global:
     istioNamespace: istio-system
-
 istiod:
   meshConfig:
     enableTracing: true
@@ -27,7 +25,6 @@ istiod:
     tracer:
       zipkin:
         address: otel-collector-collector.otel-collector:9411
-
 gateway:
   name: istio-ingressgateway
   replicaCount: 1
@@ -40,7 +37,6 @@ gateway:
     limits:
       cpu: 100m
       memory: 1024Mi
-
 kiali-operator:
   cr:
     create: true

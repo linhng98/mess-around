@@ -1,11 +1,9 @@
----
 tempo-distributed:
   reportingEnabled: false
   global_overrides:
     metrics_generator_processors:
       - service-graphs
       - span-metrics
-
   global:
     dnsService: rke2-coredns-rke2-coredns
     dnsNamespace: kube-system
@@ -15,7 +13,6 @@ tempo-distributed:
     persistence:
       enabled: true
       size: 2Gi
-
   metricsGenerator:
     enabled: true
     replicas: 1
@@ -25,24 +22,17 @@ tempo-distributed:
           - url: http://mimir-nginx.mimir/api/v1/push
             headers:
               X-Scope-OrgID: homelab
-
   distributor:
     replicas: 3
-
   compactor:
     replicas: 1
-
   querier:
     replicas: 1
-
   queryFrontend:
     replicas: 1
-
   search:
     enabled: true
-
   multitenancyEnabled: false
-
   traces:
     otlp:
       http:
@@ -51,7 +41,6 @@ tempo-distributed:
       grpc:
         enabled: true
         receiverConfig: {}
-
   storage:
     trace:
       backend: s3
@@ -61,27 +50,20 @@ tempo-distributed:
         access_key: <path:homelab/data/aws-credentials/ceph/tempo-bucket#AWS_ACCESS_KEY_ID>
         secret_key: <path:homelab/data/aws-credentials/ceph/tempo-bucket#AWS_SECRET_ACCESS_KEY>
         insecure: true
-
   memcached:
     enabled: true
     replicas: 1
-
   memcachedExporter:
     enabled: true
-
   metaMonitoring:
     serviceMonitor:
       enabled: true
-
     grafanaAgent:
       enabled: false
-
   prometheusRule:
     enabled: true
-
   minio:
     enabled: false
-
   gateway:
     enabled: true
     replicas: 3
