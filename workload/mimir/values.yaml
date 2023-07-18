@@ -200,8 +200,6 @@ mimir-distributed:
             value: configmap
           - name: FOLDER_ANNOTATION
             value: k8s-sidecar-target-directory
-        securityContext:
-          runAsUser: 0
         volumeMounts:
           - name: alert-rules
             mountPath: /alert-rules
