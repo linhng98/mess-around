@@ -1,4 +1,3 @@
----
 harbor:
   expose:
     type: ingress
@@ -25,7 +24,6 @@ harbor:
   secretKey: <path:homelab/data/secrets/harbor#secretkey>
   updateStrategy:
     type: Recreate
-
   persistence:
     enabled: true
     persistentVolumeClaim:
@@ -37,19 +35,15 @@ harbor:
       type: filesystem
       filesystem:
         rootdirectory: /storage
-
   harborAdminPassword: <path:homelab/data/secrets/harbor#password>
-
   portal:
     replicas: 1
     resources:
       requests:
         memory: 60Mi
         cpu: 10m
-
   chartmuseum:
     enabled: false
-
   registry:
     secret: <path:homelab/data/secrets/harbor#secretkey>
     credentials:
@@ -64,14 +58,12 @@ harbor:
         requests:
           memory: 60Mi
           cpu: 10m
-
   jobservice:
     secret: <path:homelab/data/secrets/harbor#secretkey>
     resources:
       requests:
         memory: 60Mi
         cpu: 10m
-
   core:
     secretName: harbor-token-ca
     secret: <path:homelab/data/secrets/harbor#secretkey>
@@ -81,14 +73,12 @@ harbor:
       requests:
         memory: 60Mi
         cpu: 10m
-
   trivy:
     enabled: true
     resources:
       requests:
         memory: 60Mi
         cpu: 10m
-
   notary:
     secretName: notary-cert
     enabled: false
@@ -96,25 +86,21 @@ harbor:
       requests:
         memory: 60Mi
         cpu: 10m
-
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
-
   exporter:
     resources:
       requests:
         memory: 60Mi
         cpu: 10m
-
   redis:
     internal:
       resources:
         requests:
           memory: 60Mi
           cpu: 10m
-
   database:
     internal:
       resources:

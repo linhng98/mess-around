@@ -1,30 +1,26 @@
----
-  - name: Start PXE server
-    hosts: localhost
-    tags: pxe
-    roles:
-      - pxe_server
-
-  - name: Common
-    remote_user: ubuntu
-    become: true
-    hosts: all
-    tags: common
-    roles:
-      - common
-
-  - name: Install rke2 cluster
-    remote_user: ubuntu
-    become: true
-    hosts: all
-    tags: rke2
-    roles:
-      - rke2
-
-  - name: Install elastiflow
-    remote_user: ubuntu
-    become: true
-    hosts: all
-    tags: elastiflow
-    roles:
-      - elastiflow
+- name: Start PXE server
+  hosts: localhost
+  tags: pxe
+  roles:
+    - pxe_server
+- name: Common
+  remote_user: ubuntu
+  become: true
+  hosts: all
+  tags: common
+  roles:
+    - common
+- name: Install rke2 cluster
+  remote_user: ubuntu
+  become: true
+  hosts: all
+  tags: rke2
+  roles:
+    - rke2
+- name: Install elastiflow
+  remote_user: ubuntu
+  become: true
+  hosts: all
+  tags: elastiflow
+  roles:
+    - elastiflow

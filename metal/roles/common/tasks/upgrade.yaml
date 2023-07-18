@@ -1,16 +1,15 @@
----
-  - name: Create daily upgrade script
-    ansible.builtin.file:
-      path: &cron /etc/cron.daily/upgrade
-      state: touch
-      mode: '0755'
-  - name: Script to upgrade
-    ansible.builtin.copy:
-      dest: *cron
-      content: |
-        #!/bin/bash
-        apt-get install unattended-upgrades -y
-        apt-get autoclean
-        #if test -f "/var/run/reboot-required"; then
-        #  reboot
-        #fi
+- name: Create daily upgrade script
+  ansible.builtin.file:
+    path: &cron /etc/cron.daily/upgrade
+    state: touch
+    mode: '0755'
+- name: Script to upgrade
+  ansible.builtin.copy:
+    dest: *cron
+    content: |
+      #!/bin/bash
+      apt-get install unattended-upgrades -y
+      apt-get autoclean
+      #if test -f "/var/run/reboot-required"; then
+      #  reboot
+      #fi

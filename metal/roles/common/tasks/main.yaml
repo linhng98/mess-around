@@ -1,5 +1,4 @@
----
-  - name: Tunning linux kernel
-    ansible.builtin.include_tasks: tunning.yaml
-  - name: Upgrade kernel
-    ansible.builtin.include_tasks: upgrade.yaml
+- name: Tunning linux kernel
+  ansible.builtin.include_tasks: tunning.yaml
+- name: Upgrade kernel
+  ansible.builtin.include_tasks: upgrade.yaml

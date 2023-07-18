@@ -1,4 +1,3 @@
----
 groups:
   - name: ceph.rules
     rules:

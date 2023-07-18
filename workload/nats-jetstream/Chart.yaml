@@ -1,4 +1,3 @@
----
 apiVersion: v2
 name: nats-jetstream
 version: 0.0.0

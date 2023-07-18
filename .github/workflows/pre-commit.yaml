@@ -1,9 +1,7 @@
----
 name: pre-commit hook check
 run-name: pre-commit hook check
 on:
   pull_request:
-
 jobs:
   pre-commit:
     runs-on: homelab

@@ -1,56 +1,48 @@
----
-  - name: Download RKE2 installation script
-    ansible.builtin.get_url:
-      url: '{{ rke2_install_bash_url }}'
-      dest: '{{ rke2_install_script_dir }}/rke2.sh'
-      mode: 0700
-
-  - name: Populate service facts
-    ansible.builtin.service_facts:
-
-  - name: Get stats of the FS object
-    ansible.builtin.stat:
-      path: /usr/local
-    register: usr_local
-
-  - name: Set RKE2 bin path
-    set_fact:
-      rke2_bin_path: "{{ '/usr/local/bin/rke2' if  usr_local.stat.writeable == True else ' /opt/rke2/bin/rke2' }}"
-
-  - name: Run RKE2 script
-    ansible.builtin.command:
-      cmd: '{{ rke2_install_script_dir }}/rke2.sh'
-    environment:
-      INSTALL_RKE2_VERSION: '{{ rke2_version }}'
-      INSTALL_RKE2_CHANNEL_URL: '{{ rke2_channel_url }}'
-      INSTALL_RKE2_CHANNEL: '{{ rke2_channel }}'
-
-  - name: Check RKE2 version
-    ansible.builtin.shell: |
-      set -o pipefail
-      {{ rke2_bin_path }} --version | grep -E "rke2 version" | awk '{print $3}'
-    args:
-      executable: /bin/bash
-    changed_when: false
-    register: installed_rke2_version
-    when: '"rke2-server.service" in ansible_facts.services'
-
-  - name: Copy Custom Manifests
-    ansible.builtin.copy:
-      src: '{{ item }}'
-      dest: '{{ rke2_data_path }}/server/manifests/'
-      owner: root
-      group: root
-      mode: 0644
-    with_items: '{{ rke2_custom_manifests }}'
-    when: rke2_custom_manifests
-
-  - name: Copy Static Pods
-    ansible.builtin.copy:
-      src: '{{ item }}'
-      dest: '{{ rke2_data_path }}/agent/pod-manifests/'
-      owner: root
-      group: root
-      mode: 0644
-    with_items: '{{ rke2_static_pods }}'
-    when: rke2_static_pods
+- name: Download RKE2 installation script
+  ansible.builtin.get_url:
+    url: '{{ rke2_install_bash_url }}'
+    dest: '{{ rke2_install_script_dir }}/rke2.sh'
+    mode: 0700
+- name: Populate service facts
+  ansible.builtin.service_facts:
+- name: Get stats of the FS object
+  ansible.builtin.stat:
+    path: /usr/local
+  register: usr_local
+- name: Set RKE2 bin path
+  set_fact:
+    rke2_bin_path: "{{ '/usr/local/bin/rke2' if  usr_local.stat.writeable == True else ' /opt/rke2/bin/rke2' }}"
+- name: Run RKE2 script
+  ansible.builtin.command:
+    cmd: '{{ rke2_install_script_dir }}/rke2.sh'
+  environment:
+    INSTALL_RKE2_VERSION: '{{ rke2_version }}'
+    INSTALL_RKE2_CHANNEL_URL: '{{ rke2_channel_url }}'
+    INSTALL_RKE2_CHANNEL: '{{ rke2_channel }}'
+- name: Check RKE2 version
+  ansible.builtin.shell: |
+    set -o pipefail
+    {{ rke2_bin_path }} --version | grep -E "rke2 version" | awk '{print $3}'
+  args:
+    executable: /bin/bash
+  changed_when: false
+  register: installed_rke2_version
+  when: '"rke2-server.service" in ansible_facts.services'
+- name: Copy Custom Manifests
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: '{{ rke2_data_path }}/server/manifests/'
+    owner: root
+    group: root
+    mode: 0644
+  with_items: '{{ rke2_custom_manifests }}'
+  when: rke2_custom_manifests
+- name: Copy Static Pods
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: '{{ rke2_data_path }}/agent/pod-manifests/'
+    owner: root
+    group: root
+    mode: 0644
+  with_items: '{{ rke2_static_pods }}'
+  when: rke2_static_pods

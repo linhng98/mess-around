@@ -1,16 +1,13 @@
----
 name: build and release new version document
 run-name: ${{ github.actor }} release new document version
 on:
   push:
     paths:
       - documents/**
-
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   KANIKO_CACHE_REPO: harbor.homelab.linhng98.com/kaniko-cache
-
 jobs:
   build-push-document-container:
     runs-on: homelab

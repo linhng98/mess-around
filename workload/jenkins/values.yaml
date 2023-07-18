@@ -1,4 +1,3 @@
----
 jenkins:
   controller:
     adminSecret: true
@@ -19,13 +18,11 @@ jenkins:
       - git:5.0.0
       - configuration-as-code:1569.vb_72405b_80249
       - blueocean:1.27.1
-
     initializeOnce: true
     statefulSetAnnotations:
       reloader.stakater.com/auto: 'true'
     podAnnotations:
       reloader.stakater.com/auto: 'true'
-
     ingress:
       enabled: true
       annotations:
@@ -37,11 +34,9 @@ jenkins:
         - secretName: *host
           hosts:
             - *host
-
     # Expose Prometheus metrics
     prometheus:
       enabled: true
-
   agent:
     enabled: true
     resources:
@@ -51,7 +46,6 @@ jenkins:
       limits:
         cpu: 4
         memory: 8Gi
-
     podTemplates:
       build-tools: |
         - name: build-tools

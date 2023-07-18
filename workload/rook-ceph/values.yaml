@@ -1,4 +1,3 @@
----
 rook-ceph-cluster:
   operatorNamespace: rook-ceph-operator
   configOverride: |
@@ -7,7 +6,6 @@ rook-ceph-cluster:
     osd_max_backfills = 3
     osd_recovery_max_active = 3
     mon_osd_down_out_interval = 600
-
   toolbox:
     enabled: true
     resources:
@@ -17,17 +15,14 @@ rook-ceph-cluster:
       requests:
         cpu: 10m
         memory: 128Mi
-
   monitoring:
     enabled: true
     createPrometheusRules: false
-
   cephClusterSpec:
     dashboard:
       enabled: true
       port: 8443
       ssl: false
-
     resources:
       mgr:
         limits:
@@ -85,13 +80,10 @@ rook-ceph-cluster:
         requests:
           cpu: 50m
           memory: 100Mi
-
     removeOSDsIfOutAndSafeToRemove: true
-
     storage:
       useAllNodes: true
       useAllDevices: true
-
   ingress:
     dashboard:
       ingressClassName: nginx
@@ -104,7 +96,6 @@ rook-ceph-cluster:
         - secretName: rook-ceph-tls
           hosts:
             - *host
-
   cephBlockPools:
     - name: ceph-blockpool
       spec:
@@ -128,7 +119,6 @@ rook-ceph-cluster:
           csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
           csi.storage.k8s.io/node-stage-secret-namespace: '{{ .Release.Namespace }}'
           csi.storage.k8s.io/fstype: ext4
-
   cephFileSystems:
     - name: ceph-filesystem
       spec:
@@ -167,7 +157,6 @@ rook-ceph-cluster:
           csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
           csi.storage.k8s.io/node-stage-secret-namespace: '{{ .Release.Namespace }}'
           csi.storage.k8s.io/fstype: ext4
-
   cephObjectStores:
     - name: ceph-objectstore
       # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Object-Storage/ceph-object-store-crd.md#object-store-settings for available configuration

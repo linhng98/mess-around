@@ -1,4 +1,3 @@
----
 deploychart:
   fullnameOverride: docusaurus
   replicaCount: 2
@@ -6,16 +5,13 @@ deploychart:
     repository: linhng98/mess-around-docs
     tag: 62a53589
     containerPort: 80
-
   strategy:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
-
   service:
     type: ClusterIP
     port: 80
-
   ingress:
     enabled: true
     className: nginx
