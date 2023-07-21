@@ -3,5 +3,5 @@ name: system-app
 version: 0.0.0
 dependencies:
   - name: reloader
-    version: 1.0.30
+    version: 1.0.31
     repository: https://stakater.github.io/stakater-charts
