@@ -32,5 +32,4 @@ RUN yes | pacman --sync --refresh \
         python-netaddr \
         python-pip \
         sudo \
-        terraform 
-
+        terraform
