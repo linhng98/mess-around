@@ -14,25 +14,14 @@
       - name: ubuntu
         gecos: ubuntu
         sudo: ALL=(ALL) NOPASSWD:ALL
-        lock_passwd: true
+        lock_passwd: false
         ssh_authorized_keys:
           - {{ ssh_public_key }}
 
   network:
     version: 2
     ethernets:
-      enp1s0:
-        match:
-          macaddress: {{ hostvars[item]["mac"] }}
-        dhcp4: no
-        addresses:
-          - {{ hostvars[item]["ansible_host"] }}/{{ (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ansible.utils.ipaddr('prefix') }}
-        gateway4: {{ ansible_default_ipv4["gateway"] }}
-        nameservers:
-          addresses:
-            - 8.8.8.8
-            - 1.1.1.1
-      enp0s3:
+      eno1:
         match:
           macaddress: {{ hostvars[item]["mac"] }}
         dhcp4: no

@@ -34,6 +34,8 @@ spec:
           value: "false"
         - name: enableUPNP
           value: "false"
+        - name : lb_enable
+          value: "true"
         - name: svc_enable
           value: "false"
         - name: vip_leaderelection
@@ -48,7 +50,7 @@ spec:
           value: "true"
         - name: address
           value: "{{ rke2_api_ip }}"
-        image: ghcr.io/kube-vip/kube-vip:v0.5.0
+        image: ghcr.io/kube-vip/kube-vip:v0.6.4
         imagePullPolicy: Always
         name: kube-vip
         resources: {}

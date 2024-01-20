@@ -39,13 +39,9 @@
     src: '{{ role_path }}/files/data/os/casper/vmlinuz'
     dest: '{{ role_path }}/files/data/ubuntu/vmlinuz'
 - name: Start docker-compose pxe server
-  community.docker.docker_compose:
-    project_src: '{{ role_path }}/files/'
-    files:
-      - docker-compose.yaml
-    state: present
-    restarted: true
-    build: true
+  shell:
+    cmd: "docker-compose -f docker-compose.yaml up -d"
+    chdir: '{{ role_path }}/files'
 - name: Wake on lan
   community.general.wakeonlan:
     mac: "{{ hostvars[item]['mac'] }}"

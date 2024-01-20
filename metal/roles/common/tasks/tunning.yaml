@@ -4,3 +4,9 @@
     value: '{{ item.value }}'
     state: present
   loop: '{{ kernel_tunnings | dict2items }}'
+- name: Load kernel modules
+  community.general.modprobe:
+    name: "{{ item }}"
+    state: present
+    persistent: present
+  loop: "{{ kernel_modules }}"
