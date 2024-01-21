@@ -8,9 +8,9 @@ export ARGO_CHART="$(shell pwd)/../workload/argo-cd"
 
 bootstrap:
 	kubectl --kubeconfig ${KUBECONFIG} get nodes
-	kubectl --kubeconfig ${KUBECONFIG} apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.10.0/system-upgrade-controller.yaml
-	kubectl --kubeconfig ${KUBECONFIG} apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-servicemonitors.yaml
-	kubectl --kubeconfig ${KUBECONFIG} apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/crds/crd-prometheusrules.yaml
+	kubectl --kubeconfig ${KUBECONFIG} apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.13.2/system-upgrade-controller.yaml
+	kubectl --kubeconfig ${KUBECONFIG} apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/charts/crds/crds/crd-servicemonitors.yaml
+	kubectl --kubeconfig ${KUBECONFIG} apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/charts/crds/crds/crd-prometheusrules.yaml
 	helm dependency update ${ARGO_CHART}
 	helm dependency update ${VAULT_CHART}
 	helm dependency update ${ROOK_OPERATOR_CHART}
