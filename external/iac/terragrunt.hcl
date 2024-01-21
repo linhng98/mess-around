@@ -38,8 +38,8 @@ remote_state {
   }
 }
 
-terraform_version_constraint  = ">= 1.0.0"
-terragrunt_version_constraint = ">= 0.31.0"
+terraform_version_constraint  = ">= 1.7.0"
+terragrunt_version_constraint = ">= 0.54.0"
 
 inputs = {
   account_name = local.account_name

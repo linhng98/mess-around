@@ -7,10 +7,6 @@ include {
   expose = true
 }
 
-dependency "ec2" {
-  config_path = "../../../ec2/frp-server"
-}
-
 dependency "zones" {
   config_path = "../zones"
 }
@@ -20,10 +16,10 @@ inputs = {
   records = [
     {
       name = "*"
-      type = "A"
+      type = "CNAME"
       ttl  = 3600
       records = [
-        dependency.ec2.outputs.eip_ip,
+        "linhng98.ddns.net",
       ]
     },
   ]
