@@ -3,7 +3,7 @@ atlantis:
   github:
     user: atlantisbot
     token: <path:homelab/data/access-token/github/mess-around#token>
-    secret: <path:homelab/data/webhook/github-action/mess-around#secret>
+    secret: <path:homelab/data/webhook/github/atlantis#secret>
   image:
     repository: linhng98/atlantis
     tag: 0.1.0
