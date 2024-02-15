@@ -42,15 +42,8 @@ argo-cd:
         nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         cert-manager.io/cluster-issuer: letsencrypt-prod
       ingressClassName: nginx
-      paths:
-        - /
-      hosts:
-        - &host argocd.homelab.linhng98.com
-      tls:
-        - secretName: argocd-tls
-          hosts:
-            - *host
-      https: true
+      hostname: argocd.homelab.linhng98.com
+      tls: true
   repoServer:
     enabled: true
     metrics: *metrics
