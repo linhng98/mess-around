@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: jenkins-admin
-type: Opaque
-data:
-  user: <path:homelab/data/secrets/jenkins#user | base64encode>
-  password: <path:homelab/data/secrets/jenkins#password | base64encode>
