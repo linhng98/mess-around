@@ -10,10 +10,10 @@ ingress-nginx:
     opentelemetry:
       enabled: true
     config:
-      enable-opentelemetry: 'true'
-      opentelemetry-operation-name: HTTP $request_method $service_name $uri
-      otlp-collector-host: otel-collector-collector.otel-collector.svc
-      otlp-collector-port: '4317'
-      otel-service-name: ingress-nginx
-      otel-sampler: AlwaysOn
-      otel-sampler-ratio: '1.0'
+      enable-opentelemetry: 'false'
+      #opentelemetry-operation-name: HTTP $request_method $service_name $uri
+      #otlp-collector-host: otel-collector-collector.otel-collector.svc
+      #otlp-collector-port: '4317'
+      #otel-service-name: ingress-nginx
+      #otel-sampler: AlwaysOn
+      #otel-sampler-ratio: '1.0'
