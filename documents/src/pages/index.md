@@ -10,12 +10,12 @@ title: Introduce
 
 - `M`ultiplatform support, avoid vendor lock-in that any enterprise should not be immersed in.
 - `E`fficency and effortless bootstrap kubernete framework.
-- `S`implicity is prequesite for reliability.
+- `S`implicity is prerequisite for reliability.
 - `S`calability design in mind.
 - `A`utomation help people reduce human error, improve productivity.
 - `R`eliability targeted, improve end user experience and development velocity.
 - `O`ptimal solution.
-- `U`tility configuration could be reused and easy to cusomize.
+- `U`tility configuration could be reused and easy to customize.
 - `N`ative Kubernete applications, well-tested and production ready.
 - `D`urability is a part of what makes a great system.
 
