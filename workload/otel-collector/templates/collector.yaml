@@ -16,7 +16,7 @@ spec:
           http:
     processors:
       tail_sampling:
-        decision_wait: 120s
+        decision_wait: 20s
         policies:
           - name: high-latency
             type: latency
