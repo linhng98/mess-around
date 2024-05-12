@@ -1,0 +1,36 @@
+version: "3"
+services:
+  nats:
+    image: nats
+    command: ["-js"]
+    ports:
+      - "8222:8222"
+      - "6222:6222"
+      - "4222:4222"
+  backend:
+    build:
+      context: backend
+    command: ["fastapi", "run", "--workers", "4"]
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - nats
+  ai-service:
+    build:
+      context: ai-service
+    command: ["fastapi", "run", "--workers", "4"]
+    env_file:
+      - ./ai-service/.env
+    depends_on:
+      - nats
+  message-provider:
+    build:
+      context: message-provider
+    restart: always
+    env_file:
+      - ./message-provider/.env
+    depends_on:
+      - nats
+      - ai-service
