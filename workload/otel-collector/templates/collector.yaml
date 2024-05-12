@@ -37,6 +37,8 @@ spec:
         protocol:
           otlp:
             timeout: 1s
+            tls:
+              insecure: true
         resolver:
           dns:
             hostname: otel-collector-collector-headless.otel-collector
