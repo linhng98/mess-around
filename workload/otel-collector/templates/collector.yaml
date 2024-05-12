@@ -75,7 +75,6 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: otel-collector-collector
-    apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: otel-collector-collector
