@@ -40,8 +40,8 @@ spec:
             tls:
               insecure: true
         resolver:
-          dns:
-            hostname: otel-collector-collector-headless.otel-collector
+          k8s:
+            service: otel-collector-collector.otel-collector
             port: 4317
 
     service:
