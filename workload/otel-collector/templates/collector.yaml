@@ -10,10 +10,12 @@ spec:
       jaeger:
         protocols:
           grpc:
-      otlp:
+      otlp/http:
+        protocols:
+          http:
+      otlp/grpc:
         protocols:
           grpc:
-          http:
     processors:
       tail_sampling:
         decision_wait: 20s
@@ -30,10 +32,23 @@ spec:
     exporters:
       otlphttp:
         endpoint: http://tempo-distributor.tempo:4318
+      loadbalancing:
+        routing_key: "traceID"
+        protocol:
+          otlp:
+            timeout: 1s
+        resolver:
+          dns:
+            hostname: otel-collector-collector-headless.otel-collector
+            port: 4317
 
     service:
       pipelines:
-        traces:
-          receivers: [otlp, jaeger, zipkin]
+        traces/loadbalancer:
+          receivers: [otlp/http]
+          processors: []
+          exporters: [loadbalancing]
+        traces/backend:
+          receivers: [otlp/grpc]
           processors: [tail_sampling]
           exporters: [otlphttp]
