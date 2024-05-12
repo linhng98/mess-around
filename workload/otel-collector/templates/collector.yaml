@@ -42,7 +42,6 @@ spec:
         resolver:
           k8s:
             service: otel-collector-collector.otel-collector
-            port: 4317
 
     service:
       pipelines:
