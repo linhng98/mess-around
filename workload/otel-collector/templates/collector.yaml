@@ -16,12 +16,12 @@ spec:
           http:
     processors:
       tail_sampling:
-        decision_wait: 10s
+        decision_wait: 120s
         policies:
           - name: high-latency
             type: latency
             latency:
-              threshold_ms: 250
+              threshold_ms: 500
           - name: error
             type: status_code
             status_code:
