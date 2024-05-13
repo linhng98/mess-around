@@ -12,7 +12,7 @@ services:
       context: backend
     command: ["fastapi", "run", "--workers", "4"]
     env_file:
-      - ./backend/.env
+      - ./backend/.env.example
     ports:
       - "8000:8000"
     depends_on:
@@ -22,7 +22,7 @@ services:
       context: ai-service
     command: ["fastapi", "run", "--workers", "4"]
     env_file:
-      - ./ai-service/.env
+      - ./ai-service/.env.example
     depends_on:
       - nats
   message-provider:
@@ -30,7 +30,7 @@ services:
       context: message-provider
     restart: always
     env_file:
-      - ./message-provider/.env
+      - ./message-provider/.env.example
     depends_on:
       - nats
       - ai-service
