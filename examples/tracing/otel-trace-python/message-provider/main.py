@@ -17,6 +17,7 @@ from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExport
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
+from opentelemetry.propagators.jaeger import JaegerPropagator
 
 # Service name is required for most backends
 resource = Resource(attributes={SERVICE_NAME: os.environ["SERVICE_NAME"]})
@@ -67,6 +68,8 @@ async def main():
 def send_request(body):
     headers = {}
     TraceContextTextMapPropagator().inject(headers)
+    JaegerPropagator().inject(headers)
+    print(headers)
     requests.post(os.environ["AI_SERVICE_URL"], json=body, headers=headers)
 
 
