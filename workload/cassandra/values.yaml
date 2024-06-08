@@ -1,0 +1,8 @@
+cassandra:
+  dbUser:
+    user: cassandra
+    password: "<path:homelab/data/secrets/cassandra#password>"
+  replicaCount: 3
+  persistence:
+    enabled: true
+    size: 5Gi
