@@ -1,3 +1,4 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -23,3 +24,30 @@ spec:
     - hosts:
         - *host
       secretName: kibana-tls
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
+  name: elastic
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: &host elastic.homelab.linhng98.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: elastic-cluster-es-http
+                port:
+                  number: 9200
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - *host
+      secretName: elastic-tls
