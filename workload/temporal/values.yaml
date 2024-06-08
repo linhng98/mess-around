@@ -6,12 +6,20 @@ temporal:
         defaultStore: default
         default:
           driver: "cassandra"
-        cassandra:
-          hosts: ["cassandra.cassandra.svc.cluster.local"]
-          port: 9042
-          keyspace: temporal
-          user: "cassandraa"
-          password: "<path:homelab/data/secrets/cassandra#password>"
+          cassandra:
+            hosts: ["cassandra.cassandra.svc.cluster.local"]
+            port: 9042
+            keyspace: temporal
+            user: "cassandra"
+            password: "<path:homelab/data/secrets/cassandra#password>"
+        visibility:
+          driver: "cassandra"
+          cassandra:
+            hosts: ["cassandra.cassandra.svc.cluster.local"]
+            port: 9042
+            keyspace: temporal
+            user: "cassandra"
+            password: "<path:homelab/data/secrets/cassandra#password>"
   admintools:
     enabled: true
   web:
