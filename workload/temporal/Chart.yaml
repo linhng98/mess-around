@@ -4,4 +4,4 @@ version: 0.0.0
 dependencies:
   - name: temporal
     version: 0.40.0
-    repository: file://charts-temporal
+    repository: file://chart-temporal
