@@ -4,5 +4,3 @@ charts
 .terragrunt*
 .terraform*
 debug.yaml
-
-!workload/temporal/charts
