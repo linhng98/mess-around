@@ -1,0 +1,38 @@
+# This sample workflow execute 3 steps in sequence.
+# 1) sampleActivity1, takes arg1 as input, and put result as result1.
+# 2) sampleActivity2, takes result1 as input, and put result as result2.
+# 3) sampleActivity3, takes args2 and result2 as input, and put result as result3.
+
+variables:
+  jobID: "680c2145-bb35-4c70-895d-f6eba3704f2e"
+  workflowID: "51c214ed-56e0-4f6c-8bde-f9b82559d898"
+  tenantID: "50d290ed-8c00-4452-b221-ea24bb406cd5"
+  data: "somedata"
+root:
+  sequence:
+    elements:
+      - activity:
+          name: PreProcessing
+          arguments:
+            - data
+          result: preprocessing_res
+      - activity:
+          name: Layout
+          arguments:
+            - preprocessing_res
+          result: layout_res
+      - activity:
+          name: Ocr
+          arguments:
+            - layout_res
+          result: ocr_res
+      - activity:
+          name: Kv
+          arguments:
+            - ocr_res
+          result: kv_res
+      - activity:
+          name: PostProcessing
+          arguments:
+            - kv_res
+          result: postprocessing_res
