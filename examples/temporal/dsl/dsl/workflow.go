@@ -3,8 +3,8 @@ package dsl
 import (
 	"time"
 
+	"go.temporal.io/sdk/temporal"
 	"go.temporal.io/sdk/workflow"
-  "go.temporal.io/sdk/temporal"
 )
 
 type (
@@ -65,8 +65,8 @@ func FlaxDSLWorkflow(ctx workflow.Context, dslWorkflow Workflow) ([]byte, error)
 	}
 
 	ao := workflow.ActivityOptions{
-    StartToCloseTimeout: 2 * time.Second,
-    RetryPolicy: retrypolicy,
+		StartToCloseTimeout: 2 * time.Second,
+		RetryPolicy:         retrypolicy,
 	}
 
 	ctx = workflow.WithActivityOptions(ctx, ao)
