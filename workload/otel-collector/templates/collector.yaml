@@ -30,6 +30,7 @@ spec:
             status_code:
               status_codes:
                 - ERROR
+      batch:
     exporters:
       otlphttp:
         endpoint: http://tempo-distributor.tempo:4318
@@ -52,7 +53,7 @@ spec:
           exporters: [loadbalancing]
         traces/backend:
           receivers: [otlp/grpc]
-          processors: [tail_sampling]
+          processors: [batch]
           exporters: [otlphttp]
 ---
 kind: Role
