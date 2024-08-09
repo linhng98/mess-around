@@ -3,5 +3,5 @@ version: 0.0.0
 name: blog
 dependencies:
   - name: deploychart
-    version: 4.1.1
+    version: 4.3.0
     repository: https://linhng98.github.io/helm-charts
