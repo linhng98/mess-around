@@ -1,6 +1,9 @@
 FROM archlinux
 ARG USER
 RUN pacman -Syyu --noconfirm
+RUN rm -rf /etc/pacman.d/gnupg
+RUN pacman-key --init
+RUN pacman-key --populate
 
 # Sort mirrors by speed
 RUN pacman --sync --refresh --noconfirm \
