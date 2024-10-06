@@ -1,6 +1,5 @@
 .POSIX:
 
-export KUBECONFIG="$(shell pwd)/../metal/roles/rke2/files/kubeconfig.yaml"
 export ROOK_OPERATOR_CHART="$(shell pwd)/../workload/rook-ceph-operator"
 export ROOK_CLUSTER_CHART="$(shell pwd)/../workload/rook-ceph"
 export VAULT_CHART="$(shell pwd)/../workload/vault"
@@ -8,7 +7,7 @@ export ARGO_CHART="$(shell pwd)/../workload/argo-cd"
 
 bootstrap:
 	kubectl --kubeconfig ${KUBECONFIG} get nodes
-	kubectl --kubeconfig ${KUBECONFIG} apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.13.2/system-upgrade-controller.yaml
+	kubectl --kubeconfig ${KUBECONFIG} apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.14.1/system-upgrade-controller.yaml
 	kubectl --kubeconfig ${KUBECONFIG} apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/charts/crds/crds/crd-servicemonitors.yaml
 	kubectl --kubeconfig ${KUBECONFIG} apply -f https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/charts/crds/crds/crd-prometheusrules.yaml
 	helm dependency update ${ARGO_CHART}
