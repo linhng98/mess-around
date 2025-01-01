@@ -4,5 +4,6 @@ charts
 .terragrunt*
 .terraform*
 debug.yaml
+metal/roles/pxe_server/files/data/os
 
 !workload/temporal/chart-temporal/charts

@@ -1,11 +1,11 @@
 host_key_checking: false
 ssh_public_key: "{{lookup('file', '~/.ssh/id_rsa.pub') }}"
 ssh_private_key_file: ~/.ssh/id_rsa
-rke2_api_ip: 192.168.1.100
-rke2_lb_ip: 192.168.1.200
-hashed_passwd: $6$salt$A5gVKxiPsiIqO8bytCymrpDYiUayc8BRNGeMOTujVbqt8Vje8e0iFgtWQ9BGCiB8RhDQNkHBtuUMisaKZxW.8/ # generated using command "openssl passwd -6 -salt salt yourpassword"
+rke2_api_ip: 192.168.2.100
+rke2_lb_ip: 192.168.2.200
+hashed_passwd: $6$salt$pNBh4jjCwRK2.tkh9KmImaaflcblYXbXIEBWu2bRXKjubIMbS1RSwnJIGsCygztUWp5jXwdAmdkV1FBkT8gCs1 # generated using command "openssl passwd -6 -salt salt yourpassword"
 apiserver_url: controlplane.homelab.linhng98.com
-rke2_version: v1.30.5+rke2r1
+rke2_version: v1.31.4+rke2r1
 rke2_cni: cilium
 kernel_modules:
   - ip_vs

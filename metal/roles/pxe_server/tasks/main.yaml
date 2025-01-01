@@ -1,7 +1,7 @@
 - name: Render user-data for autoinstall
   template:
     src: user-data.yaml.j2
-    dest: '{{ role_path }}/files/data/ubuntu/user-data'
+    dest: "{{ role_path }}/files/data/ubuntu/user-data"
     mode: 0644
 - name: Render machine specific init config
   template:
@@ -12,40 +12,40 @@
 - name: Render dnsmasq server config
   template:
     src: dnsmasq.conf.j2
-    dest: '{{ role_path }}/files/data/configs/dnsmasq.conf'
+    dest: "{{ role_path }}/files/data/configs/dnsmasq.conf"
     mode: 0644
 - name: Render grubx64 config
   template:
     src: grub.cfg.j2
-    dest: '{{ role_path }}/files/data/configs/grub.cfg'
+    dest: "{{ role_path }}/files/data/configs/grub.cfg"
     mode: 0644
 - name: Download ubuntu iso image
   ansible.builtin.get_url:
-    url: '{{ ubuntu_release_iso }}'
-    dest: '{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}'
+    url: "{{ ubuntu_release_iso }}"
+    dest: "{{ role_path }}/files/data/ubuntu/{{ ubuntu_release_iso | basename }}"
   register: iso
 - name: Extract the ISO
   command:
     cmd: xorriso -osirrox on -indev {{ iso.dest }} -extract / {{ role_path }}/files/data/os
-    creates: '{{ role_path }}/files/data/os/.treeinfo'
+    creates: "{{ role_path }}/files/data/os/.treeinfo"
 - name: Add write permission to os dir
-  ansible.builtin.command: chmod u+w -R {{ role_path }}/files/data/os
+  ansible.builtin.command: chmod -R u+w {{ role_path }}/files/data/os
 - name: Copy initrd
   ansible.builtin.copy:
-    src: '{{ role_path }}/files/data/os/casper/initrd'
-    dest: '{{ role_path }}/files/data/ubuntu/initrd'
+    src: "{{ role_path }}/files/data/os/casper/initrd"
+    dest: "{{ role_path }}/files/data/ubuntu/initrd"
 - name: Copy vmlinuz
   ansible.builtin.copy:
-    src: '{{ role_path }}/files/data/os/casper/vmlinuz'
-    dest: '{{ role_path }}/files/data/ubuntu/vmlinuz'
+    src: "{{ role_path }}/files/data/os/casper/vmlinuz"
+    dest: "{{ role_path }}/files/data/ubuntu/vmlinuz"
 - name: Start docker-compose pxe server
   shell:
     cmd: "docker-compose -f docker-compose.yaml up -d"
-    chdir: '{{ role_path }}/files'
+    chdir: "{{ role_path }}/files"
 - name: Wake on lan
   community.general.wakeonlan:
     mac: "{{ hostvars[item]['mac'] }}"
-    broadcast: '{{ ansible_default_ipv4.broadcast }}'
+    broadcast: "{{ ansible_default_ipv4.broadcast }}"
   delegate_to: localhost
   loop: "{{ groups['metal'] }}"
 - name: Check server ready
