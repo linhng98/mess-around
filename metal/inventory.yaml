@@ -16,7 +16,7 @@ metal:
           ceph_disks: [sda]
         metal2:
           ansible_host: 192.168.2.103
-          mac: fc:3f:db:0b:34:6c
+          mac: fc:3f:db:10:aa:ff
           disk: nvme0n1
           root_disk_size: -1
           ceph_disks: [sda]
