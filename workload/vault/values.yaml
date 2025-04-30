@@ -45,6 +45,14 @@ vault:
           }
 
           service_registration "kubernetes" {}
+
+          seal "awskms" {
+            region     = "ap-southeast-1"
+            kms_key_id = "5eed1709-d530-4150-9855-1457f5eedf4b"  #gitleaks:allow
+            role_arn = "arn:aws:iam::001687204912:role/mess-around_AWS_KMS_Encrypt_Role"
+            web_identity_token_file = "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
+          }
+
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -56,3 +64,8 @@ vault:
         - secretName: vault-tls
           hosts:
             - *host
+
+    serviceAccount:
+      create: true
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::001687204912:role/mess-around_AWS_KMS_Encrypt_Role
