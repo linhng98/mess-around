@@ -10,8 +10,6 @@ atlantis:
     pullPolicy: IfNotPresent
   environment:
     TF_PLUGIN_CACHE_DIR: /atlantis-data/plugin-cache
-  loadEnvFromSecrets:
-    - aws-credential
   repoConfig: |
     ---
     repos:
@@ -78,3 +76,7 @@ atlantis:
           - *host
   servicemonitor:
     enabled: true
+  serviceAccount:
+    create: true
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::001687204912:role/mess-around_Atlantis_Role
