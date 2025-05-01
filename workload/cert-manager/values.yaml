@@ -10,7 +10,7 @@ cert-manager:
       eks.amazonaws.com/role-arn: arn:aws:iam::001687204912:role/mess-around_CertManager_Role
 
 issuer:
-  email: example@gmail.com
+  email: linhnguyen.workspace@gmail.com
 x509-cert-exporter:
   podAnnotations:
     prometheus.io/port: "9793"

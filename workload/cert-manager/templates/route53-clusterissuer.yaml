@@ -10,4 +10,6 @@ spec:
       name: letsencrypt-route53-prod
     solvers:
       - dns01:
-          route53: {}
+          route53:
+            region: ap-southeast-1
+            hostedZoneID: Z07528071MN1FZYLDTDBA
