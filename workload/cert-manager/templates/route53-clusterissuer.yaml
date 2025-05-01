@@ -4,6 +4,8 @@ metadata:
   name: letsencrypt-route53-prod
 spec:
   acme:
+    privateKeySecretRef:
+      name: letsencrypt-route53-prod
     solvers:
       - dns01:
           route53: {}
