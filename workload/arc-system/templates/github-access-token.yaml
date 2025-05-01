@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-access-token
+type: Opaque
+stringData:
+  github_token: <path:homelab/data/access-token/github/mess-around#token>

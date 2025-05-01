@@ -1,0 +1,65 @@
+gha-runner-scale-set-controller:
+  replicaCount: 1
+gha-runner-scale-set:
+  githubConfigUrl: "https://github.com/linhng98"
+  githubConfigSecret: github-access-token
+  maxRunners: 4
+  minRunners: 1
+  runnerScaleSetName: "gha-selfhost"
+  template:
+    spec:
+      initContainers:
+        - name: init-dind-externals
+          image: &runner_tag ampacsvn/actions-runner:v0.0.10
+          command: ["cp", "-r", "-v", "/home/runner/externals/.", "/home/runner/tmpDir/"]
+          volumeMounts:
+            - name: dind-externals
+              mountPath: /home/runner/tmpDir
+      containers:
+        - name: runner
+          image: *runner_tag
+          command: ["/home/runner/run.sh"]
+          env:
+            - name: DOCKER_HOST
+              value: unix:///run/docker/docker.sock
+          volumeMounts:
+            - name: work
+              mountPath: /home/runner/_work
+            - name: dind-sock
+              mountPath: /run/docker
+              readOnly: true
+            - name: &buildx_cache buildx-cache-pvc
+              mountPath: /tmp/.buildx-cache/
+        - name: dind
+          image: docker:dind
+          args:
+            - dockerd
+            - --host=unix:///run/docker/docker.sock
+            - --group=$(DOCKER_GROUP_GID)
+          env:
+            - name: DOCKER_GROUP_GID
+              value: "123"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: work
+              mountPath: /home/runner/_work
+            - name: dind-sock
+              mountPath: /run/docker
+            - name: dind-externals
+              mountPath: /home/runner/externals
+            - name: *buildx_cache
+              mountPath: /tmp/.buildx-cache/
+      volumes:
+        - name: work
+          emptyDir: {}
+        - name: dind-sock
+          emptyDir: {}
+        - name: dind-externals
+          emptyDir: {}
+        - name: *buildx_cache
+          persistentVolumeClaim:
+            claimName: *buildx_cache
+  controllerServiceAccount:
+    namespace: arc-system
+    name: arc-system-gha-rs-controller
