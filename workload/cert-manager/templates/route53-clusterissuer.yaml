@@ -4,6 +4,8 @@ metadata:
   name: letsencrypt-route53-prod
 spec:
   acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: "{{ .Values.issuer.email }}"
     privateKeySecretRef:
       name: letsencrypt-route53-prod
     solvers:
