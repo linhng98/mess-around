@@ -37,14 +37,7 @@ temporal:
           hosts:
             - *host
   elasticsearch:
-    enabled: false
-    external: true
-    host: "elastic-cluster-es-http.eck"
-    port: "9200"
-    scheme: "https"
-    logLevel: "error"
-    username: "elastic"
-    password: "<path:homelab/data/secrets/elastic#password>"
+    enabled: true
   prometheus:
     enabled: false
   grafana:
