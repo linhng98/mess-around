@@ -39,9 +39,9 @@ temporal:
   elasticsearch:
     enabled: false
     external: true
-    host: "elastic.homelab.linhng98.com"
-    port: "443"
-    scheme: "https"
+    host: "elastic-cluster-es-http.eck"
+    port: "9200"
+    scheme: "http"
     logLevel: "error"
     username: "elastic"
     password: "<path:homelab/data/secrets/elastic#password>"
