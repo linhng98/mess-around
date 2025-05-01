@@ -1,7 +1,7 @@
 gha-runner-scale-set-controller:
   replicaCount: 1
 gha-runner-scale-set:
-  githubConfigUrl: "https://github.com/linhng98"
+  githubConfigUrl: "https://github.com/linhng98/mess-around"
   githubConfigSecret: github-access-token
   maxRunners: 4
   minRunners: 1
