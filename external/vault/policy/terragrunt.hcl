@@ -11,11 +11,10 @@ inputs = {
   policies = {
     readonly = {
       policy = <<EOF
-        path "secret/data/*" {
+        path "homelab/data/*" {
           capabilities = ["read", "list"]
         }
       EOF
     }
   }
 }
-
