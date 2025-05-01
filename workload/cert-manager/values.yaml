@@ -4,12 +4,17 @@ cert-manager:
     enabled: true
     servicemonitor:
       enabled: true
+  serviceAccount:
+    create: true
+    annotations:
+      eks.amazonaws.com/role-arn: mess-around_CertManager_Role
+
 issuer:
   email: example@gmail.com
 x509-cert-exporter:
   podAnnotations:
-    prometheus.io/port: '9793'
-    prometheus.io/scrape: 'true'
+    prometheus.io/port: "9793"
+    prometheus.io/scrape: "true"
   prometheusServiceMonitor:
     # -- Should a ServiceMonitor ressource be installed to scrape this exporter. For prometheus-operator (kube-prometheus) users.
     create: true

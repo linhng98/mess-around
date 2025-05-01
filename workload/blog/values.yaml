@@ -16,7 +16,7 @@ deploychart:
     enabled: true
     className: nginx
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
+      cert-manager.io/cluster-issuer: letsencrypt-route53-prod
     hosts:
       - host: &host docs.homelab.linhng98.com
         paths:

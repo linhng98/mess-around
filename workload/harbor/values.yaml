@@ -14,7 +14,7 @@ harbor:
       controller: default
       className: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt-route53-prod
         ingress.kubernetes.io/ssl-redirect: 'true'
         ingress.kubernetes.io/proxy-body-size: '0'
         nginx.ingress.kubernetes.io/ssl-redirect: 'true'

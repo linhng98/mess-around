@@ -26,7 +26,7 @@ actions-runner-controller:
       ingressClassName: nginx
       annotations:
         kubernetes.io/tls-acme: 'true'
-        cert-manager.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt-route53-prod
       hosts:
         - host: &host github-actions.homelab.linhng98.com
           paths:

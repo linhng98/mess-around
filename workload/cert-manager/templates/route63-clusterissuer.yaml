@@ -1,0 +1,9 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-route53-prod
+spec:
+  acme:
+    solvers:
+      - dns01:
+          route53: {}

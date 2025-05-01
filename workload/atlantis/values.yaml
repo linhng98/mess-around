@@ -69,7 +69,7 @@ atlantis:
     apiVersion: networking.k8s.io/v1
     ingressClassName: nginx
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
+      cert-manager.io/cluster-issuer: letsencrypt-route53-prod
     path: /
     host: &host atlantis.homelab.linhng98.com
     tls:
