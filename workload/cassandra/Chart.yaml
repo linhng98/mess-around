@@ -3,5 +3,5 @@ name: cassandra
 version: 0.0.0
 dependencies:
   - name: cassandra
-    version: 11.3.1
+    version: 12.3.5
     repository: https://charts.bitnami.com/bitnami
