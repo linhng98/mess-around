@@ -4,8 +4,8 @@ metadata:
   name: buildx-cache-pvc
 spec:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   resources:
     requests:
       storage: 100Gi
-  storageClassName: efs-sc
+  storageClassName: ceph-filesystem
