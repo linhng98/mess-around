@@ -7,7 +7,7 @@ cert-manager:
   serviceAccount:
     create: true
     annotations:
-      eks.amazonaws.com/role-arn: mess-around_CertManager_Role
+      eks.amazonaws.com/role-arn: arn:aws:iam::001687204912:role/mess-around_CertManager_Role
 
 issuer:
   email: example@gmail.com
