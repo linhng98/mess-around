@@ -41,7 +41,7 @@ temporal:
     external: true
     host: "elastic-cluster-es-http.eck"
     port: "9200"
-    scheme: "http"
+    scheme: "https"
     logLevel: "error"
     username: "elastic"
     password: "<path:homelab/data/secrets/elastic#password>"
