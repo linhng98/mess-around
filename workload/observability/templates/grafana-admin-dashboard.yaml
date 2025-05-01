@@ -3,6 +3,6 @@ kind: Secret
 metadata:
   name: grafana-admin-dashboard
 type: Opaque
-data:
-  admin-user: <path:homelab/data/secrets/grafana#admin-user | base64encode>
-  admin-password: <path:homelab/data/secrets/grafana#admin-password | base64encode>
+stringData:
+  admin-user: admin
+  admin-password: <path:homelab/data/secrets/grafana#password>

@@ -62,7 +62,7 @@ atlantis:
       cpu: 1000m
   # Optionally specify an username and a password for basic authentication
   basicAuth:
-    username: <path:homelab/data/secrets/atlantis#username>
+    username: admin
     password: <path:homelab/data/secrets/atlantis#password>
   ingress:
     enabled: true
