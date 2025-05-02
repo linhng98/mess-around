@@ -1,8 +1,6 @@
 opentelemetry-operator:
   replicaCount: 1
   manager:
-    collectorImage:
-      repository: otel/opentelemetry-collector-k8s
     resources:
       limits:
         cpu: 200m
