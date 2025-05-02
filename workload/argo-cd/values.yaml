@@ -1,9 +1,9 @@
 argo-cd:
   global:
     deploymentAnnotations:
-      reloader.stakater.com/auto: 'true'
+      reloader.stakater.com/auto: "true"
     statefulsetAnnotations:
-      reloader.stakater.com/auto: 'true'
+      reloader.stakater.com/auto: "true"
   configs:
     cm:
       create: true
@@ -22,7 +22,7 @@ argo-cd:
     name: application-controller
     replicas: 1
     args:
-      appResyncPeriod: '60'
+      appResyncPeriod: "60"
     metrics: &metrics
       enabled: true
       serviceMonitor:
@@ -59,7 +59,7 @@ argo-cd:
         command: [sh, -c]
         env:
           - name: AVP_VERSION
-            value: 1.11.0
+            value: 1.18.1
         args:
           - >-
             wget -O argocd-vault-plugin https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 && chmod +x argocd-vault-plugin && mv argocd-vault-plugin /custom-tools/
@@ -69,7 +69,7 @@ argo-cd:
     extraContainers:
       - name: avp-helm
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v2.8.0
+        image: quay.io/argoproj/argocd:v2.14.11
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
@@ -94,7 +94,7 @@ argo-cd:
       # argocd-vault-plugin with Kustomize
       - name: avp-kustomize
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v2.8.0
+        image: quay.io/argoproj/argocd:v2.14.11
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
@@ -119,7 +119,7 @@ argo-cd:
       # argocd-vault-plugin with plain YAML
       - name: avp
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v2.8.0
+        image: quay.io/argoproj/argocd:v2.14.11
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
