@@ -80,3 +80,7 @@ atlantis:
     create: true
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::001687204912:role/mess-around_Atlantis_Role
+  volumeClaim:
+    enabled: true
+    dataStorage: 5Gi
+    accessModes: ["ReadWriteOnce"]
