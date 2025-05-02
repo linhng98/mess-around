@@ -3,5 +3,5 @@ name: otel-collector
 version: 0.0.0
 dependencies:
   - name: opentelemetry-operator
-    version: 0.56.0
+    version: 0.88.3
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
