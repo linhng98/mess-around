@@ -1,6 +1,8 @@
 opentelemetry-operator:
   replicaCount: 1
   manager:
+    image:
+      repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
     resources:
       limits:
         cpu: 200m

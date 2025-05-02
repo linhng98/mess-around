@@ -5,7 +5,6 @@ metadata:
   name: otel-collector
 spec:
   mode: daemonset
-  image: otel/opentelemetry-collector-k8s:0.123.0
   config: |
     receivers:
       zipkin:
