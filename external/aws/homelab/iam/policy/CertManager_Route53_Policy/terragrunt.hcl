@@ -40,4 +40,3 @@ inputs = {
     }
   EOF
 }
-

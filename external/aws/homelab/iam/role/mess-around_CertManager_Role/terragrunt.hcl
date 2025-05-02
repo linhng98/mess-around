@@ -24,4 +24,3 @@ inputs = {
   ]
   oidc_fully_qualified_subjects = ["system:serviceaccount:cert-manager:cert-manager"]
 }
-

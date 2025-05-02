@@ -14,4 +14,3 @@ inputs = {
   url                    = "https://mess-around-oidc-provider.s3.ap-southeast-1.amazonaws.com"
   additional_thumbprints = []
 }
-

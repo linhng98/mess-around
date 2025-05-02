@@ -25,4 +25,3 @@ inputs = {
   key_users          = [dependency.kms_role.outputs.iam_role_arn]
   key_service_users  = [dependency.kms_role.outputs.iam_role_arn]
 }
-

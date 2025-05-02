@@ -37,5 +37,3 @@ remote_state {
 
 terraform_version_constraint  = ">= 1.10.0"
 terragrunt_version_constraint = ">= 0.77.0"
-
-
