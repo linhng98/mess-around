@@ -5,7 +5,7 @@ on:
 jobs:
   semantic-release:
     name: Release
-    runs-on: homelab
+    runs-on: gha-selfhost
     steps:
       - name: Checkout
         uses: actions/checkout@v3

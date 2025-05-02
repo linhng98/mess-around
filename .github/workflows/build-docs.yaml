@@ -10,7 +10,7 @@ env:
   KANIKO_CACHE_REPO: harbor.homelab.linhng98.com/kaniko-cache
 jobs:
   build-push-document-container:
-    runs-on: homelab
+    runs-on: gha-selfhost
     env:
       CONTAINER: document
       IMAGE: linhng98/mess-around-docs

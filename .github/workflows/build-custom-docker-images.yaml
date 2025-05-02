@@ -14,7 +14,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 jobs:
   build-push-custom-docker-image:
-    runs-on: homelab
+    runs-on: gha-selfhost
     steps:
       - uses: actions/checkout@v3
       - uses: dorny/paths-filter@v2

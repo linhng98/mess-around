@@ -4,7 +4,7 @@ on:
   pull_request:
 jobs:
   pre-commit:
-    runs-on: homelab
+    runs-on: gha-selfhost
     steps:
       - uses: actions/checkout@v3
       - name: run pre-commit check
