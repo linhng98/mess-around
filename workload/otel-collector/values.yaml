@@ -1,6 +1,8 @@
 opentelemetry-operator:
   replicaCount: 1
   manager:
+    collectorImage:
+      repository: "otel/opentelemetry-collector-k8s"
     image:
       repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
     resources:
