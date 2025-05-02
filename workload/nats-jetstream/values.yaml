@@ -1,23 +1,18 @@
 nats:
-  nats:
-    image:
-      repository: nats
-      pullPolicy: IfNotPresent
+  config:
+    cluster:
+      enabled: true
+      replicas: 3
     jetstream:
       enabled: true
-      memStorage:
+      fileStore:
         enabled: true
-        size: 1Gi
-      fileStorage:
-        enabled: true
-        storageDirectory: /data
-        size: 5Gi
-  cluster:
+        dir: /data
+        pvc:
+          enabled: true
+          size: 5Gi
+          storageClassName:
+  promExporter:
     enabled: true
-    replicas: 3
-  natsbox:
-    enabled: true
-  exporter:
-    enabled: true
-    serviceMonitor:
+    podMonitor:
       enabled: true
