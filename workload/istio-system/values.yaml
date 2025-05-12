@@ -37,19 +37,3 @@ gateway:
     limits:
       cpu: 100m
       memory: 1024Mi
-kiali-operator:
-  cr:
-    create: true
-    spec:
-      deployment:
-        accessible_namespaces:
-          - '**'
-      auth:
-        strategy: anonymous
-      server:
-        web_root: /
-      external_services:
-        prometheus:
-          url: http://mimir-nginx.mimir/prometheus
-          custom_headers:
-            X-Scope-OrgID: homelab
