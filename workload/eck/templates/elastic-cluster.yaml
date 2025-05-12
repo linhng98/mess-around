@@ -3,7 +3,7 @@ kind: Elasticsearch
 metadata:
   name: elastic-cluster
 spec:
-  version: 9.0.1
+  version: 8.11.3
   nodeSets:
     - name: master
       count: 3
