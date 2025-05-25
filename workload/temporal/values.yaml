@@ -39,7 +39,7 @@ temporal:
           hosts:
             - *host
   elasticsearch:
-    enabled: true
+    enabled: false
   prometheus:
     enabled: false
   grafana:
