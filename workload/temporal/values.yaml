@@ -8,7 +8,7 @@ temporal:
           driver: "sql"
           sql:
             driver: "postgres12"
-            host: postgresql
+            host: temporal-postgresql-hl
             port: 5432
             database: temporal
             user: postgres
@@ -17,7 +17,7 @@ temporal:
           driver: "sql"
           sql:
             driver: "postgres12"
-            host: postgresql
+            host: temporal-postgresql-hl
             port: 5432
             database: temporal_visibility
             user: postgres
