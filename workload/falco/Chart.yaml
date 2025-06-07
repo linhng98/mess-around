@@ -3,5 +3,5 @@ name: falco
 version: 0.0.0
 dependencies:
   - name: falco
-    version: 5.0.0
+    version: 5.0.3
     repository: https://falcosecurity.github.io/charts
