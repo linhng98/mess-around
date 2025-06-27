@@ -55,7 +55,7 @@ argo-cd:
         name: cmp-plugin
     initContainers:
       - name: download-tools
-        image: alpine:3.21
+        image: alpine:3.22
         command: [sh, -c]
         env:
           - name: AVP_VERSION
@@ -69,7 +69,7 @@ argo-cd:
     extraContainers:
       - name: avp-helm
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v3.0.3
+        image: quay.io/argoproj/argocd:v3.0.9
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
@@ -94,7 +94,7 @@ argo-cd:
       # argocd-vault-plugin with Kustomize
       - name: avp-kustomize
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v3.0.3
+        image: quay.io/argoproj/argocd:v3.0.9
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
@@ -119,7 +119,7 @@ argo-cd:
       # argocd-vault-plugin with plain YAML
       - name: avp
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v3.0.3
+        image: quay.io/argoproj/argocd:v3.0.9
         envFrom:
           - secretRef:
               name: argocd-vault-plugin-credential
