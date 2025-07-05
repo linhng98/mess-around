@@ -5,3 +5,6 @@ dependencies:
   - name: reloader
     version: 2.1.4
     repository: https://stakater.github.io/stakater-charts
+  - name: kyverno
+    version: 3.4.4
+    repository: https://kyverno.github.io/kyverno/
