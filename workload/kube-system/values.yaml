@@ -2,6 +2,3 @@ reloader:
   reloader:
     serviceMonitor:
       enabled: true
-kyverno:
-  crds:
-    install: true
