@@ -44,6 +44,13 @@ argo-cd:
       ingressClassName: nginx
       hostname: argocd.homelab.linhng98.com
       tls: true
+    extensions:
+      enabled: true
+      extensionList:
+        - name: rollout-extension
+          env:
+            - name: EXTENSION_URL
+              value: https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.7/extension.tar
   repoServer:
     enabled: true
     metrics: *metrics
