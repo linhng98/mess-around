@@ -151,3 +151,15 @@ argo-cd:
   applicationSet:
     enabled: true
     metrics: *metrics
+
+argo-rollouts:
+  installCRDs: true
+  keepCRDs: true
+
+  controller:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+  dashboard:
+    enabled: true
