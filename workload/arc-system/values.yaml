@@ -10,7 +10,7 @@ gha-runner-scale-set:
     spec:
       initContainers:
         - name: init-dind-externals
-          image: &runner_tag ampacsvn/actions-runner:v0.0.10
+          image: &runner_tag ampacsvn/actions-runner:v0.0.11
           command: ["cp", "-r", "-v", "/home/runner/externals/.", "/home/runner/tmpDir/"]
           volumeMounts:
             - name: dind-externals
