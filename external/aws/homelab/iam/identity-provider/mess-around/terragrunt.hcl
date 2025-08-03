@@ -1,5 +1,5 @@
 terraform {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-github-oidc-provider?ref=v5.58.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-github-oidc-provider?ref=v5.59.0"
 }
 
 include {

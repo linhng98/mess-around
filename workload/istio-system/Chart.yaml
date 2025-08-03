@@ -3,11 +3,11 @@ name: istio-system
 version: 0.0.0
 dependencies:
   - name: base
-    version: 1.26.2
+    version: 1.26.3
     repository: https://istio-release.storage.googleapis.com/charts
   - name: istiod
-    version: 1.26.2
+    version: 1.26.3
     repository: https://istio-release.storage.googleapis.com/charts
   - name: gateway
-    version: 1.26.2
+    version: 1.26.3
     repository: https://istio-release.storage.googleapis.com/charts
