@@ -1,5 +1,5 @@
 terraform {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-policy?ref=v5.59.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-policy?ref=v6.2.0"
 }
 
 include "root" {
