@@ -6,11 +6,11 @@ dependencies:
     version: 2.10.2
     repository: https://grafana.github.io/helm-charts
   - name: kube-prometheus-stack
-    version: 75.15.1
+    version: 75.18.1
     repository: https://prometheus-community.github.io/helm-charts
     alias: prom
   - name: grafana
-    version: 9.3.0
+    version: 9.3.4
     repository: https://grafana.github.io/helm-charts
   - name: metrics-server
     version: 3.13.0
