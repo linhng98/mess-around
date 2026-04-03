@@ -1,6 +1,6 @@
 services:
   apache2:
-    image: httpd:2.4.54-alpine
+    image: httpd:2.4.66-alpine3.23
     volumes:
       - ./data/ubuntu:/usr/local/apache2/htdocs/pxe/ubuntu
       - ./data/autoinstall.d:/usr/local/apache2/htdocs/pxe/autoinstall.d

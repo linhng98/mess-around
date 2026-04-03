@@ -2,29 +2,21 @@ metal:
   children:
     masters:
       hosts:
-        metal0:
-          ansible_host: 192.168.1.101
-          mac: c8:d3:ff:9a:1d:a1
-          disk: nvme0n1
-          root_disk_size: -1
-          ceph_disks: [sda]
         metal1:
-          ansible_host: 192.168.1.102
-          mac: fc:3f:db:0c:4c:f7
+          ansible_host: 192.168.1.101
+          mac: 8c:8c:aa:28:61:2a
           disk: nvme0n1
           root_disk_size: -1
           ceph_disks: [sda]
         metal2:
-          ansible_host: 192.168.1.103
-          mac: fc:3f:db:10:aa:ff
+          ansible_host: 192.168.1.102
+          mac: 8c:8c:aa:28:5e:56
           disk: nvme0n1
           root_disk_size: -1
           ceph_disks: [sda]
-    workers:
-      hosts:
         metal3:
-          ansible_host: 192.168.1.104
-          mac: fc:3f:db:0b:35:02
+          ansible_host: 192.168.1.103
+          mac: 6c:24:08:ed:3a:ce
           disk: nvme0n1
           root_disk_size: -1
           ceph_disks: [sda]

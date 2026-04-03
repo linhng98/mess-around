@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   creationTimestamp: null
-  name: kube-vip-api-server
+  name: kube-vip-ds
   namespace: kube-system
 spec:
   selector:
     matchLabels:
-      name: kube-vip-api-server
+      name: kube-vip-ds
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: kube-vip-api-server
+        name: kube-vip-ds
     spec:
       containers:
       - args:
@@ -37,7 +37,9 @@ spec:
         - name : lb_enable
           value: "true"
         - name: svc_enable
-          value: "false"
+          value: "true"
+        - name: svc_election
+          value: "true"
         - name: vip_leaderelection
           value: "true"
         - name: vip_leaseduration
@@ -50,7 +52,7 @@ spec:
           value: "true"
         - name: address
           value: "{{ rke2_api_ip }}"
-        image: ghcr.io/kube-vip/kube-vip:v0.6.4
+        image: ghcr.io/kube-vip/kube-vip:v1.1.2
         imagePullPolicy: Always
         name: kube-vip
         resources: {}
