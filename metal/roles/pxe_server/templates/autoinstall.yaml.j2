@@ -26,8 +26,8 @@
           macaddress: {{ hostvars[item]["mac"] }}
         dhcp4: no
         addresses:
-          - {{ hostvars[item]["ansible_host"] }}/{{ (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ansible.utils.ipaddr('prefix') }}
-        gateway4: {{ ansible_default_ipv4["gateway"] }}
+          - {{ hostvars[item]["ansible_host"] }}/{{ (ansible_facts['default_ipv4']['address'] + '/' + ansible_facts['default_ipv4']['netmask']) | ansible.utils.ipaddr('prefix') }}
+        gateway4: {{ ansible_facts['default_ipv4']['gateway'] }}
         nameservers:
           addresses:
             - 8.8.8.8

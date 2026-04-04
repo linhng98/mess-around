@@ -1,19 +1,15 @@
+port=0
 bind-interfaces
 
-dhcp-range={{ ansible_default_ipv4.network | ansible.utils.ipmath(2) }},{{ ansible_default_ipv4.broadcast | ansible.utils.ipmath(-1) }},{{ ansible_default_ipv4.netmask }},8h
-dhcp-option=option:router,{{ ansible_default_ipv4["gateway"] }}
-dhcp-option=option:dns-server,8.8.8.8
-dhcp-option=option:dns-server,1.1.1.1
+# Proxy DHCP mode: let the router handle IP allocation,
+# dnsmasq only provides PXE boot info as a supplementary response
+dhcp-range={{ ansible_facts['default_ipv4']['network'] }},proxy
 
 enable-tftp
 tftp-root=/srv/tftp/
-dhcp-boot=bootx64.efi
-pxe-prompt="Press F8 for PXE Network boot.", 5
-pxe-service=x86PC, "Install OS via PXE",pxelinux
+dhcp-boot=bootx64.efi,{{ ansible_facts['default_ipv4']['address'] }}
+pxe-service=x86-64_EFI, "Boot x86_64 UEFI", bootx64.efi
 
-#log DNS queries
 log-queries
-#log DHCP details
 log-dhcp
-#log file to use
 log-facility=/var/log/dnsmasq.log
