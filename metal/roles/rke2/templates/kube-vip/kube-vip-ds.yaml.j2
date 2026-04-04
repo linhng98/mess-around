@@ -63,7 +63,7 @@ spec:
             - NET_RAW
             - SYS_TIME
       nodeSelector:
-        node-role.kubernetes.io/master: "true"
+        node-role.kubernetes.io/control-plane: "true"
       hostNetwork: true
       serviceAccountName: kube-vip
       tolerations:

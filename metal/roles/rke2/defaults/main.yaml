@@ -77,9 +77,9 @@ rke2_disable:
   - rke2-ingress-nginx
   - rke2-metrics-server
 # Path to custom manifests deployed during the RKE2 installation
-rke2_custom_manifests:
+rke2_custom_manifests: []
 # Path to static pods deployed during the RKE2 installation
-rke2_static_pods:
+rke2_static_pods: []
 # Configure custom Containerd Registry
 rke2_custom_registry_mirrors:
   - name:
@@ -101,7 +101,7 @@ rke2_etcd_snapshot_source_dir: etcd_snapshots
 # When the file name is defined, the etcd will be restored on initial deployment Ansible run.
 # The etcd will be restored only during the initial run, so even if you will leave the the file name specified,
 # the etcd will remain untouched during the next runs.
-rke2_etcd_snapshot_file:
+rke2_etcd_snapshot_file: ""
 # Etcd snapshot location
 rke2_etcd_snapshot_destination_dir: '{{ rke2_data_path }}/server/db/snapshots'
 # Override default containerd snapshotter

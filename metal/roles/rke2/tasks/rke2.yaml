@@ -36,7 +36,7 @@
     group: root
     mode: 0644
   with_items: '{{ rke2_custom_manifests }}'
-  when: rke2_custom_manifests
+  when: rke2_custom_manifests | default([]) | length > 0
 - name: Copy Static Pods
   ansible.builtin.copy:
     src: '{{ item }}'
@@ -45,4 +45,4 @@
     group: root
     mode: 0644
   with_items: '{{ rke2_static_pods }}'
-  when: rke2_static_pods
+  when: rke2_static_pods | default([]) | length > 0
