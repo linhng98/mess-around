@@ -45,7 +45,7 @@
 - name: Wake on lan
   community.general.wakeonlan:
     mac: "{{ hostvars[item]['mac'] }}"
-    broadcast: "{{ ansible_default_ipv4.broadcast }}"
+    broadcast: "{{ ansible_facts['default_ipv4']['broadcast'] }}"
   delegate_to: localhost
   loop: "{{ groups['metal'] }}"
 - name: Check server ready
