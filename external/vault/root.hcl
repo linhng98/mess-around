@@ -1,8 +1,8 @@
 locals {
   # Extract the variables we need for easy access
-  account_name = "linhng98"
-  account_id   = "001687204912"
-  aws_region   = "ap-southeast-1"
+  account_name = get_env("AWS_ACCOUNT_NAME")
+  account_id   = get_env("AWS_ACCOUNT_ID")
+  aws_region   = get_env("AWS_REGION")
 }
 
 # Generate an AWS provider block

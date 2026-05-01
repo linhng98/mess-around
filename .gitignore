@@ -3,6 +3,8 @@ charts
 .env
 .terragrunt*
 .terraform*
+*.key
+_out
 debug.yaml
 metal/roles/pxe_server/files/data/os
 

@@ -1,5 +1,15 @@
 terraform {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git//?ref=v4.11.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git//?ref=v5.12.0"
+
+  before_hook "gen_oidc_config" {
+    commands = ["apply", "plan"]
+    execute  = ["${find_in_parent_folders("_scripts")}/gen_oidc_config.sh"]
+  }
+
+  after_hook "copy_jwks_s3" {
+    commands = ["apply", "plan"]
+    execute  = ["${find_in_parent_folders("_scripts")}/copy_jwks_s3.sh"]
+  }
 }
 
 include {
