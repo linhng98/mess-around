@@ -8,13 +8,6 @@ rook-ceph-cluster:
     mon_osd_down_out_interval = 600
   toolbox:
     enabled: true
-    resources:
-      limits:
-        cpu: 500m
-        memory: 1Gi
-      requests:
-        cpu: 10m
-        memory: 128Mi
   monitoring:
     enabled: true
     createPrometheusRules: false
@@ -23,63 +16,6 @@ rook-ceph-cluster:
       enabled: true
       port: 8443
       ssl: false
-    resources:
-      mgr:
-        limits:
-          cpu: 1000m
-          memory: 1Gi
-        requests:
-          cpu: 10m
-          memory: 512Mi
-      mon:
-        limits:
-          cpu: 2000m
-          memory: 2Gi
-        requests:
-          cpu: 10m
-          memory: 1Gi
-      osd:
-        limits:
-          cpu: 2000m
-          memory: 2Gi
-        requests:
-          cpu: 10m
-          memory: 2Gi
-      prepareosd:
-        limits:
-          cpu: 500m
-          memory: 400Mi
-        requests:
-          cpu: 100m
-          memory: 50Mi
-      mgr-sidecar:
-        limits:
-          cpu: 500m
-          memory: 100Mi
-        requests:
-          cpu: 10m
-          memory: 50Mi
-      crashcollector:
-        limits:
-          cpu: 500m
-          memory: 60Mi
-        requests:
-          cpu: 10m
-          memory: 60Mi
-      logcollector:
-        limits:
-          cpu: 500m
-          memory: 1Gi
-        requests:
-          cpu: 10m
-          memory: 50Mi
-      cleanup:
-        limits:
-          cpu: 500m
-          memory: 1Gi
-        requests:
-          cpu: 50m
-          memory: 100Mi
     removeOSDsIfOutAndSafeToRemove: true
     storage:
       useAllNodes: true
@@ -133,13 +69,6 @@ rook-ceph-cluster:
         metadataServer:
           activeCount: 1
           activeStandby: true
-          resources:
-            limits:
-              cpu: 2000m
-              memory: 4Gi
-            requests:
-              cpu: 50m
-              memory: 1Gi
           priorityClassName: system-cluster-critical
       storageClass:
         enabled: true

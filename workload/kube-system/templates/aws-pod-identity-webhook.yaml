@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: pod-identity-webhook
-  namespace: kube-system
   annotations:
     prometheus.io/port: "443"
     prometheus.io/scheme: "https"
@@ -18,7 +17,6 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: pod-identity-webhook
-  namespace: kube-system
   annotations:
     cert-manager.io/inject-ca-from: kube-system/pod-identity-webhook
 webhooks:
@@ -46,7 +44,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pod-identity-webhook
-  namespace: kube-system
 spec:
   replicas: 1
   selector:
@@ -83,7 +80,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: pod-identity-webhook
-  namespace: kube-system
 spec:
   secretName: pod-identity-webhook-cert
   commonName: "pod-identity-webhook.kube-system.svc"
@@ -103,13 +99,11 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: pod-identity-webhook
-  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: pod-identity-webhook
-  namespace: kube-system
 rules:
   - apiGroups:
       - ""
@@ -132,7 +126,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: pod-identity-webhook
-  namespace: kube-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
