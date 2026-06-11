@@ -11,13 +11,6 @@ argo-cd:
       timeout.reconciliation: 180s
       timeout.hard.reconciliation: 0s
       application.instanceLabelKey: argocd.argoproj.io/instance
-      resource.exclusions: |
-        - apiGroups:
-            - cilium.io
-          kinds:
-            - CiliumIdentity
-          clusters:
-            - "*"
   controller:
     name: application-controller
     replicas: 1
@@ -44,117 +37,9 @@ argo-cd:
       ingressClassName: nginx
       hostname: argocd.homelab.linhng98.com
       tls: true
-    extensions:
-      enabled: true
-      extensionList:
-        - name: rollout-extension
-          env:
-            - name: EXTENSION_URL
-              value: https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.7/extension.tar
   repoServer:
     enabled: true
     metrics: *metrics
-    volumes:
-      - name: custom-tools
-        emptyDir: {}
-      - configMap:
-          name: cmp-plugin
-        name: cmp-plugin
-    initContainers:
-      - name: download-tools
-        image: alpine:3.22
-        command: [sh, -c]
-        env:
-          - name: AVP_VERSION
-            value: 1.18.1
-        args:
-          - >-
-            wget -O argocd-vault-plugin https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 && chmod +x argocd-vault-plugin && mv argocd-vault-plugin /custom-tools/
-        volumeMounts:
-          - mountPath: /custom-tools
-            name: custom-tools
-    extraContainers:
-      - name: avp-helm
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v3.0.12
-        envFrom:
-          - secretRef:
-              name: argocd-vault-plugin-credential
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 999
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /tmp
-            name: tmp
-          # Register plugins into sidecar
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: avp-helm.yaml
-            name: cmp-plugin
-          # Important: Mount tools into $PATH
-          - name: custom-tools
-            subPath: argocd-vault-plugin
-            mountPath: /usr/local/bin/argocd-vault-plugin
-      # argocd-vault-plugin with Kustomize
-      - name: avp-kustomize
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v3.0.12
-        envFrom:
-          - secretRef:
-              name: argocd-vault-plugin-credential
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 999
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /tmp
-            name: tmp
-          # Register plugins into sidecar
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: avp-kustomize.yaml
-            name: cmp-plugin
-          # Important: Mount tools into $PATH
-          - name: custom-tools
-            subPath: argocd-vault-plugin
-            mountPath: /usr/local/bin/argocd-vault-plugin
-      # argocd-vault-plugin with plain YAML
-      - name: avp
-        command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/argoproj/argocd:v3.0.12
-        envFrom:
-          - secretRef:
-              name: argocd-vault-plugin-credential
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 999
-        volumeMounts:
-          - mountPath: /var/run/argocd
-            name: var-files
-          - mountPath: /home/argocd/cmp-server/plugins
-            name: plugins
-          - mountPath: /tmp
-            name: tmp
-          # Register plugins into sidecar
-          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-            subPath: avp.yaml
-            name: cmp-plugin
-          # Important: Mount tools into $PATH
-          - name: custom-tools
-            subPath: argocd-vault-plugin
-            mountPath: /usr/local/bin/argocd-vault-plugin
-    envFrom:
-      - secretRef:
-          name: argocd-vault-plugin-credential
-          #volumeMounts:
-          #  - name: custom-tools
-          #    mountPath: /usr/local/bin/argocd-vault-plugin
-          #    subPath: argocd-vault-plugin
   applicationSet:
     enabled: true
     metrics: *metrics
