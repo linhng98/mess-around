@@ -23,6 +23,6 @@ bootstrap:
 	helm upgrade --install rook-ceph --namespace rook-ceph --create-namespace --kubeconfig ${KUBECONFIG} -f "${ROOK_CLUSTER_CHART}/values.yaml" ${ROOK_CLUSTER_CHART}
 	helm upgrade --install vault --namespace vault --create-namespace --kubeconfig ${KUBECONFIG} -f "${VAULT_CHART}/values.yaml" ${VAULT_CHART}
 	helm upgrade --install argo-cd --namespace argo-cd --create-namespace --kubeconfig ${KUBECONFIG} -f "${ARGO_CHART}/values.yaml" ${ARGO_CHART}
-	helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.17.2 --set crds.enabled=true
+	helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.20.2 --set crds.enabled=true
 	helm upgrade --install cert-manager --namespace cert-manager --create-namespace --kubeconfig ${KUBECONFIG} -f "${CERT_MANAGER_CHART}/values.yaml" ${CERT_MANAGER_CHART}
 	kubectl --kubeconfig ${KUBECONFIG} apply -f application-set/
