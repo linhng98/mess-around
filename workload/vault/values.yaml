@@ -49,9 +49,11 @@ vault:
           seal "awskms" {
             region     = "ap-southeast-1"
             kms_key_id = "5eed1709-d530-4150-9855-1457f5eedf4b"  #gitleaks:allow
-            role_arn = "arn:aws:iam::001687204912:role/mess-around_AWS_KMS_Encrypt_Role"
-            web_identity_token_file = "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
           }
+    extraEnvironmentVars:
+      AWS_REGION: ap-southeast-1
+      AWS_DEFAULT_REGION: ap-southeast-1
+      AWS_STS_REGIONAL_ENDPOINTS: regional
     ingress:
       enabled: true
       ingressClassName: nginx

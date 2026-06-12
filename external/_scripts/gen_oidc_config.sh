@@ -29,7 +29,7 @@ echo "Generating discovery.json..."
 cat > ${OIDC_CONFIG} <<EOF
 {
     "issuer": "${OIDC_DISCOVERY_ENDPOINT}",
-    "jwks_uri": "${OIDC_DISCOVERY_ENDPOINT}/keys.json",
+    "jwks_uri": "${OIDC_DISCOVERY_ENDPOINT}/.well-known/keys.json",
     "authorization_endpoint": "urn:kubernetes:programmatic_authorization",
     "response_types_supported": [
         "id_token"
