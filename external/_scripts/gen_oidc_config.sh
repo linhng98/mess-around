@@ -6,7 +6,7 @@ PRIV_KEY="${OUT_DIR}/service.key"
 PUB_KEY="${OUT_DIR}/service.pub"
 PKCS_KEY="${OUT_DIR}/service-pkcs8.pub"
 JWKS="${OUT_DIR}/keys.json"
-OIDC_CONFIG="${OUT_DIR}/openid-configuration"
+OIDC_CONFIG="${OUT_DIR}/discovery.json"
 OIDC_DISCOVERY_ENDPOINT="https://${S3_OIDC_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com"
 
 mkdir -p ${OUT_DIR}
@@ -28,8 +28,8 @@ go run github.com/aws/amazon-eks-pod-identity-webhook/hack/self-hosted@latest \
 echo "Generating discovery.json..."
 cat > ${OIDC_CONFIG} <<EOF
 {
-    "issuer": "https://${OIDC_DISCOVERY_ENDPOINT}",
-    "jwks_uri": "https://${OIDC_DISCOVERY_ENDPOINT}/keys.json",
+    "issuer": "${OIDC_DISCOVERY_ENDPOINT}",
+    "jwks_uri": "${OIDC_DISCOVERY_ENDPOINT}/keys.json",
     "authorization_endpoint": "urn:kubernetes:programmatic_authorization",
     "response_types_supported": [
         "id_token"

@@ -7,6 +7,8 @@ hashed_passwd: $6$salt$pNBh4jjCwRK2.tkh9KmImaaflcblYXbXIEBWu2bRXKjubIMbS1RSwnJIG
 apiserver_url: controlplane.homelab.linhng98.com
 rke2_version: v1.34.6+rke2r1
 rke2_cni: cilium
+rke2_kube_apiserver_args:
+  - service-account-issuer=https://mess-around-oidc-provider.s3.ap-southeast-1.amazonaws.com
 kernel_modules:
   - ip_vs
   - ip_vs_rr
