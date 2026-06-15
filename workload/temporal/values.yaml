@@ -17,6 +17,10 @@ temporal:
               user: temporal
               existingSecret: temporal-postgresql
               secretKey: user-password
+              connectProtocol: tcp
+              maxConns: 20
+              maxIdleConns: 20
+              maxConnLifetime: "1h"
           visibility:
             sql:
               createDatabase: true
@@ -28,6 +32,10 @@ temporal:
               user: temporal
               existingSecret: temporal-postgresql
               secretKey: user-password
+              connectProtocol: tcp
+              maxConns: 20
+              maxIdleConns: 20
+              maxConnLifetime: "1h"
   admintools:
     enabled: true
   web:
