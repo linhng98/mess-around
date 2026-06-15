@@ -8,9 +8,11 @@ tempo-distributed:
     dnsService: rke2-coredns-rke2-coredns
     dnsNamespace: kube-system
     clusterDomain: cluster.local
+    extraArgs:
+      - -config.expand-env=true
     extraEnvFrom:
       - secretRef:
-          name: mimir-bucket
+          name: tempo-bucket
   ingester:
     replicas: 3
     persistence:

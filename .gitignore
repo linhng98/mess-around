@@ -6,6 +6,7 @@ charts
 *.key
 _out
 debug.yaml
+AGENTS.md
 metal/roles/pxe_server/files/data/os
 
 !workload/temporal/chart-temporal/charts
