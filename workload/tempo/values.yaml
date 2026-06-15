@@ -8,6 +8,9 @@ tempo-distributed:
     dnsService: rke2-coredns-rke2-coredns
     dnsNamespace: kube-system
     clusterDomain: cluster.local
+    extraEnvFrom:
+      - secretRef:
+          name: mimir-bucket
   ingester:
     replicas: 3
     persistence:
@@ -47,8 +50,8 @@ tempo-distributed:
       s3:
         bucket: tempo-bucket
         endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph
-        access_key: <path:homelab/data/aws-credentials/ceph/tempo-bucket#AWS_ACCESS_KEY_ID>
-        secret_key: <path:homelab/data/aws-credentials/ceph/tempo-bucket#AWS_SECRET_ACCESS_KEY>
+        access_key: ${AWS_ACCESS_KEY_ID}
+        secret_key: ${AWS_SECRET_ACCESS_KEY}
         insecure: true
   memcached:
     enabled: true
