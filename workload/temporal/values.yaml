@@ -29,12 +29,6 @@ temporal:
   web:
     enabled: true
     replicaCount: 1
-  elasticsearch:
-    enabled: false
-  prometheus:
-    enabled: false
-  grafana:
-    enabled: false
 postgresql:
   auth:
     enablePostgresUser: true
