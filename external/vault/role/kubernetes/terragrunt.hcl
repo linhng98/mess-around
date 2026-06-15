@@ -12,9 +12,9 @@ inputs = {
   path            = "kubernetes"
   backend_roles = {
     argocd = {
-      role_name                        = "argocd"
-      bound_service_account_names      = ["argo-cd-argocd-repo-server"]
-      bound_service_account_namespaces = ["argo-cd"]
+      role_name                        = "external-secrets"
+      bound_service_account_names      = ["external-secrets"]
+      bound_service_account_namespaces = ["external-secrets"]
       token_policies                   = ["readonly"]
     }
   }
