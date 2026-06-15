@@ -10,10 +10,9 @@ temporal:
           default:
             sql:
               createDatabase: true
-              driverName: "postgres12"
-              pluginName: "postgres12"
-              host: temporal-postgresql-hl
-              port: 5432
+              driverName: postgres12_pgx
+              pluginName: postgres12_pgx
+              connectAddr: temporal-postgresql:5432
               database: temporal
               user: temporal
               existingSecret: temporal-postgresql
@@ -21,10 +20,10 @@ temporal:
           visibility:
             sql:
               createDatabase: true
-              driverName: "postgres12"
-              pluginName: "postgres12"
+              driverName: postgres12_pgx
+              pluginName: postgres12_pgx
+              connectAddr: temporal-postgresql:5432
               host: temporal-postgresql-hl
-              port: 5432
               database: temporal_visibility
               user: temporal
               existingSecret: temporal-postgresql
