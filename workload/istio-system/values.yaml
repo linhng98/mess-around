@@ -1,39 +1,8 @@
 base:
   global:
     istioNamespace: istio-system
-istiod:
-  meshConfig:
-    enableTracing: true
-    defaultConfig:
-      tracing:
-        sampling: 100
-  pilot:
-    resources:
-      requests:
-        cpu: 100m
-        memory: 50Mi
-  global:
-    proxy:
-      resources:
-        requests:
-          cpu: 10m
-          memory: 128Mi
-        limits:
-          cpu: 200m
-          memory: 500Mi
-      tracer: zipkin
-    tracer:
-      zipkin:
-        address: otel-collector-collector.otel-collector:9411
 gateway:
   name: istio-ingressgateway
   replicaCount: 1
   service:
-    loadBalancerIP: 192.168.1.201
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 100m
-      memory: 1024Mi
+    loadBalancerIP: 192.168.1.200
