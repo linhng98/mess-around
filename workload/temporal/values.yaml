@@ -13,7 +13,7 @@ temporal:
               driverName: postgres12_pgx
               pluginName: postgres12_pgx
               connectAddr: temporal-postgresql:5432
-              database: temporal
+              databaseName: temporal
               user: temporal
               existingSecret: temporal-postgresql
               secretKey: user-password
@@ -24,7 +24,7 @@ temporal:
               pluginName: postgres12_pgx
               connectAddr: temporal-postgresql:5432
               host: temporal-postgresql-hl
-              database: temporal_visibility
+              databaseName: temporal_visibility
               user: temporal
               existingSecret: temporal-postgresql
               secretKey: user-password
