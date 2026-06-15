@@ -35,8 +35,6 @@ temporal:
     enabled: false
   grafana:
     enabled: false
-  cassandra:
-    enabled: false
 postgresql:
   auth:
     enablePostgresUser: true
