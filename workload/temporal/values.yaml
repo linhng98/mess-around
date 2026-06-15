@@ -4,26 +4,31 @@ temporal:
     config:
       persistence:
         defaultStore: default
-        default:
-          driver: "sql"
-          sql:
-            driver: "postgres12"
-            host: temporal-postgresql-hl
-            port: 5432
-            database: temporal
-            user: postgres
-            existingSecret: temporal-postgresql
-            secretKey: user-password
-        visibility:
-          driver: "sql"
-          sql:
-            driver: "postgres12"
-            host: temporal-postgresql-hl
-            port: 5432
-            database: temporal_visibility
-            user: postgres
-            existingSecret: temporal-postgresql
-            secretKey: user-password
+        visibilityStore: visibility
+        numHistoryShards: 512
+        datastores:
+          default:
+            sql:
+              createDatabase: true
+              driverName: "postgres12"
+              pluginName: "postgres12"
+              host: temporal-postgresql-hl
+              port: 5432
+              database: temporal
+              user: temporal
+              existingSecret: temporal-postgresql
+              secretKey: user-password
+          visibility:
+            sql:
+              createDatabase: true
+              driverName: "postgres12"
+              pluginName: "postgres12"
+              host: temporal-postgresql-hl
+              port: 5432
+              database: temporal_visibility
+              user: temporal
+              existingSecret: temporal-postgresql
+              secretKey: user-password
   admintools:
     enabled: true
   web:
@@ -32,6 +37,7 @@ temporal:
 postgresql:
   auth:
     enablePostgresUser: true
+    username: temporal
     existingSecret: temporal-postgresql
     secretKeys:
       adminPasswordKey: postgres-password
