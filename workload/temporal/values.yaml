@@ -12,7 +12,8 @@ temporal:
             port: 5432
             database: temporal
             user: postgres
-            password: <path:homelab/data/secrets/temporal#postgres_password>
+            existingSecret: temporal-postgresql
+            secretKey: user-password
         visibility:
           driver: "sql"
           sql:
@@ -21,23 +22,13 @@ temporal:
             port: 5432
             database: temporal_visibility
             user: postgres
-            password: <path:homelab/data/secrets/temporal#postgres_password>
+            existingSecret: temporal-postgresql
+            secretKey: user-password
   admintools:
     enabled: true
   web:
     enabled: true
     replicaCount: 1
-    ingress:
-      enabled: true
-      className: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-route53-prod
-      hosts:
-        - &host temporal.homelab.linhng98.com
-      tls:
-        - secretName: temporal-tls
-          hosts:
-            - *host
   elasticsearch:
     enabled: false
   prometheus:
@@ -46,12 +37,13 @@ temporal:
     enabled: false
   cassandra:
     enabled: false
-  postgresql:
-    enabled: true
 postgresql:
-  image:
-    tag: 17.5.0-debian-12-r3
   auth:
     enablePostgresUser: true
-    postgresPassword: <path:homelab/data/secrets/temporal#postgres_password>
+    existingSecret: temporal-postgresql
+    secretKeys:
+      adminPasswordKey: postgres-password
+      userPasswordKey: user-password
+      replicationPasswordKey: replication-password
+      metricsPasswordKey: metrics-password
   architecture: standalone
