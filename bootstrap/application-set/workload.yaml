@@ -45,3 +45,10 @@ spec:
           kind: ServiceMonitor
           jqPathExpressions:
             - .spec.endpoints[]?.relabelings[]?.action
+        - group: external-secrets.io
+          kind: ExternalSecret
+          jqPathExpressions:
+            - .spec.data[]?.remoteRef.conversionStrategy
+            - .spec.data[]?.remoteRef.decodingStrategy
+            - .spec.data[]?.remoteRef.metadataPolicy
+            - .spec.data[]?.remoteRef.nullBytePolicy
