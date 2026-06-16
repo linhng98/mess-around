@@ -21,22 +21,25 @@ spec:
         - image: cloudflare/cloudflared:latest
           name: cloudflared
           env:
-            # Defines an environment variable for the tunnel token.
-            - name: TUNNEL_TOKEN
+            - name: TUNNEL_ID
               valueFrom:
                 secretKeyRef:
-                  name: cloudflare-tunnel-token
-                  key: token
+                  name: cloudflare-tunnel-credentials
+                  key: tunnel-id
           command:
-            # Configures tunnel run parameters
             - cloudflared
             - tunnel
-            - --no-autoupdate
-            - --loglevel
-            - info
-            - --metrics
-            - 0.0.0.0:2000
+            - --config
+            - /etc/cloudflared/config/config.yaml
             - run
+            - homelab
+          volumeMounts:
+            - name: cloudflared-config
+              mountPath: /etc/cloudflared/config
+              readOnly: true
+            - name: cloudflare-tunnel-credentials
+              mountPath: /etc/cloudflared/credentials
+              readOnly: true
           livenessProbe:
             httpGet:
               # Cloudflared has a /ready endpoint which returns 200 if and only if
@@ -46,3 +49,10 @@ spec:
             failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10
+      volumes:
+        - name: cloudflared-config
+          configMap:
+            name: cloudflared-config
+        - name: cloudflare-tunnel-credentials
+          secret:
+            secretName: cloudflare-tunnel-credentials

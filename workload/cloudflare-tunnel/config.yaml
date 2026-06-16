@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-config
+data:
+  config.yaml: |
+    credentials-file: /etc/cloudflared/credentials/credentials.json
+    no-autoupdate: true
+    loglevel: info
+    metrics: 0.0.0.0:2000
+    ingress:
+      - hostname: vault.linhng98.com
+        service: https://istio-ingressgateway.istio-system.svc.cluster.local:443
+        originRequest:
+          originServerName: vault.linhng98.com
+          httpHostHeader: vault.linhng98.com
+      - service: http_status:404
