@@ -27,6 +27,8 @@ tempo-distributed:
           - url: http://mimir-nginx.mimir/api/v1/push
             headers:
               X-Scope-OrgID: homelab
+    extraArgs:
+      - -config.expand-env=true
   distributor:
     replicas: 1
   compactor:
@@ -39,6 +41,8 @@ tempo-distributed:
       - -config.expand-env=true
   queryFrontend:
     replicas: 1
+    extraArgs:
+      - -config.expand-env=true
   search:
     enabled: true
   multitenancyEnabled: false
