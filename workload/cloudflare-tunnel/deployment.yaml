@@ -26,6 +26,7 @@ spec:
             - --config
             - /etc/cloudflared/config/config.yaml
             - run
+            - homelab
           volumeMounts:
             - name: cloudflared-config
               mountPath: /etc/cloudflared/config
