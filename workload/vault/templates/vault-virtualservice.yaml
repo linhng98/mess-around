@@ -5,7 +5,7 @@ metadata:
   name: vault
 spec:
   hosts:
-    - vault.homelab.linhng98.com
+    - vault.linhng98.com
   gateways:
     - istio-system/istio-ingressgateway
   http:
