@@ -2,15 +2,15 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: homelab-wildcard-tls
+  name: linhng98-wildcard-tls
 spec:
-  secretName: homelab-wildcard-tls
+  secretName: linhng98-wildcard-tls
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer
     name: letsencrypt-cloudflare-prod
   dnsNames:
-    - "*.homelab.linhng98.com"
+    - "*.linhng98.com"
 ---
 apiVersion: networking.istio.io/v1
 kind: Gateway
@@ -26,6 +26,6 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: homelab-wildcard-tls
+        credentialName: linhng98-wildcard-tls
       hosts:
-        - "*.homelab.linhng98.com"
+        - "*.linhng98.com"
