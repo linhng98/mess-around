@@ -14,7 +14,7 @@ tempo-distributed:
       - secretRef:
           name: tempo-bucket
   ingester:
-    replicas: 3
+    replicas: 1
     persistence:
       enabled: true
       size: 2Gi
@@ -28,7 +28,7 @@ tempo-distributed:
             headers:
               X-Scope-OrgID: homelab
   distributor:
-    replicas: 3
+    replicas: 1
   compactor:
     replicas: 1
   querier:
@@ -71,4 +71,4 @@ tempo-distributed:
     enabled: false
   gateway:
     enabled: true
-    replicas: 3
+    replicas: 1
