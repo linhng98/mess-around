@@ -6,6 +6,6 @@ dependencies:
     version: v1.20.2
     repository: https://charts.jetstack.io
   - name: x509-certificate-exporter
-    version: 3.19.1
+    version: 4.1.0
     repository: https://charts.enix.io
     alias: x509-cert-exporter
