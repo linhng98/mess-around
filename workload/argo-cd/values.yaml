@@ -29,14 +29,6 @@ argo-cd:
   server:
     enabled: true
     metrics: *metrics
-    ingress:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-        cert-manager.io/cluster-issuer: letsencrypt-route53-prod
-      ingressClassName: nginx
-      hostname: argocd.homelab.linhng98.com
-      tls: true
   repoServer:
     enabled: true
     metrics: *metrics

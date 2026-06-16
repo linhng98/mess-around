@@ -153,17 +153,6 @@ prom:
 grafana:
   serviceMonitor:
     enabled: true
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-route53-prod
-    hosts:
-      - &host grafana.homelab.linhng98.com
-    tls:
-      - secretName: grafana-tls
-        hosts:
-          - *host
   deploymentStrategy:
     type: RollingUpdate
     rollingUpdate:

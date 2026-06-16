@@ -54,17 +54,6 @@ vault:
       AWS_REGION: ap-southeast-1
       AWS_DEFAULT_REGION: ap-southeast-1
       AWS_STS_REGIONAL_ENDPOINTS: regional
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-route53-prod
-      hosts:
-        - host: &host vault.homelab.linhng98.com
-      tls:
-        - secretName: vault-tls
-          hosts:
-            - *host
     serviceAccount:
       create: true
       annotations:
