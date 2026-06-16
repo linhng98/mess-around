@@ -8,8 +8,6 @@ tempo-distributed:
     dnsService: rke2-coredns-rke2-coredns
     dnsNamespace: kube-system
     clusterDomain: cluster.local
-    extraArgs:
-      - -config.expand-env=true
     extraEnvFrom:
       - secretRef:
           name: tempo-bucket
@@ -18,6 +16,8 @@ tempo-distributed:
     persistence:
       enabled: true
       size: 2Gi
+    extraArgs:
+      - -config.expand-env=true
   metricsGenerator:
     enabled: true
     replicas: 1
@@ -31,8 +31,12 @@ tempo-distributed:
     replicas: 1
   compactor:
     replicas: 1
+    extraArgs:
+      - -config.expand-env=true
   querier:
     replicas: 1
+    extraArgs:
+      - -config.expand-env=true
   queryFrontend:
     replicas: 1
   search:
