@@ -3,6 +3,6 @@ base:
     istioNamespace: istio-system
 gateway:
   name: istio-ingressgateway
-  replicaCount: 1
+  replicaCount: 2
   service:
     loadBalancerIP: 192.168.1.200

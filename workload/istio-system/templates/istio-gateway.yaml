@@ -1,0 +1,31 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: homelab-wildcard-tls
+spec:
+  secretName: homelab-wildcard-tls
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-cloudflare-prod
+  dnsNames:
+    - "*.homelab.linhng98.com"
+---
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: istio-ingress
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: homelab-wildcard-tls
+      hosts:
+        - "*.homelab.linhng98.com"
