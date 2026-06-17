@@ -1,4 +1,6 @@
 loki:
+  global:
+    dnsService: rke2-coredns-rke2-coredns
   loki:
     commonConfig:
       replication_factor: 1
