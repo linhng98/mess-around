@@ -318,7 +318,7 @@ mimir-distributed:
     replicas: 1
   minio:
     enabled: false
-  nginx:
+  gateway:
     enabled: true
     replicas: 3
   metaMonitoring:

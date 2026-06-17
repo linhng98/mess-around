@@ -115,7 +115,7 @@ prom:
       #        requests:
       #          storage: 5Gi
       remoteWrite:
-        - url: http://mimir-nginx.mimir/api/v1/push
+        - url: http://mimir-gateway.mimir/api/v1/push
           headers:
             X-Scope-OrgID: homelab
       affinity:
@@ -185,7 +185,7 @@ grafana:
           isDefault: true
           type: prometheus
           uid: prometheus
-          url: http://mimir-nginx.mimir/prometheus
+          url: http://mimir-gateway.mimir/prometheus
           basicAuth: false
           jsonData:
             httpHeaderName1: X-Scope-OrgID

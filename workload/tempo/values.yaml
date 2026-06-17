@@ -24,7 +24,7 @@ tempo-distributed:
     config:
       storage:
         remote_write:
-          - url: http://mimir-nginx.mimir/api/v1/push
+          - url: http://mimir-gateway.mimir/api/v1/push
             headers:
               X-Scope-OrgID: homelab
     extraArgs:
