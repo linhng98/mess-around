@@ -9,6 +9,8 @@ spec:
       pod: cloudflared
   template:
     metadata:
+      annotations:
+        reloader.stakater.com/auto: "true"
       labels:
         pod: cloudflared
     spec:

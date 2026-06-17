@@ -11,8 +11,17 @@ spec:
         spec:
           containers:
             - name: renovate
-              image: renovate/renovate:34.24.0
-              envFrom:
-                - secretRef:
-                    name: renovate-env
+              image: renovate/renovate:latest
+              env:
+                - name: RENOVATE_PLATFORM
+                  value: github
+                - name: LOG_LEVEL
+                  value: debug
+                - name: RENOVATE_REPOSITORIES
+                  value: linhng98/mess-around
+                - name: RENOVATE_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: renovate-token
+                      key: RENOVATE_TOKEN
           restartPolicy: Never

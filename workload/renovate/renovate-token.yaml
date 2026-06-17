@@ -1,0 +1,17 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: renovate-token
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: vault
+    kind: ClusterSecretStore
+  target:
+    name: renovate-token
+    creationPolicy: Owner
+  data:
+    - secretKey: RENOVATE_TOKEN
+      remoteRef:
+        key: homelab/data/secrets/github/token
+        property: renovate
