@@ -1,108 +1,85 @@
-loki-stack:
+loki:
   loki:
-    enabled: true
-    isDefault: false
-    config:
-      auth_enabled: false
-      ruler:
-        storage:
-          type: local
-          local:
-            directory: &rule_path /loki-rules
-        rule_path: *rule_path
-        alertmanager_url: http://observability-prom-alertmanager:9093
-        ring:
-          kvstore:
-            store: inmemory
-        enable_api: true
-      memberlist:
-        join_members:
-          # the value must be defined as string to be evaluated when secret manifest is being generating
-          - '{{ include "loki.fullname" . }}-memberlist'
-      ingester:
-        chunk_idle_period: 3m
-        chunk_block_size: 262144
-        chunk_retain_period: 1m
-        max_transfer_retries: 0
-        wal:
-          dir: /data/loki/wal
-        lifecycler:
-          ring:
-            replication_factor: 1
-      limits_config:
-        enforce_metric_name: false
-        reject_old_samples: true
-        reject_old_samples_max_age: 168h
-        max_entries_limit_per_query: 5000
-      schema_config:
-        configs:
-          - from: 2020-10-24
-            store: boltdb-shipper
-            object_store: filesystem
-            schema: v11
-            index:
-              prefix: index_
-              period: 24h
-      server:
-        http_listen_port: 3100
-        grpc_listen_port: 9095
-      storage_config:
-        boltdb_shipper:
-          active_index_directory: /data/loki/boltdb-shipper-active
-          cache_location: /data/loki/boltdb-shipper-cache
-          cache_ttl: 24h # Can be increased for faster performance over longer query periods, uses more disk space
-          shared_store: filesystem
-        filesystem:
-          directory: /data/loki/chunks
-      chunk_store_config:
-        max_look_back_period: 1d
-      table_manager:
-        retention_deletes_enabled: true
-        retention_period: 1d
-      compactor:
-        working_directory: /data/loki/boltdb-shipper-compactor
-        shared_store: filesystem
-        retention_enabled: true
-    extraContainers:
-      - name: config-reloader
-        image: docker.io/kiwigrid/k8s-sidecar:2.7.3
-        env:
-          - name: LABEL
-            value: loki_rules
-          - name: UNIQUE_FILENAMES
-            value: 'true'
-          - name: FOLDER
-            value: *rule_path
-          - name: NAMESPACE
-            value: observability
-          - name: RESOURCE
-            value: configmap
-          - name: FOLDER_ANNOTATION
-            value: k8s-sidecar-target-directory
-          - name: METHOD
-            value: SLEEP
-          - name: SLEEP_TIME
-            value: '60'
-        volumeMounts:
-          - name: ruler-cm
-            mountPath: *rule_path
-    extraVolumes:
-      - name: ruler-cm
-        emptyDir: {}
-    extraVolumeMounts:
-      - name: ruler-cm
-        mountPath: *rule_path
-    serviceMonitor:
+    commonConfig:
+      replication_factor: 1
+    schemaConfig:
+      configs:
+        - from: "2024-04-01"
+          store: tsdb
+          object_store: s3
+          schema: v13
+          index:
+            prefix: loki_index_
+            period: 24h
+    ingester:
+      chunk_encoding: snappy
+    tracing:
       enabled: true
-  promtail:
+    querier:
+      max_concurrent: 2
+    storage:
+      type: s3
+      bucketNames:
+        chunks: loki-bucket
+        ruler: loki-bucket
+      s3:
+        endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph
+        accessKeyId: ${AWS_ACCESS_KEY_ID}
+        secretAccessKey: ${AWS_SECRET_ACCESS_KEY}
+        s3ForcePathStyle: true
+        insecure: true
+  deploymentMode: Monolithic
+  singleBinary:
+    replicas: 1
+    resources:
+      limits:
+        cpu: 3
+        memory: 4Gi
+      requests:
+        cpu: 2
+        memory: 2Gi
+    extraEnv:
+      - name: GOMEMLIMIT
+        value: 3750MiB
+    extraEnvFrom:
+      - secretRef:
+          name: loki-bucket
+  chunksCache:
+    writebackSizeLimit: 10MB
+  minio:
+    enabled: false
+  backend:
+    replicas: 0
+  read:
+    replicas: 0
+  write:
+    replicas: 0
+  ingester:
+    replicas: 0
+  querier:
+    replicas: 0
+  queryFrontend:
+    replicas: 0
+  queryScheduler:
+    replicas: 0
+  distributor:
+    replicas: 0
+  compactor:
+    replicas: 0
+  indexGateway:
+    replicas: 0
+  bloomCompactor:
+    replicas: 0
+  bloomGateway:
+    replicas: 0
+promtail:
+  config:
+    logLevel: info
+    serverPort: 3101
+    clients:
+      - url: http://{{ .Release.Name }}-loki-gateway/loki/api/v1/push
+  serviceMonitor:
     enabled: true
-    config:
-      logLevel: info
-      serverPort: 3101
-      clients:
-        - url: http://{{ .Release.Name }}-loki:3100/loki/api/v1/push
-    serviceMonitor:
-      enabled: true
 metrics-server:
   metrics:
     enabled: true
@@ -188,7 +165,7 @@ grafana:
         - name: Loki
           type: loki
           uid: loki
-          url: http://observability-loki:3100
+          url: http://observability-loki-gateway
         - name: Tempo
           type: tempo
           uid: tempo
