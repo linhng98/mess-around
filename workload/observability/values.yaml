@@ -213,7 +213,7 @@ grafana:
             httpHeaderValue1: homelab
   grafana.ini:
     server:
-      root_url: https://grafana.homelab.linhng98.com
+      root_url: https://grafana.linhng98.com
     users:
       viewers_can_edit: true
     auth:

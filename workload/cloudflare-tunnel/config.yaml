@@ -14,4 +14,14 @@ data:
         originRequest:
           originServerName: vault.linhng98.com
           httpHostHeader: vault.linhng98.com
+      - hostname: grafana.linhng98.com
+        service: https://istio-ingressgateway.istio-system.svc.cluster.local:443
+        originRequest:
+          originServerName: grafana.linhng98.com
+          httpHostHeader: grafana.linhng98.com
+      - hostname: argocd.linhng98.com
+        service: https://istio-ingressgateway.istio-system.svc.cluster.local:443
+        originRequest:
+          originServerName: argocd.linhng98.com
+          httpHostHeader: argocd.linhng98.com
       - service: http_status:404

@@ -8,9 +8,12 @@ argo-cd:
     cm:
       create: true
       admin.enabled: true
+      url: https://argocd.linhng98.com
       timeout.reconciliation: 180s
       timeout.hard.reconciliation: 0s
       application.instanceLabelKey: argocd.argoproj.io/instance
+    params:
+      server.insecure: true
   controller:
     name: application-controller
     replicas: 1
