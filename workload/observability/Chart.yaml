@@ -3,7 +3,7 @@ name: observability
 version: 0.0.0
 dependencies:
   - name: loki
-    version: 17.4.4
+    version: 18.1.0
     repository: https://grafana-community.github.io/helm-charts
   - name: promtail
     version: 6.17.1
@@ -16,5 +16,5 @@ dependencies:
     version: 10.5.15
     repository: https://grafana.github.io/helm-charts
   - name: metrics-server
-    version: 3.13.0
+    version: 3.13.1
     repository: https://kubernetes-sigs.github.io/metrics-server
