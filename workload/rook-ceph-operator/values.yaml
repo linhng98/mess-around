@@ -3,3 +3,24 @@ rook-ceph:
     enabled: true
   monitoring:
     enabled: true
+ceph-csi-drivers:
+  operatorConfig:
+    namespace: rook-ceph-operator
+    driverSpecDefaults:
+      imageSet:
+        name: rook-csi-operator-image-set-configmap
+      nodePlugin:
+        priorityClassName: system-node-critical
+      controllerPlugin:
+        priorityClassName: system-cluster-critical
+  drivers:
+    rbd:
+      name: rook-ceph-operator.rbd.csi.ceph.com
+    cephfs:
+      name: rook-ceph-operator.cephfs.csi.ceph.com
+    nfs:
+      enabled: false
+      name: rook-ceph-operator.nfs.csi.ceph.com
+    nvmeof:
+      enabled: false
+      name: rook-ceph-operator.nvmeof.csi.ceph.com
