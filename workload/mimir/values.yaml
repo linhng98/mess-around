@@ -200,7 +200,7 @@ mimir-distributed:
           - name: NAMESPACE
             value: mimir
           - name: RESOURCE
-            value: configmap
+            value: secret
           - name: FOLDER_ANNOTATION
             value: k8s-sidecar-target-directory
         volumeMounts:
