@@ -14,15 +14,12 @@
   ],
   "packageRules": [
     {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchPackagePatterns": [
-        "*"
-      ],
+      "groupName": null,
       "matchUpdateTypes": [
         "minor",
         "patch"
       ]
     }
-  ]
+  ],
+  "separateMinorPatch": true
 }
