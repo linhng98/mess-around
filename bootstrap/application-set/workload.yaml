@@ -3,6 +3,9 @@ kind: ApplicationSet
 metadata:
   name: appset-workload
   namespace: argo-cd
+  annotations:
+    argocd-diff-preview/watch-pattern: |
+      bootstrap/application-set/workload.yaml
 spec:
   generators:
     - git:
@@ -13,6 +16,9 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
+      annotations:
+        argocd-diff-preview/watch-pattern: |
+          workload/{{path.basename}}/.*
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
