@@ -1,0 +1,7 @@
+argo-events:
+  crds:
+    install: true
+eventBus:
+  enabled: true
+  name: default
+  replicas: 3

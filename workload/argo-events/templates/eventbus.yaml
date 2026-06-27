@@ -1,0 +1,10 @@
+{{- if .Values.eventBus.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: EventBus
+metadata:
+  name: {{ .Values.eventBus.name }}
+spec:
+  nats:
+    native:
+      replicas: {{ .Values.eventBus.replicas }}
+{{- end }}
