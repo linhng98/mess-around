@@ -1,3 +1,0 @@
-kyverno:
-  crds:
-    install: true

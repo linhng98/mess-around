@@ -1,6 +1,11 @@
 base:
   global:
     istioNamespace: istio-system
+  base:
+    validationFailurePolicy: Fail
+istiod:
+  base:
+    validationFailurePolicy: Fail
 gateway:
   name: istio-ingressgateway
   replicaCount: 2
