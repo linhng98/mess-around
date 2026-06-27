@@ -24,9 +24,9 @@ data:
         originRequest:
           originServerName: argocd.linhng98.com
           httpHostHeader: argocd.linhng98.com
-      - hostname: github-events.linhng98.com
+      - hostname: argo-events.linhng98.com
         service: https://istio-ingressgateway.istio-system.svc.cluster.local:443
         originRequest:
-          originServerName: github-events.linhng98.com
-          httpHostHeader: github-events.linhng98.com
+          originServerName: argo-events.linhng98.com
+          httpHostHeader: argo-events.linhng98.com
       - service: http_status:404

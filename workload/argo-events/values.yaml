@@ -11,10 +11,10 @@ github:
   repositories:
     - mess-around
   webhook:
-    host: github-events.linhng98.com
+    host: argo-events.linhng98.com
     endpoint: /mess-around
     port: 12000
-    url: https://github-events.linhng98.com
+    url: https://argo-events.linhng98.com
     secretName: github-webhook
     secretKey: secret
   events:
