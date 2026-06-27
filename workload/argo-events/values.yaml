@@ -5,3 +5,16 @@ eventBus:
   enabled: true
   name: default
   replicas: 3
+github:
+  enabled: true
+  owner: linhng98
+  repositories:
+    - mess-around
+  webhook:
+    endpoint: /mess-around
+    port: 12000
+    url: https://github-events.linhng98.com
+    secretName: github-webhook
+    secretKey: secret
+  events:
+    - "*"

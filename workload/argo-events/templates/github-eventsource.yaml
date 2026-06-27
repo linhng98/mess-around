@@ -1,0 +1,35 @@
+{{- if .Values.github.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: github
+spec:
+  service:
+    ports:
+      - name: http
+        port: {{ .Values.github.webhook.port }}
+        targetPort: {{ .Values.github.webhook.port }}
+  github:
+    pull-request:
+      repositories:
+        - owner: {{ .Values.github.owner }}
+          names:
+            {{- range .Values.github.repositories }}
+            - {{ . }}
+            {{- end }}
+      webhook:
+        endpoint: {{ .Values.github.webhook.endpoint }}
+        port: {{ .Values.github.webhook.port | quote }}
+        method: POST
+        url: {{ .Values.github.webhook.url }}
+      events:
+        {{- range .Values.github.events }}
+        - {{ . }}
+        {{- end }}
+      webhookSecret:
+        name: {{ .Values.github.webhook.secretName }}
+        key: {{ .Values.github.webhook.secretKey }}
+      insecure: false
+      active: true
+      contentType: json
+{{- end }}
