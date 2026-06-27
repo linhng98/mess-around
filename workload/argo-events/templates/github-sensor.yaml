@@ -1,0 +1,41 @@
+{{- if and .Values.github.enabled .Values.github.sensor.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: github
+spec:
+  dependencies:
+    - name: github
+      eventSourceName: github
+      eventName: pull-request
+  triggers:
+    - template:
+        name: github-http-trigger
+        http:
+          url: {{ .Values.github.sensor.triggerUrl }}
+          method: {{ .Values.github.sensor.method }}
+          payload:
+            - src:
+                dependencyName: github
+                dataKey: body
+              dest: body
+            - src:
+                dependencyName: github
+                dataKey: headers
+              dest: headers
+            - src:
+                dependencyName: github
+                contextKey: type
+              dest: context.type
+            - src:
+                dependencyName: github
+                contextKey: subject
+              dest: context.subject
+            - src:
+                dependencyName: github
+                contextKey: id
+              dest: context.id
+          retryStrategy:
+            steps: 3
+            duration: 3s
+{{- end }}

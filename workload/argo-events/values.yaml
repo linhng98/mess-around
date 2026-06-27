@@ -19,3 +19,15 @@ github:
     secretKey: secret
   events:
     - "*"
+  sensor:
+    enabled: true
+    triggerUrl: http://http-server.argo-events.svc:8090
+    method: POST
+httpServer:
+  enabled: true
+  name: http-server
+  image:
+    repository: mendhak/http-https-echo
+    tag: "41"
+    pullPolicy: IfNotPresent
+  port: 8090
