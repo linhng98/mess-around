@@ -1,0 +1,20 @@
+{{- if .Values.github.enabled }}
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: github-events
+spec:
+  hosts:
+    - {{ .Values.github.webhook.host }}
+  gateways:
+    - istio-system/istio-ingressgateway
+  http:
+    - match:
+        - uri:
+            prefix: {{ .Values.github.webhook.endpoint }}
+      route:
+        - destination:
+            host: github-eventsource-svc
+            port:
+              number: {{ .Values.github.webhook.port }}
+{{- end }}

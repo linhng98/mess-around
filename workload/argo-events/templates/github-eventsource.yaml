@@ -24,7 +24,7 @@ spec:
         url: {{ .Values.github.webhook.url }}
       events:
         {{- range .Values.github.events }}
-        - {{ . }}
+        - {{ . | quote }}
         {{- end }}
       webhookSecret:
         name: {{ .Values.github.webhook.secretName }}
