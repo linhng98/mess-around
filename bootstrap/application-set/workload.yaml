@@ -5,7 +5,8 @@ metadata:
   namespace: argo-cd
   annotations:
     argocd-diff-preview/watch-pattern: |
-      bootstrap/application-set/workload.yaml
+      bootstrap/application-set/workload.yaml,
+      workload/.*
 spec:
   generators:
     - git:
