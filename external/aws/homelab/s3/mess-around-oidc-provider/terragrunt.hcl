@@ -1,5 +1,5 @@
 terraform {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git//?ref=v5.14.1"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git//?ref=v5.15.1"
 
   before_hook "gen_oidc_config" {
     commands = ["apply", "plan"]
