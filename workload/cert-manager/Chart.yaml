@@ -3,7 +3,7 @@ name: cert-manager
 version: 0.0.0
 dependencies:
   - name: cert-manager
-    version: v1.20.3
+    version: v1.21.0
     repository: https://charts.jetstack.io
   - name: x509-certificate-exporter
     version: 4.1.0
