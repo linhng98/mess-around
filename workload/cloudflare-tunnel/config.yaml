@@ -32,5 +32,5 @@ data:
       - hostname: k8s.linhng98.com
         service: https://192.168.1.100:6443
         originRequest:
-          originServerName: controlplane.homelab.linhng98.com
+          originServerName: k8s.linhng98.com
       - service: http_status:404
