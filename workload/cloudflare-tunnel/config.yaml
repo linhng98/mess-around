@@ -29,4 +29,8 @@ data:
         originRequest:
           originServerName: argo-events.linhng98.com
           httpHostHeader: argo-events.linhng98.com
+      - hostname: k8s.linhng98.com
+        service: https://192.168.1.100:6443
+        originRequest:
+          originServerName: controlplane.homelab.linhng98.com
       - service: http_status:404
