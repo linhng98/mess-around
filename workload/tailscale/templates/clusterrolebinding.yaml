@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tailscale-homelab-access
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.access.clusterRole | quote }}
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: {{ .Values.access.group | quote }}

@@ -1,0 +1,13 @@
+tailscale-operator:
+  oauth:
+    # Public identifiers from the Tailscale federated identity, not secrets.
+    clientId: "TTYHF5HGkc11CNTRL-ksg7mT2j3b11CNTRL"
+    audience: "api.tailscale.com/TTYHF5HGkc11CNTRL-ksg7mT2j3b11CNTRL"
+  operatorConfig:
+    hostname: homelab-k8s
+  apiServerProxyConfig:
+    mode: "true"
+    allowImpersonation: "true"
+access:
+  group: homelab-k8s-readers
+  clusterRole: view

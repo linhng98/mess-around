@@ -1,0 +1,7 @@
+{{- $oauth := index .Values "tailscale-operator" "oauth" -}}
+{{- if or (empty $oauth.clientId) (empty $oauth.audience) -}}
+{{- fail "Set tailscale-operator.oauth.clientId and oauth.audience from your Tailscale federated identity before deploying. See README.md." -}}
+{{- end -}}
+{{- if $oauth.clientSecret -}}
+{{- fail "Use OIDC federation: leave tailscale-operator.oauth.clientSecret unset." -}}
+{{- end -}}
