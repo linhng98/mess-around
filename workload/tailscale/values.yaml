@@ -6,8 +6,5 @@ tailscale-operator:
   operatorConfig:
     hostname: homelab-k8s
   apiServerProxyConfig:
-    mode: "true"
-    allowImpersonation: "true"
-access:
-  group: homelab-k8s-readers
-  clusterRole: view
+    mode: "false"
+    allowImpersonation: "false"
