@@ -70,3 +70,72 @@ jellyfin:
     limits:
       memory: 4Gi
       ephemeral-storage: 25Gi
+mediaStack:
+  mediaClaimName: jellyfin-media
+  configStorageClass: ceph-block
+  timezone: Asia/Ho_Chi_Minh
+  apps:
+    seerr:
+      enabled: true
+      image: ghcr.io/seerr-team/seerr:v3.5.0
+      port: 5055
+      nodePort: 30055
+      configPath: /app/config
+      configSize: 5Gi
+      media: false
+      linuxserver: false
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 1Gi
+    radarr:
+      enabled: true
+      image: lscr.io/linuxserver/radarr:version-6.4.4.10685
+      port: 7878
+      nodePort: 30787
+      configPath: /config
+      configSize: 5Gi
+      media: true
+      linuxserver: true
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 1Gi
+    prowlarr:
+      enabled: true
+      image: lscr.io/linuxserver/prowlarr:version-2.6.5.5623
+      port: 9696
+      nodePort: 30696
+      configPath: /config
+      configSize: 2Gi
+      media: false
+      linuxserver: true
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          memory: 512Mi
+    qbittorrent:
+      enabled: true
+      image: lscr.io/linuxserver/qbittorrent:5.2.4
+      # Match the external port for qBittorrent's WebUI origin checks.
+      port: 30080
+      nodePort: 30080
+      configPath: /config
+      configSize: 2Gi
+      media: true
+      linuxserver: true
+      env:
+        WEBUI_PORT: "30080"
+        TORRENTING_PORT: "6881"
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 2Gi

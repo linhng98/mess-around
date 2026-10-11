@@ -1,0 +1,141 @@
+{{- range $name, $app := .Values.mediaStack.apps }}
+{{- if $app.enabled }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $name }}-config
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false,Delete=false
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: {{ $.Values.mediaStack.configStorageClass }}
+  resources:
+    requests:
+      storage: {{ $app.configSize }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: {{ $name }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+  ports:
+    - name: http
+      port: {{ $app.port }}
+      targetPort: http
+      nodePort: {{ $app.nodePort }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $name }}
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ $name }}
+        app.kubernetes.io/instance: {{ $.Release.Name }}
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+        {{- if not $app.linuxserver }}
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        {{- end }}
+      {{- if $app.media }}
+      initContainers:
+        - name: media-directories
+          image: jellyfin/jellyfin:{{ $.Values.jellyfin.image.tag }}
+          command: ["/bin/sh", "-c"]
+          args: ["mkdir -p /media/downloads /media/movies /media/tv"]
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: media
+              mountPath: /media
+      {{- end }}
+      containers:
+        - name: {{ $name }}
+          image: {{ $app.image }}
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            {{- if not $app.linuxserver }}
+            capabilities:
+              drop: [ALL]
+            {{- end }}
+          env:
+            - name: TZ
+              value: {{ $.Values.mediaStack.timezone | quote }}
+            {{- if $app.linuxserver }}
+            # LinuxServer's init starts as root, then runs the app as PUID/PGID.
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: UMASK
+              value: "002"
+            {{- end }}
+            {{- range $key, $value := $app.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ $app.port }}
+          startupProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 10
+            failureThreshold: 60
+          readinessProbe:
+            tcpSocket:
+              port: http
+            timeoutSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: http
+            timeoutSeconds: 5
+            periodSeconds: 20
+            failureThreshold: 6
+          resources:
+            {{- toYaml $app.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: {{ $app.configPath }}
+            {{- if $app.media }}
+            - name: media
+              mountPath: /media
+            {{- end }}
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ $name }}-config
+        {{- if $app.media }}
+        - name: media
+          persistentVolumeClaim:
+            claimName: {{ $.Values.mediaStack.mediaClaimName }}
+        {{- end }}
+{{- end }}
+{{- end }}
