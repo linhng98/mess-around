@@ -1,0 +1,72 @@
+jellyfin:
+  fullnameOverride: jellyfin
+  image:
+    tag: "12.2"
+  service:
+    type: NodePort
+    nodePort: 30096
+  serviceAccount:
+    automount: false
+  deploymentStrategy:
+    type: Recreate
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+    fsGroup: 1000
+    fsGroupChangePolicy: OnRootMismatch
+    seccompProfile:
+      type: RuntimeDefault
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: [ALL]
+  jellyfin:
+    env:
+      - name: TZ
+        value: Asia/Ho_Chi_Minh
+  persistence:
+    config:
+      storageClass: ceph-block
+      size: 10Gi
+      annotations:
+        argocd.argoproj.io/sync-options: Prune=false,Delete=false
+    media:
+      storageClass: ceph-filesystem
+      size: 100Gi
+      accessMode: ReadWriteMany
+      readOnly: true
+      annotations:
+        argocd.argoproj.io/sync-options: Prune=false,Delete=false
+  extraInitContainers:
+    - name: media-directories
+      image: jellyfin/jellyfin:12.2
+      command: ["/bin/sh", "-c"]
+      args: ["mkdir -p /media/movies /media/tv /media/downloads"]
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: [ALL]
+      volumeMounts:
+        - name: media
+          mountPath: /media
+  startupProbe:
+    tcpSocket: null
+    httpGet:
+      path: /health
+      port: http
+    failureThreshold: 60
+    timeoutSeconds: 5
+  livenessProbe:
+    timeoutSeconds: 5
+    failureThreshold: 6
+  readinessProbe:
+    timeoutSeconds: 5
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+      ephemeral-storage: 1Gi
+    limits:
+      memory: 4Gi
+      ephemeral-storage: 25Gi

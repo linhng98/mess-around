@@ -1,0 +1,8 @@
+apiVersion: v2
+name: jellyfin
+description: Jellyfin media server for the homelab
+version: 0.0.0
+dependencies:
+  - name: jellyfin
+    version: 3.2.0
+    repository: https://jellyfin.github.io/jellyfin-helm
