@@ -31,7 +31,7 @@ Enable authentication on every application even on the LAN.
    Add a qBittorrent download client: host `qbittorrent`, port `30080`, category
    `radarr`, and the credentials from step 1. Test and save. Keep Completed Download
    Handling enabled and enable hardlinks under advanced Media Management settings.
-   Select a quality profile and size limits appropriate for the shared 100Gi volume.
+   Select a quality profile and size limits appropriate for the shared 300Gi volume.
 3. Open Prowlarr, create login credentials, and add your authorized indexers.
    Under Settings > Apps, add Radarr with Prowlarr URL `http://prowlarr:9696`,
    Radarr URL `http://radarr:7878`, and Radarr's API key from Settings > General.
@@ -67,8 +67,8 @@ Each application has a separate RBD settings PVC and a single Recreate deploymen
 to avoid concurrent SQLite writers. LinuxServer containers initialize as root and
 drop to UID/GID 1000 for the application; Seerr runs as UID/GID 1000 directly.
 Settings PVCs are protected from Argo CD pruning/deletion, but not manual PVC or
-namespace deletion. Back them up before upgrades. The media capacity remains
-100Gi; downloads and the library share that space.
+namespace deletion. Back them up before upgrades. The configured media capacity is
+300Gi; downloads and the library share that space.
 
 ## Validation
 

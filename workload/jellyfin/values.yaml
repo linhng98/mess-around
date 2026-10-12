@@ -33,7 +33,7 @@ jellyfin:
         argocd.argoproj.io/sync-options: Prune=false,Delete=false
     media:
       storageClass: ceph-filesystem
-      size: 100Gi
+      size: 300Gi
       accessMode: ReadWriteMany
       readOnly: true
       annotations:
