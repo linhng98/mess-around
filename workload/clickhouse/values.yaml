@@ -1,0 +1,30 @@
+clickhouse:
+  fullnameOverride: clickhouse
+  clickhouse:
+    shardsCount: 1
+    replicasCount: 1
+    defaultUser:
+      password_secret_name: clickhouse-auth
+      allowExternalAccess: true
+    persistence:
+      storageClass: ceph-block
+      size: 50Gi
+    resources:
+      requests:
+        cpu: 500m
+        memory: 2Gi
+      limits:
+        memory: 4Gi
+  keeper:
+    enabled: false
+  operator:
+    watchNamespaces:
+      - clickhouse
+    crdHook:
+      # The upstream default uses bitnami/kubectl:latest.
+      image:
+        repository: alpine/kubectl
+        tag: "1.35.0"
+credentials:
+  remoteKey: homelab/data/secrets/clickhouse
+  remoteProperty: password

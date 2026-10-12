@@ -1,0 +1,8 @@
+apiVersion: v2
+name: clickhouse
+description: Single-node ClickHouse for the homelab
+version: 0.0.0
+dependencies:
+  - name: clickhouse
+    version: 0.3.13
+    repository: https://helm.altinity.com
