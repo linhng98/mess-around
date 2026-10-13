@@ -11,9 +11,10 @@ clickhouse:
       size: 50Gi
     resources:
       requests:
-        cpu: 500m
-        memory: 2Gi
+        cpu: 2
+        memory: 8Gi
       limits:
+        cpu: 2
         memory: 4Gi
   keeper:
     enabled: false
