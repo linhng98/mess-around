@@ -8,6 +8,9 @@ istiod:
     validationFailurePolicy: Fail
 gateway:
   name: istio-ingressgateway
-  replicaCount: 2
+  kind: DaemonSet
+  autoscaling:
+    enabled: false
   service:
+    externalTrafficPolicy: Local
     loadBalancerIP: 192.168.1.200
