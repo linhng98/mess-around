@@ -15,7 +15,7 @@ clickhouse:
         memory: 8Gi
       limits:
         cpu: 2
-        memory: 4Gi
+        memory: 8Gi
   keeper:
     enabled: false
   operator:
