@@ -77,7 +77,7 @@ mediaStack:
   apps:
     seerr:
       enabled: true
-      image: ghcr.io/seerr-team/seerr:v3.5.0
+      image: ghcr.io/seerr-team/seerr:v3.5.1
       port: 5055
       nodePort: 30055
       configPath: /app/config
