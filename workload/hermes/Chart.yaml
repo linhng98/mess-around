@@ -1,0 +1,5 @@
+apiVersion: v2
+name: hermes
+description: Hermes Agent Discord gateway
+type: application
+version: 0.1.0

@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hermes
+  annotations:
+    secret.reloader.stakater.com/reload: hermes-auth
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hermes
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hermes
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: config
+          image: busybox:1.37.0
+          command:
+            - sh
+            - -ec
+            - |
+              mkdir -p /opt/data/workspace
+              cp /config/config.yaml /opt/data/config.yaml
+              chown 10000:10000 /opt/data /opt/data/workspace /opt/data/config.yaml
+              chmod 640 /opt/data/config.yaml
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+            - name: config
+              mountPath: /config
+              readOnly: true
+      containers:
+        - name: hermes
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}@{{ .Values.image.digest }}"
+          imagePullPolicy: IfNotPresent
+          # The official entrypoint bootstraps as root, then drops to UID 10000.
+          args: [gateway, run]
+          env:
+            - name: HERMES_HOME
+              value: /opt/data
+            # Let Kubernetes restart a failed gateway instead of hiding it behind s6.
+            - name: HERMES_GATEWAY_NO_SUPERVISE
+              value: "1"
+            - name: DISCORD_ALLOWED_USERS
+              value: {{ .Values.discord.allowedUsers | quote }}
+            - name: DISCORD_ALLOW_ALL_USERS
+              value: "false"
+            - name: GATEWAY_ALLOW_ALL_USERS
+              value: "false"
+          envFrom:
+            - secretRef:
+                name: hermes-auth
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hermes-data
+        - name: config
+          configMap:
+            name: hermes-config

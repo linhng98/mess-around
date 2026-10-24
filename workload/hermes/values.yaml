@@ -1,0 +1,29 @@
+image:
+  repository: nousresearch/hermes-agent
+  tag: stable
+  digest: sha256:9c5561579f3ffdf333401797094ac3a743738d6c25d40f4331c7bf77b694238d
+discord:
+  allowedUsers: "1079024012677632051"
+credentials:
+  remoteKey: homelab/data/secrets/hermes
+persistence:
+  storageClass: ceph-block
+  size: 20Gi
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    memory: 2Gi
+# Git is authoritative: this config is copied onto the PVC at each pod start.
+config:
+  model:
+    provider: openrouter
+    default: deepseek/deepseek-v4.1-flash
+  provider_routing:
+    sort: price
+  terminal:
+    backend: local
+    cwd: /opt/data/workspace
+  agent:
+    max_turns: 20
