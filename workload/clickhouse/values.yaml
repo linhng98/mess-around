@@ -25,7 +25,7 @@ clickhouse:
       # The upstream default uses bitnami/kubectl:latest.
       image:
         repository: alpine/kubectl
-        tag: "1.35.0"
+        tag: "1.35.4"
 credentials:
   remoteKey: homelab/data/secrets/clickhouse
   remoteProperty: password
