@@ -1,12 +1,13 @@
 host_key_checking: false
+ansible_python_interpreter: /usr/bin/python3
 ssh_public_key: "{{lookup('file', '~/.ssh/id_ed25519.pub') }}"
-ssh_private_key_file: ~/.ssh/id_rsa
+ssh_private_key_file: ~/.ssh/id_ed25519
 rke2_api_ip: 192.168.1.100
 rke2_lb_ip: 192.168.1.200
 pxe_gateway: 192.168.1.1
-hashed_passwd: $6$salt$pNBh4jjCwRK2.tkh9KmImaaflcblYXbXIEBWu2bRXKjubIMbS1RSwnJIGsCygztUWp5jXwdAmdkV1FBkT8gCs1 # generated using command "openssl passwd -6 -salt salt yourpassword"
+hashed_passwd: '$6$b4rr7OfSukJN4hZb$cPToatq3h6.FT5Gp/AeAasz/mfLN7d1bc3Aaw2468AUdJSvygqORgjghEZG3HBB5rgvVVpVo2vaqQFeC8xpqs0'
 apiserver_url: k8s.linhng98.com
-rke2_version: v1.35.7+rke2r1
+rke2_version: v1.36.5+rke2r1
 rke2_cni: cilium
 rke2_kube_apiserver_args:
   - service-account-issuer=https://mess-around-oidc-provider.s3.ap-southeast-1.amazonaws.com

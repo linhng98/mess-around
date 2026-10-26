@@ -1,1 +1,2 @@
 ubuntu_release_iso: https://releases.ubuntu.com/24.04.4/ubuntu-24.04.4-live-server-amd64.iso
+pxe_targets: "{{ groups['metal'] }}"

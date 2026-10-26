@@ -7,7 +7,7 @@ dhcp-range={{ ansible_facts['default_ipv4']['network'] }},proxy
 
 enable-tftp
 tftp-root=/srv/tftp/
-dhcp-boot=bootx64.efi,{{ ansible_facts['default_ipv4']['address'] }}
+dhcp-boot=bootx64.efi,,{{ ansible_facts['default_ipv4']['address'] }}
 pxe-service=x86-64_EFI, "Boot x86_64 UEFI", bootx64.efi
 
 log-queries

@@ -20,3 +20,11 @@ metal:
           disk: nvme0n1
           root_disk_size: -1
           ceph_disks: [sda]
+    workers:
+      hosts:
+        metal4:
+          ansible_host: 192.168.1.104
+          mac: 90:2e:16:a1:26:04
+          disk: nvme0n1
+          root_disk_size: -1
+          ceph_disks: []

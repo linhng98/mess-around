@@ -1,33 +1,29 @@
+autoinstall:
   version: 1
   identity:
     hostname: {{ item }}
-    password: {{ hashed_passwd }}
     username: ubuntu
+    password: {{ hashed_passwd | quote }}
   ssh:
-    install-server: yes
+    install-server: true
+    allow-pw: false
     authorized-keys:
       - {{ ssh_public_key }}
-    allow-pw: false
-  user-data:
-    users:
-      - default
-      - name: ubuntu
-        gecos: ubuntu
-        sudo: ALL=(ALL) NOPASSWD:ALL
-        lock_passwd: false
-        ssh_authorized_keys:
-          - {{ ssh_public_key }}
-
+  late-commands:
+    - curtin in-target --target=/target -- sh -c 'echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu'
+    - curtin in-target --target=/target -- chmod 0440 /etc/sudoers.d/ubuntu
   network:
     version: 2
     ethernets:
       eno1:
         match:
-          macaddress: {{ hostvars[item]["mac"] }}
-        dhcp4: no
+          macaddress: {{ hostvars[item]["mac"] | quote }}
+        dhcp4: false
         addresses:
           - {{ hostvars[item]["ansible_host"] }}/{{ (ansible_facts['default_ipv4']['address'] + '/' + ansible_facts['default_ipv4']['netmask']) | ansible.utils.ipaddr('prefix') }}
-        gateway4: {{ pxe_gateway }}
+        routes:
+          - to: default
+            via: {{ pxe_gateway }}
         nameservers:
           addresses:
             - 8.8.8.8
@@ -71,38 +67,38 @@
         id: mount-boot-partition
         path: /boot
         type: mount
-      - type: partition             # LVM partition (PV)
+      - type: partition
         number: 3
         id: lvm-partition
         device: {{ hostvars[item]["disk"] }}
         size: -1
         grub_device: false
-      - name: system                # LVM VG (system)
+      - name: system
         devices:
-        - lvm-partition
+          - lvm-partition
         preserve: false
         type: lvm_volgroup
-        id: lvm_volgroup-0
-      - name: root                  # LVM LV (root)
-        volgroup: lvm_volgroup-0
+        id: lvm-volgroup-system
+      - name: root
+        volgroup: lvm-volgroup-system
         size: {{ hostvars[item]["root_disk_size"] }}
         wipe: superblock
         preserve: false
         type: lvm_partition
-        id: lvm_partition-root
-      - fstype: xfs                 # LVM LV root - format rules
-        volume: lvm_partition-root
+        id: lvm-partition-root
+      - fstype: xfs
+        volume: lvm-partition-root
         preserve: false
         type: format
         id: format-root
-      - path: /                     # LVM LV root - mount rules
+      - path: /
         device: format-root
         type: mount
         id: mount-root
-      {% for cd in hostvars[item]["ceph_disks"] -%}
+{% for cd in hostvars[item]["ceph_disks"] | default([]) %}
       - id: {{ cd }}
         path: /dev/{{ cd }}
         ptable: gpt
         type: disk
         wipe: superblock-recursive
-      {% endfor %}
+{% endfor %}
